@@ -38,7 +38,7 @@ generate s3 keys against AD account.
 
 ```bash
  curl -u "leon:vastdata" -X POST https://10.143.11.204/api/s3keys/ -k
-{"access_key":"C008GHHCT49EC5K3QITW","secret_key":"71+SbsMQBoc9AT5+jhUBtxXoTMir3i9IDvCKI7NW"}
+{"access_key":"theaccesskey","secret_key":"thesecretkey"}
 ```
 
 When you try to get a third key
