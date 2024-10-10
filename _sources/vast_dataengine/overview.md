@@ -1,0 +1,5 @@
+# Vast Data Engine Introduction
+
+VAST DataEngine is an advanced computational platform designed to accelerate AI and data-driven workloads by tightly integrating compute and storage. Optimized for high-performance analytics, machine learning, and AI model training, VAST DataEngine leverages the scalability and speed of VAST’s Universal Storage to process vast amounts of data with low latency. By enabling compute operations to happen closer to the data, DataEngine reduces the time and complexity involved in traditional data pipelines. This architecture allows organizations to run complex AI models and large-scale data analytics with higher efficiency, unlocking faster insights and enabling real-time decision-making. VAST DataEngine is built to handle the demands of AI and big data workloads, making it a powerful tool for enterprises looking to push the boundaries of data science and machine learning.
+
+Watch this space for content for Vast DataEngine!
