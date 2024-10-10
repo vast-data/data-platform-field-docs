@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extras &#8212; Data Platform Field Docs</title>
+    <title>Secure Deployment Pattern &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/misc/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/secure_deployment/overview';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Setup VastDB using Python API" href="vastdb_py_setup.html" />
-    <link rel="prev" title="Secure Deployment Pattern" href="../secure_deployment/overview.html" />
+    <link rel="next" title="Extras" href="../misc/overview.html" />
+    <link rel="prev" title="How to get Data from Salesforce to VAST Database" href="../nifi/salesforce/query.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -232,9 +232,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to Vast DB</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../secure_deployment/overview.html">Secure Deployment</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Extras</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="vastdb_py_setup.html">VastDB setup using API</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Secure Deployment</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/vastdb_py_setup.html">VastDB setup using API</a></li>
 </ul>
 </details></li>
 </ul>
@@ -322,7 +322,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/misc/overview.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/secure_deployment/overview.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -352,7 +352,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/misc/overview.md" target="_blank"
+      <li><a href="../../_sources/vast_database/secure_deployment/overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -423,7 +423,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -434,11 +436,24 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Extras</h1>
+    <h1>Secure Deployment Pattern</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-design">High Level Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-and-caveats">Requirements and caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-request-s3-keys-using-s3keys-api">User request S3 keys using s3keys api</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-configuration">Bucket Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity-policy-configuration">Identity Policy - Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-python-code">Example Python code</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -448,11 +463,166 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="extras">
-<h1>Extras<a class="headerlink" href="#extras" title="Link to this heading">#</a></h1>
-<p>In this section you will find scripts and examples that don’t fit into the overall content structure.</p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="secure-deployment-pattern">
+<h1>Secure Deployment Pattern<a class="headerlink" href="#secure-deployment-pattern" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>High Level Design</p></li>
+<li><p>Requirements and caveats</p></li>
+<li><p>Database Setup</p></li>
+<li><p>User request S3 keys using s3keys api</p></li>
+<li><p>Bucket Configuration</p></li>
+<li><p>Identity Policy - Configuration</p></li>
+<li><p>Example Python code</p></li>
+</ul>
+<p>This page is to help define a secure environment to allow multiple users to consume Vast Database and S3 buckets using python.</p>
+<section id="high-level-design">
+<h2>High Level Design<a class="headerlink" href="#high-level-design" title="Link to this heading">#</a></h2>
+<p><img alt="High level design" src="../../_images/high_level_design.jpg" /></p>
+</section>
+<section id="requirements-and-caveats">
+<h2>Requirements and caveats<a class="headerlink" href="#requirements-and-caveats" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>This design requires the Auth source for users to be within Active Directory. There seems to be a requirement on the s3keys API for AD auth users only.</p></li>
+<li><p>For this example we will show steps using Vast Database only. Standard S3 buckets will be similar but the sub bucket security may be limited by the file type used i.e. parquet, Delta lake etc.</p></li>
+<li><p>End users must have access to the VMS API to request the S3 keys for a given AD user.</p></li>
+<li><p>There is no Row or Column security here, just schema and table security. This will be until Vast implements row and column security on the database.</p></li>
+<li><p>There is limited management tools to administer and review the following security. Further work is required here.
+Database Setup
+For this example we will have a Database owner who creates the Database/View/Schemas and configures the identity policy for the two users to consume Schema 1 and Schema 2</p></li>
+</ol>
+<p><img alt="database setup" src="../../_images/database_setup.jpg" /></p>
+</section>
+<section id="user-request-s3-keys-using-s3keys-api">
+<h2>User request S3 keys using s3keys api<a class="headerlink" href="#user-request-s3-keys-using-s3keys-api" title="Link to this heading">#</a></h2>
+<p>Caveats</p>
+<ul class="simple">
+<li><p>User has to have an AD account, does not work against local vast users</p></li>
+<li><p>Each user can only have 2 access/secret keys. Once limit is reached a user can delete one of their existing access/secret keys before requesting a new access/secret key.</p></li>
+<li><p>Integration into python code should be done in a custom function but not covered here.</p></li>
+<li><p>There is no expiry time limits on Vast S3 keys atm.</p></li>
+<li><p>Further requirement for GUI front end to this s3keys function could be a good idea
+generate s3 keys against AD account.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;leon:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://10.143.11.204/api/s3keys/<span class="w"> </span>-k
+<span class="o">{</span><span class="s2">&quot;access_key&quot;</span>:<span class="s2">&quot;C008GHHCT49EC5K3QITW&quot;</span>,<span class="s2">&quot;secret_key&quot;</span>:<span class="s2">&quot;71+SbsMQBoc9AT5+jhUBtxXoTMir3i9IDvCKI7NW&quot;</span><span class="o">}</span>
+</pre></div>
 </div>
+<p>When you try to get a third key</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;leon:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://10.143.11.204/api/s3keys/<span class="w"> </span>-k
+<span class="o">{</span><span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;A user cannot have more than two access keys&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>Delete a key</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;vms_ad_user:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://&lt;VMS_VIP&gt;/api/s3keys/<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;access_key&quot;:&quot;&lt;ACCESS_KEY&gt;&quot;}&#39;</span><span class="w"> </span>-k<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="bucket-configuration">
+<h2>Bucket Configuration<a class="headerlink" href="#bucket-configuration" title="Link to this heading">#</a></h2>
+<p>A simple Vast Data base View</p>
+<p><img alt="database view" src="../../_images/database_view.png" /></p>
+<p>Owner is a local user to the cluster. Could also be a AD user if required. Please note this use does not have access to the data</p>
+<p><img alt="database view owner" src="../../_images/database_view_owner.png" /></p>
+<p>Local user</p>
+<p><img alt="local user" src="../../_images/local_user.png" /></p>
+<p>Simple View policy for the database.</p>
+<p><img alt="simple view policy" src="../../_images/simple_view_policy.png" /></p>
+<p>Create two schemas in the the vastdbsec database</p>
+<p><img alt="create two schemas" src="../../_images/two_schemas.png" /></p>
+</section>
+<section id="identity-policy-configuration">
+<h2>Identity Policy - Configuration<a class="headerlink" href="#identity-policy-configuration" title="Link to this heading">#</a></h2>
+<p>The following identity policy is designed to give an AD user or group full access to the department_a schema within the vastdbsec database. This user or group will not be able to access the department_b schema although he will know of its existence when listing schemas.</p>
+<p><img alt="identify policy" src="../../_images/identify_policy.jpg" /></p>
+<p>Please note the following :-</p>
+<ol class="arabic simple">
+<li><p>HeadBucket is required on the vastdbsec bucket.</p></li>
+<li><p>TabularListSchemas is required on the vastdbsec bucket.</p></li>
+<li><p>TabularListTables and TabularCreateTable is required on both the root and all objects within a Schema i.e. vastdbsec/department_a and vastdbsec/department_a/*</p></li>
+</ol>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Policy1721818146435&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt1&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:HeadBucket&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt2&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularListSchemas&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt3&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularListTables&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularCreateTable&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec/department_a&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt4&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularListTables&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularCreateTable&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec/department_a/*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example attached to a user called department_a</p>
+<p><img alt="attached policy" src="../../_images/attached_policy.png" /></p>
+</section>
+<section id="example-python-code">
+<h2>Example Python code<a class="headerlink" href="#example-python-code" title="Link to this heading">#</a></h2>
+<p>This is only an example of how to in code get a access / secret key.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
+
+<span class="c1"># Retrieve environment variables - </span>
+<span class="n">vms_vip</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;VAST_VIP&#39;</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;VAST_USERNAME&#39;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;VAST_PASSWORD&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">vms_vip</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">]):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing one or more environment variables: VAST_VIP, VAST_USERNAME, VAST_PASSWORD&quot;</span><span class="p">)</span>
+
+<span class="c1"># Endpoint for requesting S3 keys</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://</span><span class="si">{</span><span class="n">vms_vip</span><span class="si">}</span><span class="s1">/api/s3keys/&#39;</span>
+
+<span class="c1"># Make the POST request to create a new S3 key</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">),</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Check if the request was successful</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="c1"># Parse the JSON response</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">access_key</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_key&#39;</span><span class="p">)</span>
+    <span class="n">secret_key</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;secret_key&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Print the access and secret keys</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Access Key: </span><span class="si">{</span><span class="n">access_key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Secret Key: </span><span class="si">{</span><span class="n">secret_key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># These variables can now be used in your SDK code</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Failed to get S3 keys: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -468,7 +638,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./vast_database/misc"
+            path: "./vast_database/secure_deployment"
         },
         predefinedOutput: true
     }
@@ -486,20 +656,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../secure_deployment/overview.html"
+       href="../nifi/salesforce/query.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Secure Deployment Pattern</p>
+        <p class="prev-next-title">How to get Data from Salesforce to VAST Database</p>
       </div>
     </a>
     <a class="right-next"
-       href="vastdb_py_setup.html"
+       href="../misc/overview.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setup VastDB using Python API</p>
+        <p class="prev-next-title">Extras</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -509,6 +679,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-design">High Level Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-and-caveats">Requirements and caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-request-s3-keys-using-s3keys-api">User request S3 keys using s3keys api</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-configuration">Bucket Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity-policy-configuration">Identity Policy - Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-python-code">Example Python code</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
