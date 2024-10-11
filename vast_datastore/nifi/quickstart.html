@@ -461,6 +461,10 @@ document.write(`
 </ul>
 <p>Visit the above URL for details.</p>
 <p>Here is an example from the above URL to quickly try NiFi with VastDB using docker:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The following example experimental. Ensure you manually backup data that you cannot lose.</p>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># set this to the hostname or ip address where you are running NiFi</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">NIFI_HOST</span><span class="o">=</span>hostname_or_ipaddress
 
@@ -472,12 +476,21 @@ document.write(`
 mkdir<span class="w"> </span>vastdb_nifi_docker
 <span class="nb">cd</span><span class="w"> </span>vastdb_nifi_docker
 
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_extensions
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_conf
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_state
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_db
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_profile
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_content
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_provenance
+
 <span class="nv">LATEST_RELEASE</span><span class="o">=</span><span class="k">$(</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import requests; print(requests.get(&#39;https://api.github.com/repos/vast-data/vastdb_nifi/releases/latest&#39;).json()[&#39;tag_name&#39;].lstrip(&#39;v&#39;))&quot;</span><span class="k">)</span>
-wget<span class="w"> </span>-c<span class="w"> </span>https://github.com/vast-data/vastdb_nifi/releases/download/v<span class="si">${</span><span class="nv">LATEST_RELEASE</span><span class="si">}</span>/vastdb_nifi-<span class="si">${</span><span class="nv">LATEST_RELEASE</span><span class="si">}</span>-linux-x86_64-py39.nar
+
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://github.com/vast-data/vastdb_nifi/releases/download/v<span class="si">${</span><span class="nv">LATEST_RELEASE</span><span class="si">}</span>/vastdb_nifi-<span class="si">${</span><span class="nv">LATEST_RELEASE</span><span class="si">}</span>-linux-x86_64-py39.nar
 
 <span class="c1"># Include parquet support</span>
-wget<span class="w"> </span>-c<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
-wget<span class="w"> </span>-c<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w">  </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w">  </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
 
 docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-p<span class="w"> </span><span class="m">8443</span>:8443<span class="w"> </span><span class="se">\</span>
@@ -485,7 +498,13 @@ docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> 
 <span class="w">   </span>-e<span class="w"> </span><span class="nv">NIFI_WEB_PROXY_HOST</span><span class="o">=</span><span class="si">${</span><span class="nv">NIFI_HOST</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-e<span class="w"> </span><span class="nv">SINGLE_USER_CREDENTIALS_USERNAME</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-e<span class="w"> </span><span class="nv">SINGLE_USER_CREDENTIALS_PASSWORD</span><span class="o">=</span><span class="m">123456123456</span><span class="w"> </span><span class="se">\</span>
-<span class="w">   </span>-v<span class="w"> </span>.:/opt/nifi/nifi-current/nar_extensions<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_conf:/opt/nifi/nifi-current/conf<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_extensions:/opt/nifi/nifi-current/nar_extensions<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_state:/opt/nifi/nifi-current/state<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_db:/opt/nifi/nifi-current/database_repository<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_content:/opt/nifi/nifi-current/content_repository<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>-v<span class="w"> </span>./nifi_provenance:/opt/nifi/nifi-current/provenance_repository<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>apache/nifi:2.0.0-M4
 </pre></div>

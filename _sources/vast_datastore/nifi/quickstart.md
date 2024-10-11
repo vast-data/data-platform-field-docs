@@ -13,6 +13,10 @@ Visit the above URL for details.
 
 Here is an example from the above URL to quickly try NiFi with VastDB using docker:
 
+```{important}
+The following example experimental. Ensure you manually backup data that you cannot lose.
+```
+
 ```bash
 # set this to the hostname or ip address where you are running NiFi
 export NIFI_HOST=hostname_or_ipaddress
@@ -25,12 +29,21 @@ fi
 mkdir vastdb_nifi_docker
 cd vastdb_nifi_docker
 
+mkdir -p nifi_extensions
+mkdir -p nifi_conf
+mkdir -p nifi_state
+mkdir -p nifi_db
+mkdir -p nifi_profile
+mkdir -p nifi_content
+mkdir -p nifi_provenance
+
 LATEST_RELEASE=$(python3 -c "import requests; print(requests.get('https://api.github.com/repos/vast-data/vastdb_nifi/releases/latest').json()['tag_name'].lstrip('v'))")
-wget -c https://github.com/vast-data/vastdb_nifi/releases/download/v${LATEST_RELEASE}/vastdb_nifi-${LATEST_RELEASE}-linux-x86_64-py39.nar
+
+wget -c -P nifi_extensions https://github.com/vast-data/vastdb_nifi/releases/download/v${LATEST_RELEASE}/vastdb_nifi-${LATEST_RELEASE}-linux-x86_64-py39.nar
 
 # Include parquet support
-wget -c https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
-wget -c https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions  https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions  https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
 
 docker run --name nifi \
    -p 8443:8443 \
@@ -38,7 +51,13 @@ docker run --name nifi \
    -e NIFI_WEB_PROXY_HOST=${NIFI_HOST} \
    -e SINGLE_USER_CREDENTIALS_USERNAME=admin \
    -e SINGLE_USER_CREDENTIALS_PASSWORD=123456123456 \
-   -v .:/opt/nifi/nifi-current/nar_extensions \
+   -v ./nifi_conf:/opt/nifi/nifi-current/conf \
+   -v ./nifi_extensions:/opt/nifi/nifi-current/nar_extensions \
+   -v ./nifi_state:/opt/nifi/nifi-current/state \
+   -v ./nifi_db:/opt/nifi/nifi-current/database_repository \
+   -v ./nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository \
+   -v ./nifi_content:/opt/nifi/nifi-current/content_repository \
+   -v ./nifi_provenance:/opt/nifi/nifi-current/provenance_repository \
    --platform linux/amd64 \
    apache/nifi:2.0.0-M4
 ```
