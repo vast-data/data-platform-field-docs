@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Python Data Ingestion &#8212; Data Platform Field Docs</title>
+    <title>Trino Patterns for Working with Vast Data &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/ingestion/python';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/query/trino';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Apache NiFi Patterns" href="nifi.html" />
-    <link rel="prev" title="Data Ingestion" href="ingestion.html" />
+    <link rel="next" title="Introduction" href="../sdk_ref/intro.html" />
+    <link rel="prev" title="Querying Data with Spark" href="spark.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -194,20 +194,20 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="ingestion.html">Data Ingest/Transformation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nifi.html">Apache NiFi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spark.html">Spark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python_kafka.html">Kafka via Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trino.html">Trino</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="query.html">Data Querying</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dremio_quickstart/howto.html">Dremio Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Spark</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Trino</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -327,7 +327,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/ingestion/python.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/query/trino.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -357,7 +357,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/ingestion/python.md" target="_blank"
+      <li><a href="../../_sources/vast_database/query/trino.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -439,7 +439,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Python Data Ingestion</h1>
+    <h1>Trino Patterns for Working with Vast Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -453,14 +453,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="python-data-ingestion">
-<h1>Python Data Ingestion<a class="headerlink" href="#python-data-ingestion" title="Link to this heading">#</a></h1>
-<p>While Spark provides powerful tools for large-scale data processing, the VAST Data Python Database SDK empowers you to directly query and analyze your VAST-DB tables using familiar Python syntax. This guide (refer to <a class="reference internal" href="../sdk_ref/intro.html"><span class="std std-doc">here</span></a>) will equip you with the skills to:</p>
-<ul class="simple">
-<li><p><strong>Master VAST Data Queries:</strong> Craft efficient queries for various functionalities, from basic data retrieval to complex joins and data manipulations.</p></li>
-<li><p><strong>Build Powerful Analyses:</strong> Explore techniques for multi-table joins with filtering and sorting to extract precise information directly from your VAST Data database.</p></li>
-<li><p><strong>Optimize for Performance:</strong> Leverage the built-in profiling capabilities of the VAST Data SDK to understand query execution and optimize your code for maximum efficiency.</p></li>
-</ul>
+  <section id="trino-patterns-for-working-with-vast-data">
+<h1><strong>Trino Patterns for Working with Vast Data</strong><a class="headerlink" href="#trino-patterns-for-working-with-vast-data" title="Link to this heading">#</a></h1>
+<p>Trino, a distributed SQL query engine, is designed to handle large-scale analytics and data warehousing efficiently. This document explores key Trino patterns for querying, joining, aggregating, and analyzing vast datasets.</p>
+<p>This documentation will delve into specific Trino patterns and provide practical examples. By understanding and implementing these patterns, you can effectively leverage Trino to process vast datasets and extract valuable insights.</p>
+<p>See the <a class="reference internal" href="../trino/overview.html"><span class="std std-doc">Trino Patterns</span></a> documentation.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -476,7 +473,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./vast_database/ingestion"
+            path: "./vast_database/query"
         },
         predefinedOutput: true
     }
@@ -494,20 +491,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ingestion.html"
+       href="spark.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Ingestion</p>
+        <p class="prev-next-title">Querying Data with Spark</p>
       </div>
     </a>
     <a class="right-next"
-       href="nifi.html"
+       href="../sdk_ref/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Apache NiFi Patterns</p>
+        <p class="prev-next-title">Introduction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

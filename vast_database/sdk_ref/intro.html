@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Create Session" href="create_session.html" />
-    <link rel="prev" title="Querying Data with Spark" href="../query/spark.html" />
+    <link rel="prev" title="Trino Patterns for Working with Vast Data" href="../query/trino.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -194,19 +194,20 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingestion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../query/trino_quickstart/howto.html">Trino Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Python SDK Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -230,6 +231,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">Apache NiFi Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to Vast DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../secure_deployment/overview.html">Secure Deployment</a></li>
@@ -511,12 +516,12 @@ Key libraries used in this API include requests for HTTP requests, pyarrow for h
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../query/spark.html"
+       href="../query/trino.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Querying Data with Spark</p>
+        <p class="prev-next-title"><strong>Trino Patterns for Working with Vast Data</strong></p>
       </div>
     </a>
     <a class="right-next"
