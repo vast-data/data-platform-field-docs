@@ -38,15 +38,17 @@ generate s3 keys against AD account.
 
 ```bash
  curl -u "leon:vastdata" -X POST https://10.143.11.204/api/s3keys/ -k
-{"access_key":"theaccesskey","secret_key":"thesecretkey"}
 ```
+
+> {"access_key":"theaccesskey","secret_key":"thesecretkey"}
 
 When you try to get a third key
 
 ```bash
 $ curl -u "leon:vastdata" -X POST https://10.143.11.204/api/s3keys/ -k
-{"detail":"A user cannot have more than two access keys"}
 ```
+
+> {"detail":"A user cannot have more than two access keys"}
 
 Delete a key
 
