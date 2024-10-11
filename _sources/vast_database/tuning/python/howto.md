@@ -1,7 +1,8 @@
-# Tuning
+# Tuning Python SDK
 
-<font color='red'><b>NOTE:</b> This documentation is currently under review. Please be aware that the information contained here is subject to change as we finalize our recommendations.
-</font>
+```{important}
+This documentation is currently under review. Please be aware that the information contained here is subject to change as we finalize our recommendations.
+```
 
 ## **Splits and Subsplits**
 

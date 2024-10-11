@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tuning VAST DB for Trino &#8212; Data Platform Field Docs</title>
+    <title>Tuning Trino &#8212; Data Platform Field Docs</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Overview" href="../../nifi/overview.html" />
-    <link rel="prev" title="Tuning" href="../python/howto.html" />
+    <link rel="prev" title="Tuning Python SDK" href="../python/howto.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,7 +186,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../vast_datastore/nifi/overview.html">Apache NiFi Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../vast_datastore/nifi/quickstart.html">Apache NiFi Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
 </ul>
 </details></li>
@@ -226,7 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../sdk_ref/projections.html">Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../sdk_ref/limit_n.html">‘LIMIT n’ functionality</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../sdk_ref/tuning.html">Performance Tuning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sdk_ref/python-sdk-101-03.html">Complete Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sdk_ref/python-sdk-101-03.html">Complete Python SDK Reference</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spark/overview.html">Spark Operations Guide</a></li>
@@ -449,7 +449,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tuning VAST DB for Trino</h1>
+    <h1>Tuning Trino</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -479,8 +479,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tuning-vast-db-for-trino">
-<h1>Tuning VAST DB for Trino<a class="headerlink" href="#tuning-vast-db-for-trino" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tuning-trino">
+<h1>Tuning Trino<a class="headerlink" href="#tuning-trino" title="Link to this heading">#</a></h1>
 <p>Example config:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vast</span><span class="p">:</span> <span class="o">|-</span>
   <span class="n">connector</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">vast</span>
@@ -619,7 +619,7 @@ o	By analyzing the tables, you can potentially improve query performance by allo
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tuning</p>
+        <p class="prev-next-title">Tuning Python SDK</p>
       </div>
     </a>
     <a class="right-next"

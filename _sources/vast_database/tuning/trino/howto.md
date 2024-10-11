@@ -1,4 +1,4 @@
-# Tuning VAST DB for Trino
+# Tuning Trino
 
 Example config:
 
