@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Getting Started &#8212; Data Platform Field Docs</title>
+    <title>Getting Started with Vast Database &#8212; Data Platform Field Docs</title>
   
   
   
@@ -430,7 +430,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -441,11 +443,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Getting Started</h1>
+    <h1>Getting Started with Vast Database</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-steps">Setup steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dedicated-vip-pool">Creating a Dedicated VIP Pool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-a-database-owner-user">Setting Up a Database Owner User</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-database-and-schema">Creating a Database and Schema</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#official-documenation">Official documenation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-automation">Example automation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -455,15 +472,73 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
-<p>The instructions for configuring the Vast Database on a Vast Cluster can be found here:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-vast-database">
+<h1>Getting Started with Vast Database<a class="headerlink" href="#getting-started-with-vast-database" title="Link to this heading">#</a></h1>
+<p>This documentation provides a quick start guide to using the VAST Web UI for creating and managing VAST Databases. We’ll walk you through the essential steps to set up a dedicated VIP pool, configure a database owner user, and create a database and schema.</p>
+<p>By following these steps, you’ll have a solid foundation for using VAST Database to store and manage your data.</p>
+<section id="setup-steps">
+<h2>Setup steps<a class="headerlink" href="#setup-steps" title="Link to this heading">#</a></h2>
+<section id="creating-a-dedicated-vip-pool">
+<h3>Creating a Dedicated VIP Pool<a class="headerlink" href="#creating-a-dedicated-vip-pool" title="Link to this heading">#</a></h3>
+<p>A VIP pool is a group of CNodes (compute nodes) that serve specific workloads. By creating a dedicated VIP pool for VAST Database, you can ensure optimal performance for database operations.</p>
+<ol class="arabic simple">
+<li><p><strong>Navigate to Network Access:</strong> In the VAST Web UI, go to <strong>Network Access</strong> -&gt; <strong>Virtual IP Pools</strong>.</p></li>
+<li><p><strong>Create a New VIP Pool:</strong> Click the <strong>+ Create VIP Pool</strong> button.</p></li>
+<li><p><strong>Configure Settings:</strong></p>
+<ul class="simple">
+<li><p><strong>Name:</strong> Give the VIP pool a descriptive name (e.g., “VastDB-VIP-Pool”).</p></li>
+<li><p><strong>CNodes:</strong> Select the CNodes you want to include in the pool. Consider factors like workload balance and performance requirements.</p></li>
+<li><p><strong>Other Options:</strong> Set any additional options as needed (e.g., health checks, failover settings).</p></li>
+</ul>
+</li>
+<li><p><strong>Save:</strong> Click <strong>Create</strong> to save the new VIP pool.</p></li>
+</ol>
+</section>
+<section id="setting-up-a-database-owner-user">
+<h3>Setting Up a Database Owner User<a class="headerlink" href="#setting-up-a-database-owner-user" title="Link to this heading">#</a></h3>
+<p>A database owner user has specific permissions to manage databases and schemas. Ensure the user you choose has the necessary privileges.</p>
+<ol class="arabic simple">
+<li><p><strong>Create or Select a User:</strong> If you don’t have a suitable user, create one. Go to <strong>User Management</strong> -&gt; <strong>Users</strong> and click <strong>+ Create User</strong>.</p></li>
+<li><p><strong>Grant Permissions:</strong></p>
+<ul class="simple">
+<li><p><strong>Allow Create Bucket:</strong> Ensure this option is enabled in the user’s settings.</p></li>
+<li><p><strong>S3 Access Key Pair:</strong> Generate an S3 access key pair for the user. This is required for database authentication.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="creating-a-database-and-schema">
+<h3>Creating a Database and Schema<a class="headerlink" href="#creating-a-database-and-schema" title="Link to this heading">#</a></h3>
+<p>A database is a logical container for schemas and tables, while a schema is a collection of related tables.</p>
+<ol class="arabic simple">
+<li><p><strong>Navigate to VAST DB:</strong> Go to <strong>Database</strong> -&gt; <strong>VAST DB</strong>.</p></li>
+<li><p><strong>Create a New Database:</strong> Click <strong>+ New Database</strong>.</p></li>
+<li><p><strong>Configure Settings:</strong></p>
+<ul class="simple">
+<li><p><strong>Database Name:</strong> Choose a unique name for the database (e.g., “my_database”).</p></li>
+<li><p><strong>Policy:</strong> Select a policy that aligns with your database’s security and performance requirements.</p></li>
+<li><p><strong>Path:</strong> Specify the path where the database will be stored.</p></li>
+<li><p><strong>Database Owner:</strong> Select the database owner user you created earlier.</p></li>
+</ul>
+</li>
+<li><p><strong>Create Schema:</strong> Once the database is created, select it and click <strong>+ Add Schema</strong>. Choose a name for the schema (e.g., “public”).</p></li>
+</ol>
+<p>By following these steps, you’ll have a well-configured VAST Database environment ready for your applications.</p>
+</section>
+</section>
+<section id="official-documenation">
+<h2>Official documenation<a class="headerlink" href="#official-documenation" title="Link to this heading">#</a></h2>
+<p>The official documenation for configuring the Vast Database on a Vast Cluster can be found here:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://support.vastdata.com/s/article/UUID-6e4e2b57-cf7b-8e8d-e382-9fe87ba7b3de">Release 5.0</a></p></li>
 <li><p><a class="reference external" href="https://support.vastdata.com/s/article/UUID-e45ec1c7-c33f-056c-2e74-bb4046234be0">Release 5.1</a></p></li>
 </ul>
-<p>Also see <a class="reference internal" href="../misc/vastdb_py_setup.html"><span class="std std-doc">example automation</span></a> for configuring Vast Database.</p>
+</section>
+<section id="example-automation">
+<h2>Example automation<a class="headerlink" href="#example-automation" title="Link to this heading">#</a></h2>
+<p>The following Python <a class="reference internal" href="../misc/vastdb_py_setup.html"><span class="std std-doc">code</span></a> configures a Vast Database on a newly installed Vast Cluster using the Vast Cluster API.</p>
 <hr/>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -520,6 +595,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-steps">Setup steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dedicated-vip-pool">Creating a Dedicated VIP Pool</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-a-database-owner-user">Setting Up a Database Owner User</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-database-and-schema">Creating a Database and Schema</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#official-documenation">Official documenation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-automation">Example automation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
