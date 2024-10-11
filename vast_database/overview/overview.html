@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Performance Tuning &#8212; Data Platform Field Docs</title>
+    <title>Introduction to VAST Database &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/tuning';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/overview/overview';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python SDK Reference" href="python-sdk-101-03.html" />
-    <link rel="prev" title="LIMIT n" href="limit_n.html" />
+    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="prev" title="Apache Nifi to Tag VAST Datastore S3 objects" href="../../vast_datastore/nifi/tagging_s3/overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -193,12 +193,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Overview</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limits.html">Dimensions and Limits</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
@@ -215,16 +215,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="create_session.html">Creating a session</a></li>
-<li class="toctree-l2"><a class="reference internal" href="schema_management.html">Schema Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="verify_parquet.html">Verifying Parquet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="importing_files.html">Importing Files, API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files, Pandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="limit_n.html">'LIMIT n' functionality</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Performance Tuning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python-sdk-101-03.html">Complete Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/create_session.html">Creating a session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/schema_management.html">Schema Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/verify_parquet.html">Verifying Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files.html">Importing Files, API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files_pandas.html">Importing Files, Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/limit_n.html">'LIMIT n' functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/python-sdk-101-03.html">Complete Reference</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../spark/overview.html">Spark Operations Guide</a></li>
@@ -333,7 +333,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/tuning.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/overview/overview.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +363,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/sdk_ref/tuning.md" target="_blank"
+      <li><a href="../../_sources/vast_database/overview/overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -445,7 +445,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Performance Tuning</h1>
+    <h1>Introduction to VAST Database</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -459,13 +459,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="performance-tuning">
-<h1>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading">#</a></h1>
-<p>See:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-vast-database">
+<h1>Introduction to VAST Database<a class="headerlink" href="#introduction-to-vast-database" title="Link to this heading">#</a></h1>
+<p><strong>VAST Database</strong> is a high-performance, distributed database designed for handling massive datasets and demanding workloads. It’s built on the same underlying technology as the VAST Cluster, a scalable object storage platform, making it ideal for storing and managing large-scale data.</p>
+<p><strong>Key Features of VAST Database:</strong></p>
 <ul class="simple">
-<li><p>vippools (coming soon)</p></li>
-<li><p><a class="reference internal" href="../tuning/python/howto.html"><span class="std std-doc">Python SDK Tuning</span></a></p></li>
+<li><p><strong>Scalability:</strong> VAST Database can scale horizontally to handle massive datasets without compromising performance.</p></li>
+<li><p><strong>High Performance:</strong> It offers exceptional read and write performance, making it suitable for demanding applications.</p></li>
+<li><p><strong>Durability:</strong> VAST Database uses erasure coding to ensure data durability and fault tolerance.</p></li>
+<li><p><strong>Flexibility:</strong> It supports various data models and query languages, making it adaptable to different use cases.</p></li>
+<li><p><strong>Integration:</strong> VAST Database integrates seamlessly with other VAST Cluster components, providing a unified data management solution.</p></li>
 </ul>
+<p><strong>Use Cases for VAST Database:</strong></p>
+<ul class="simple">
+<li><p><strong>Data Warehousing:</strong> Storing and analyzing large datasets for business intelligence and reporting.</p></li>
+<li><p><strong>Analytics:</strong> Processing and analyzing massive datasets for machine learning, data mining, and scientific research.</p></li>
+<li><p><strong>Time Series Data:</strong> Managing time-series data from IoT devices, sensors, and financial systems.</p></li>
+<li><p><strong>NoSQL Databases:</strong> Storing and querying semi-structured or unstructured data.</p></li>
+<li><p><strong>Streaming Data:</strong> Processing and analyzing real-time data streams from various sources, such as IoT devices, social media feeds, and financial markets.</p></li>
+<li><p><strong>Real-time Analytics:</strong> Performing real-time analysis on streaming data to make immediate decisions and insights.</p></li>
+</ul>
+<p>By leveraging the power of VAST Database, organizations can efficiently store, manage, and analyze massive datasets to drive innovation and gain valuable insights.</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -481,7 +497,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./vast_database/sdk_ref"
+            path: "./vast_database/overview"
         },
         predefinedOutput: true
     }
@@ -499,20 +515,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="limit_n.html"
+       href="../../vast_datastore/nifi/tagging_s3/overview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">LIMIT n</p>
+        <p class="prev-next-title">Apache Nifi to Tag VAST Datastore S3 objects</p>
       </div>
     </a>
     <a class="right-next"
-       href="python-sdk-101-03.html"
+       href="introduction.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Python SDK Reference</p>
+        <p class="prev-next-title">Introduction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
