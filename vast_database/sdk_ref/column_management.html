@@ -510,7 +510,7 @@ document.write(`
 <span class="c1"># DATABASE_SCHEMA = &#39;your_database_schema&#39;</span>
 <span class="c1">#</span>
 <span class="c1"># This will be created:</span>
-<span class="c1"># TABLE_NAME=&#39;python_sdk_demo&#39;</span>
+<span class="c1"># TABLE_NAME=&#39;TEMPORARY_TABLE&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -581,7 +581,12 @@ document.write(`
 </details>
 </div>
 <p>Create a utility function to print columns.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_columns</span><span class="p">(</span><span class="n">database_name</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
@@ -595,6 +600,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
