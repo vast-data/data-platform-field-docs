@@ -1,4 +1,4 @@
-# Trino Quickstart for Vast DB
+# Trino Quickstart
 
 Trino provides a very powerful and flexible way to connect to the VAST DB. Trino allows querying the DB from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.
 

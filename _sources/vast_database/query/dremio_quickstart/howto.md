@@ -1,4 +1,4 @@
-# Dremio Quickstart for Vast DB
+# Dremio Quickstart
 
 ## Introduction
 

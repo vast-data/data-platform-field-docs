@@ -1,4 +1,4 @@
-# Python Data Querying
+# Python
 
 While Spark provides powerful tools for large-scale data processing, the VAST Data Python Database SDK empowers you to directly query and analyze your VAST-DB tables using familiar Python syntax. This guide (refer to [here](../sdk_ref/intro.md)) will equip you with the skills to:
 

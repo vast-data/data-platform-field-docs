@@ -1,4 +1,4 @@
-# How to get Data from Salesforce to VAST Database
+# Salesforce to VAST DB
 
 ![Overview](./overview.png)
 

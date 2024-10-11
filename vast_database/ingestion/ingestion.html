@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Ingestion &#8212; Data Platform Field Docs</title>
+    <title>Data Ingest/Transformation &#8212; Data Platform Field Docs</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Python Data Ingestion" href="python.html" />
-    <link rel="prev" title="Getting Started with Vast Database" href="../overview/getting_started.html" />
+    <link rel="prev" title="Getting Started" href="../overview/getting_started.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,9 +180,9 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Python Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB setup</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -200,15 +200,15 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Data Ingest/Transformation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html">Python Data Ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nifi.html">Apache NiFi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Spark Data Ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python_kafka.html">Kafka via Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trino.html">Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trino.html">Trino with Vast Data</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
@@ -236,24 +236,24 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">Apache NiFi Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to Vast DB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../secure_deployment/overview.html">Secure Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../secure_deployment/overview.html">Secure Deployment Pattern</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../misc/vastdb_py_setup.html">VastDB setup using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/vastdb_py_setup.html">Vast DB setup</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Vast Catalog Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
 </ul>
@@ -447,7 +447,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Ingestion</h1>
+    <h1>Data Ingest/Transformation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -461,8 +461,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-ingestion">
-<h1>Data Ingestion<a class="headerlink" href="#data-ingestion" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-ingest-transformation">
+<h1>Data Ingest/Transformation<a class="headerlink" href="#data-ingest-transformation" title="Link to this heading">#</a></h1>
 <p>Efficient data ingestion is a critical first step in leveraging the full potential of the VAST Database. This section focuses on the best practices, tools, and techniques for getting your data into VAST quickly and reliably. Whether you’re moving large-scale datasets, streaming real-time data, or transferring files from diverse sources, VAST’s architecture is designed to handle massive data ingestion with ease, ensuring high performance and scalability. Explore this section to learn how to optimize your ingestion workflows and seamlessly integrate data into the VAST Database, enabling fast, powerful analytics right from the start.</p>
 <div class="toctree-wrapper compound">
 </div>
@@ -504,7 +504,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Getting Started with Vast Database</p>
+        <p class="prev-next-title">Getting Started</p>
       </div>
     </a>
     <a class="right-next"

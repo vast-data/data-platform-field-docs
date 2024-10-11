@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to get Data from Salesforce to VAST Database &#8212; Data Platform Field Docs</title>
+    <title>Salesforce to VAST DB &#8212; Data Platform Field Docs</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/nifi/salesforce/query';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Overview" href="../../trino/overview.html" />
+    <link rel="next" title="Trino Patterns" href="../../trino/overview.html" />
     <link rel="prev" title="Bulk Import from S3" href="../bulk_import.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -180,9 +180,9 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../vast_datastore/overview.html">Overview</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../vast_datastore/vastpy/overview.html">Python Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../vast_datastore/vastpy/overview.html">Vastpy Library Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB setup</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../vast_datastore/nifi/overview.html">Apache NiFi Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -200,15 +200,15 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../ingestion/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ingestion/python.html">Python Data Ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ingestion/nifi.html">Apache NiFi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ingestion/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ingestion/spark.html">Spark Data Ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ingestion/python_kafka.html">Kafka via Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../ingestion/trino.html">Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ingestion/trino.html">Trino with Vast Data</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../query/query.html">Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../query/dremio_quickstart/howto.html">Dremio Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../query/python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../query/spark.html">Spark</a></li>
@@ -236,24 +236,24 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Apache NiFi Patterns</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../quickstart.html">Apache NiFi Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html">NiFi 2.x Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../bulk_import.html">Bulk Import from S3</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Salesforce to Vast DB</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Salesforce to VAST DB</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../trino/overview.html">Trino Patterns</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../trino/quickstart.html">Trino Quickstart</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../secure_deployment/overview.html">Secure Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../secure_deployment/overview.html">Secure Deployment Pattern</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../misc/vastdb_py_setup.html">VastDB setup using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../misc/vastdb_py_setup.html">Vast DB setup</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../vast_catalog/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../vast_catalog/overview.html">Vast Catalog Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
 </ul>
@@ -449,7 +449,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>How to get Data from Salesforce to VAST Database</h1>
+    <h1>Salesforce to VAST DB</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -485,8 +485,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="how-to-get-data-from-salesforce-to-vast-database">
-<h1>How to get Data from Salesforce to VAST Database<a class="headerlink" href="#how-to-get-data-from-salesforce-to-vast-database" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="salesforce-to-vast-db">
+<h1>Salesforce to VAST DB<a class="headerlink" href="#salesforce-to-vast-db" title="Link to this heading">#</a></h1>
 <p><img alt="Overview" src="../../../_images/overview1.png" /></p>
 <p>To get data from Salesforce into the VAST Database, you can follow these steps, leveraging tools like Nifi, Airbyte, Meltano, and VAST’s integration options:</p>
 <section id="extract-data-from-salesforce">
@@ -682,7 +682,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">Trino Patterns</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -1,4 +1,4 @@
-# Kafka to Vast DB using Python
+# Kafka via Python
 
 ## Requirements:
 1. Create a vast bucket and schema

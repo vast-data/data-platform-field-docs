@@ -1,4 +1,4 @@
-# Getting Started with Vast Database
+# Getting Started
 
 This documentation provides a quick start guide to using the VAST Web UI for creating and managing VAST Databases. We'll walk you through the essential steps to set up a dedicated VIP pool, configure a database owner user, and create a database and schema.
 

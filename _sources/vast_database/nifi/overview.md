@@ -1,6 +1,6 @@
-# Overview
+# Apache NiFi Patterns
 
-## **Apache NiFi Patterns for Working with Vast Data**
+## Patterns for Working with Vast Data
 
 ### **Overview**
 

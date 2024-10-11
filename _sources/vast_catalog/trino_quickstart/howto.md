@@ -1,4 +1,4 @@
-# Trino Quickstart for Vast Catalog
+# Trino Quickstart
 
 Trino provides a very powerful and flexible way to connect to the VAST Catalog. Trino allows querying the catalog from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.
 
