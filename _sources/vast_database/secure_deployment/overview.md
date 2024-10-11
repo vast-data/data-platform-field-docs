@@ -53,7 +53,9 @@ $ curl -u "leon:vastdata" -X POST https://10.143.11.204/api/s3keys/ -k
 Delete a key
 
 ```bash
-curl -u "vms_ad_user:vastdata" -X DELETE https://<VMS_VIP>/api/s3keys/ -d '{"access_key":"<ACCESS_KEY>"}' -k -H "accept: application/json" -H "Content-Type: application/json"
+curl -u "vms_ad_user:vastdata" -X DELETE https://<VMS_VIP>/api/s3keys/ \
+-d '{"access_key":"<ACCESS_KEY>"}' -k \
+-H "accept: application/json" -H "Content-Type: application/json"
 ```
 
 ## Bucket Configuration

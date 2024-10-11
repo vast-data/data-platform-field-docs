@@ -517,7 +517,9 @@ generate s3 keys against AD account.</p></li>
 <div><p>{“detail”:”A user cannot have more than two access keys”}</p>
 </div></blockquote>
 <p>Delete a key</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;vms_ad_user:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://&lt;VMS_VIP&gt;/api/s3keys/<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;access_key&quot;:&quot;&lt;ACCESS_KEY&gt;&quot;}&#39;</span><span class="w"> </span>-k<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;vms_ad_user:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://&lt;VMS_VIP&gt;/api/s3keys/<span class="w"> </span><span class="se">\</span>
+-d<span class="w"> </span><span class="s1">&#39;{&quot;access_key&quot;:&quot;&lt;ACCESS_KEY&gt;&quot;}&#39;</span><span class="w"> </span>-k<span class="w"> </span><span class="se">\</span>
+-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
 </pre></div>
 </div>
 </section>
