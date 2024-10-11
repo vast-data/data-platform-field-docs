@@ -1,4 +1,6 @@
-# Dremio Quickstart
+# Dremio
+
+These instructions describe how to quickly try Dremo 24.0.0 with Vast Database.
 
 ## Introduction
 
@@ -6,7 +8,7 @@ Dremio is a powerful query engine designed for high-performance analytics on clo
 
 ## Instructions
 
-These instructions describe how to quickly try Dremo 24.0.0 with Vast Database.
+Run the following command.
 
 ```bash
 mkdir dremio_docker
