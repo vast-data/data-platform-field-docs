@@ -452,18 +452,18 @@ document.write(`
 <h1>NiFi 2.x Quickstart<a class="headerlink" href="#nifi-2-x-quickstart" title="Link to this heading">#</a></h1>
 <p>The VastDB Apache NiFi 2.x Processors <a class="reference external" href="https://github.com/vast-data/vastdb_nifi">Github repository</a> contains Apache Nifi 2.x Processors for working with VastDB:</p>
 <ul class="simple">
-<li><p><strong>DeleteVastDB</strong>: Deletes Vast DataBase Table rows</p></li>
-<li><p><strong>DropVastDBTable</strong>: Drop a Vast DataBase Table</p></li>
-<li><p><strong>ImportVastDB</strong>: High performance import of parquet files from Vast S3</p></li>
-<li><p><strong>PutVastDB</strong>: Writes data to a Vast DataBase Table</p></li>
-<li><p><strong>QueryVastDBTable</strong>: Queries a Vast DataBase Table</p></li>
-<li><p><strong>UpdateVastDB</strong>: Updates a Vast DataBase Table</p></li>
+<li><p><strong>DeleteVastDB</strong>: Deletes Vast DataBase Table rows (<a class="reference external" href="https://github.com/vast-data/vastdb_nifi/blob/main/docs/DeleteVastDB.md">docs</a>)</p></li>
+<li><p><strong>DropVastDBTable</strong>: Drop a Vast DataBase Table (<a class="reference external" href="https://github.com/vast-data/vastdb_nifi/blob/main/docs/DropVastDBTable.md">docs</a>)</p></li>
+<li><p><strong>ImportVastDB</strong>: High performance import of parquet files from Vast S3 (<a class="reference external" href="https://github.com/vast-data/vastdb_nifi/blob/main/docs/ImportVastDB.md">docs</a>)</p></li>
+<li><p><strong>PutVastDB</strong>: Writes data to a Vast DataBase Table (<a class="reference external" href="https://github.com/vast-data/vastdb_nifi/blob/main/docs/PutVastDB.md">docs</a>)</p></li>
+<li><p><strong>QueryVastDBTable</strong>: Queries a Vast DataBase Table (<a class="reference external" href="https://github.com/vast-data/vastdb_nif/blob/main/docs/QueryVastDBTable.md">docs</a>)</p></li>
+<li><p><strong>UpdateVastDB</strong>: Updates a Vast DataBase Table (<a class="reference external" href="https://github.com/vast-data/vastdb_nifi/blob/main/docs/UpdateVastDB.md">docs</a>)</p></li>
 </ul>
 <p>Visit the above URL for details.</p>
 <p>Here is an example from the above URL to quickly try NiFi with VastDB using docker:</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The following example experimental. Ensure you manually backup data that you cannot lose.</p>
+<p>The following example experimental. Ensure you manually backup data that you can’t afford to lose.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># set this to the hostname or ip address where you are running NiFi</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">NIFI_HOST</span><span class="o">=</span>hostname_or_ipaddress
@@ -477,9 +477,9 @@ mkdir<span class="w"> </span>vastdb_nifi_docker
 <span class="nb">cd</span><span class="w"> </span>vastdb_nifi_docker
 
 mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_extensions
-mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_conf
 mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_state
 mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_db
+mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_flowfile
 mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_profile
 mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_content
 mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_provenance
@@ -498,7 +498,6 @@ docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> 
 <span class="w">   </span>-e<span class="w"> </span><span class="nv">NIFI_WEB_PROXY_HOST</span><span class="o">=</span><span class="si">${</span><span class="nv">NIFI_HOST</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-e<span class="w"> </span><span class="nv">SINGLE_USER_CREDENTIALS_USERNAME</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-e<span class="w"> </span><span class="nv">SINGLE_USER_CREDENTIALS_PASSWORD</span><span class="o">=</span><span class="m">123456123456</span><span class="w"> </span><span class="se">\</span>
-<span class="w">   </span>-v<span class="w"> </span>./nifi_conf:/opt/nifi/nifi-current/conf<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-v<span class="w"> </span>./nifi_extensions:/opt/nifi/nifi-current/nar_extensions<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-v<span class="w"> </span>./nifi_state:/opt/nifi/nifi-current/state<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-v<span class="w"> </span>./nifi_db:/opt/nifi/nifi-current/database_repository<span class="w"> </span><span class="se">\</span>

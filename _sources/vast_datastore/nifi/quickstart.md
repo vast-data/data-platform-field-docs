@@ -2,19 +2,19 @@
 
 The VastDB Apache NiFi 2.x Processors [Github repository](https://github.com/vast-data/vastdb_nifi) contains Apache Nifi 2.x Processors for working with VastDB:
 
-  - **DeleteVastDB**: Deletes Vast DataBase Table rows
-  - **DropVastDBTable**: Drop a Vast DataBase Table
-  - **ImportVastDB**: High performance import of parquet files from Vast S3
-  - **PutVastDB**: Writes data to a Vast DataBase Table
-  - **QueryVastDBTable**: Queries a Vast DataBase Table
-  - **UpdateVastDB**: Updates a Vast DataBase Table
+- **DeleteVastDB**: Deletes Vast DataBase Table rows ([docs](https://github.com/vast-data/vastdb_nifi/blob/main/docs/DeleteVastDB.md))
+- **DropVastDBTable**: Drop a Vast DataBase Table ([docs](https://github.com/vast-data/vastdb_nifi/blob/main/docs/DropVastDBTable.md))
+- **ImportVastDB**: High performance import of parquet files from Vast S3 ([docs](https://github.com/vast-data/vastdb_nifi/blob/main/docs/ImportVastDB.md))
+- **PutVastDB**: Writes data to a Vast DataBase Table ([docs](https://github.com/vast-data/vastdb_nifi/blob/main/docs/PutVastDB.md))
+- **QueryVastDBTable**: Queries a Vast DataBase Table ([docs](https://github.com/vast-data/vastdb_nif/blob/main/docs/QueryVastDBTable.md))
+- **UpdateVastDB**: Updates a Vast DataBase Table ([docs](https://github.com/vast-data/vastdb_nifi/blob/main/docs/UpdateVastDB.md))
 
 Visit the above URL for details.
 
 Here is an example from the above URL to quickly try NiFi with VastDB using docker:
 
 ```{important}
-The following example experimental. Ensure you manually backup data that you cannot lose.
+The following example experimental. Ensure you manually backup data that you can't afford to lose.
 ```
 
 ```bash
@@ -30,9 +30,9 @@ mkdir vastdb_nifi_docker
 cd vastdb_nifi_docker
 
 mkdir -p nifi_extensions
-mkdir -p nifi_conf
 mkdir -p nifi_state
 mkdir -p nifi_db
+mkdir -p nifi_flowfile
 mkdir -p nifi_profile
 mkdir -p nifi_content
 mkdir -p nifi_provenance
@@ -51,7 +51,6 @@ docker run --name nifi \
    -e NIFI_WEB_PROXY_HOST=${NIFI_HOST} \
    -e SINGLE_USER_CREDENTIALS_USERNAME=admin \
    -e SINGLE_USER_CREDENTIALS_PASSWORD=123456123456 \
-   -v ./nifi_conf:/opt/nifi/nifi-current/conf \
    -v ./nifi_extensions:/opt/nifi/nifi-current/nar_extensions \
    -v ./nifi_state:/opt/nifi/nifi-current/state \
    -v ./nifi_db:/opt/nifi/nifi-current/database_repository \
