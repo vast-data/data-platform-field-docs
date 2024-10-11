@@ -1,4 +1,4 @@
-# Verifying Parquet Files
+# Utility: Verify Parquet
 
 ## Overview
 

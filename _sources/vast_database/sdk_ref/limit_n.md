@@ -1,4 +1,4 @@
-# LIMIT n
+# 'LIMIT n' functionality
 
 ## Overview
 
