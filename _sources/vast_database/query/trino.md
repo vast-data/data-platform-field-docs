@@ -1,4 +1,4 @@
-## **Trino with Vast Data**
+# Trino with Vast Data
 
 Trino, a distributed SQL query engine, is designed to handle large-scale analytics and data warehousing efficiently. This document explores key Trino patterns for querying, joining, aggregating, and analyzing vast datasets.
 

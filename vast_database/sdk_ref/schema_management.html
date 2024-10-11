@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>LIMIT n &#8212; Data Platform Field Docs</title>
+    <title>Scheme Management &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/limit_n';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/schema_management';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Performance Tuning" href="tuning.html" />
-    <link rel="prev" title="Projections" href="projections.html" />
+    <link rel="next" title="Verifying Parquet Files" href="verify_parquet.html" />
+    <link rel="prev" title="Create Session" href="create_session.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -212,12 +212,12 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="create_session.html">Creating a session</a></li>
-<li class="toctree-l2"><a class="reference internal" href="schema_management.html">Schema Management</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Schema Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="verify_parquet.html">Verifying Parquet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="importing_files.html">Importing Files, API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files, Pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">'LIMIT n' functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limit_n.html">'LIMIT n' functionality</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tuning.html">Tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="limits.html">Dimensions and Limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python-sdk-101-03.html">Complete Reference</a></li>
@@ -329,7 +329,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/limit_n.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/schema_management.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -359,7 +359,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/sdk_ref/limit_n.md" target="_blank"
+      <li><a href="../../_sources/vast_database/sdk_ref/schema_management.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +369,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -443,7 +443,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>LIMIT n</h1>
+    <h1>Scheme Management</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -453,8 +453,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sdk-and-connect-to-vast-db">Install sdk and connect to Vast DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-management-api">Schema Management API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-schema"><code class="docutils literal notranslate"><span class="pre">create_schema</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schemas"><code class="docutils literal notranslate"><span class="pre">schemas</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema"><code class="docutils literal notranslate"><span class="pre">schema</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rename"><code class="docutils literal notranslate"><span class="pre">rename</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop"><code class="docutils literal notranslate"><span class="pre">drop</span></code></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -466,49 +474,241 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="limit-n">
-<h1>LIMIT n<a class="headerlink" href="#limit-n" title="Link to this heading">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>A common operation when interactively working with large datasets is to LIMIT the records returned so can quickly view some data without processing the whole dataset.</p>
-<p>For more information see:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../tuning/python/howto.html"><span class="std std-doc">Tuning: splits and subplits</span></a></p></li>
-<li><p><a class="reference external" href="https://vastdb-sdk.readthedocs.io/en/latest/table.html#vastdb.table.Table.select">vastdb.Table.select()</a></p></li>
-<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html">pyarrow.RecordBatchReader</a></p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="scheme-management">
+<h1>Scheme Management<a class="headerlink" href="#scheme-management" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>This notebook provides a comprehensive guide to managing schemas within your VAST Database using the Python SDK. We’ll cover essential functions like creating new schemas, listing existing ones, retrieving specific schemas, renaming schemas, and deleting them.</p>
+<p>By following along, you’ll gain the ability to effectively organize and access your data within VAST DB. The code examples demonstrate each function’s usage with clear explanations, making it easy to integrate these operations into your workflow.</p>
 </section>
-<section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Link to this heading">#</a></h2>
-<p>Let’s say you have a large table with 10 million rows. You want to execute a query that returns only a small set of rows, similar to the SQL LIMIT operator (e.g. <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">table</span> <span class="pre">LIMIT</span> <span class="pre">n</span></code>).</p>
-<p>Here’s how you might configure it:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vastdb.config</span> <span class="kn">import</span> <span class="n">QueryConfig</span>
-
-<span class="n">config</span> <span class="o">=</span> <span class="n">QueryConfig</span><span class="p">(</span>
-  <span class="n">num_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                	 <span class="c1"># Manually specify 1 split</span>
-  <span class="n">num_sub_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>              <span class="c1"># Each split will be divided into 1 subsplits</span>
-  <span class="n">limit_rows_per_sub_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>   <span class="c1"># Each subsplit will process 10 rows at a time</span>
-<span class="p">)</span>
+<section id="install-sdk-and-connect-to-vast-db">
+<h2>Install sdk and connect to Vast DB<a class="headerlink" href="#install-sdk-and-connect-to-vast-db" title="Link to this heading">#</a></h2>
+<p>Install vastdb library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--quiet<span class="w"> </span>vastdb
 </pre></div>
 </div>
-<p>Here’s how it can be used:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyarrow</span>
-<span class="kn">import</span> <span class="nn">vastdb</span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change these variables to reflect your environment, E.g. </span>
+<span class="c1">#</span>
+<span class="c1"># ENDPOINT = &#39;http://your_vast_endpoint:12345&#39;</span>
+<span class="c1"># DATABASE_NAME = &#39;your_db&#39;</span>
+<span class="c1"># ACCESS_KEY = &#39;your_access_key&#39;</span>
+<span class="c1"># SECRET_KEY = &#39;your_secret_key&#39;</span>
+<span class="c1">#</span>
+<span class="c1"># This will get created:</span>
+<span class="c1"># DATABASE_SCHEMA = &#39;your_database_schema&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Connect to Vast DB:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vastdb</span>
 
 <span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span>
-<span class="p">)</span>
-
-<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DB_BUCKET</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">DB_SCHEMA</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">DB_TABLE</span><span class="p">)</span>
-
-    <span class="n">batches</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-    <span class="n">first_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">batches</span><span class="p">)</span>
-
-    <span class="k">assert</span> <span class="n">first_batch</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">==</span> <span class="mi">10</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span>
+    <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+    <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">table.select()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">pyarrow.RecordBatchReader</span></code> and we take the first batch.  We then verify that batch has 10 rows.</p>
+</div>
+</div>
+</section>
+<section id="schema-management-api">
+<h2>Schema Management API<a class="headerlink" href="#schema-management-api" title="Link to this heading">#</a></h2>
+<section id="create-schema">
+<h3><code class="docutils literal notranslate"><span class="pre">create_schema</span></code><a class="headerlink" href="#create-schema" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Create a new schema (a container of tables) in a bucket..</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (str): Name of the schema to create.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail_if_exists</span></code> (bool, optional, default=True): If True, fail if the schema name already exists in the bucket</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that we use the fail_if_exists=False so that the command doesn&#39;t</span>
+<span class="c1"># return an error if the schema already exists</span>
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">create_schema</span><span class="p">(</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_exists</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema: </span><span class="si">{</span><span class="n">schema</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Schema: python-sdk-schema
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="schemas">
+<h3><code class="docutils literal notranslate"><span class="pre">schemas</span></code><a class="headerlink" href="#schemas" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Usage</strong>: List all schemas in a bucket.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code> (int, optional): Maximum number of schemas to retrieve (default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print all schemas in the Database</span>
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">schema</span> <span class="ow">in</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schemas</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="schema">
+<h3><code class="docutils literal notranslate"><span class="pre">schema</span></code><a class="headerlink" href="#schema" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Get a specific schema (a container of tables) under this schema.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (str): Name of the schema to get.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail_if_missing</span></code> (bool, optional, default=True): If True, fail with an exception if the schema doesn’t exist, else return None</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">schema_name</span><span class="o">=</span><span class="s1">&#39;python-sdk1&#39;</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># here we select the schema we are interested in</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rename">
+<h3><code class="docutils literal notranslate"><span class="pre">rename</span></code><a class="headerlink" href="#rename" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Rename this schema.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">new_name</span></code> (str): New name for the schema.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">create_schema</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATABASE_SCHEMA</span><span class="si">}</span><span class="s1">_TEMPORARY_SCHEMA&#39;</span><span class="p">,</span> 
+        <span class="n">fail_if_exists</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema: </span><span class="si">{</span><span class="n">schema</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATABASE_SCHEMA</span><span class="si">}</span><span class="s1">_TEMPORARY_SCHEMA&#39;</span><span class="p">,</span> 
+            <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="c1"># if the schema exists, we can rename it</span>
+    <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATABASE_SCHEMA</span><span class="si">}</span><span class="s1">_TEMPORARY_SCHEMA&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema renamed&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unable to rename schema:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># verify the schema exists</span>
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;TEMPORARY_SCHEMA_RENAMED&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="drop">
+<h3><code class="docutils literal notranslate"><span class="pre">drop</span></code><a class="headerlink" href="#drop" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Delete a schema in a bucket.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p>No parameters</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s drop the schma we created in the previous step</span>
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+
+    <span class="c1"># first retrieve the schema</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATABASE_SCHEMA</span><span class="si">}</span><span class="s1">_TEMPORARY_SCHEMA&#39;</span><span class="p">,</span> 
+            <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="c1"># then drop it</span>
+    <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema dropped&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unable to drop schema:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># verify the schema names</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">schema</span> <span class="ow">in</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schemas</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -543,20 +743,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="projections.html"
+       href="create_session.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Projections</p>
+        <p class="prev-next-title">Create Session</p>
       </div>
     </a>
     <a class="right-next"
-       href="tuning.html"
+       href="verify_parquet.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Performance Tuning</p>
+        <p class="prev-next-title">Verifying Parquet Files</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -576,8 +776,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sdk-and-connect-to-vast-db">Install sdk and connect to Vast DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-management-api">Schema Management API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-schema"><code class="docutils literal notranslate"><span class="pre">create_schema</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schemas"><code class="docutils literal notranslate"><span class="pre">schemas</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema"><code class="docutils literal notranslate"><span class="pre">schema</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rename"><code class="docutils literal notranslate"><span class="pre">rename</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop"><code class="docutils literal notranslate"><span class="pre">drop</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

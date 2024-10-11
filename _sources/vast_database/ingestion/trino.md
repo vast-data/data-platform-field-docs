@@ -1,4 +1,4 @@
-## **Trino with Vast Data**
+# Trino with Vast Data
 
 Trino excels at distributed SQL querying on massive datasets, but it also offers powerful capabilities for data ingestion and transformation (ETL) processes. This document focuses on key Trino patterns specifically designed for efficiently loading and manipulating vast amounts of data.
 

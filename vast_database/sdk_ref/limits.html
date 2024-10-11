@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Performance Tuning &#8212; Data Platform Field Docs</title>
+    <title>Dimensions and Limits &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/tuning';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/limits';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Dimensions and Limits" href="limits.html" />
-    <link rel="prev" title="LIMIT n" href="limit_n.html" />
+    <link rel="next" title="Python SDK Reference" href="python-sdk-101-03.html" />
+    <link rel="prev" title="Performance Tuning" href="tuning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -218,8 +218,8 @@
 <li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files, Pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="limit_n.html">'LIMIT n' functionality</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Tuning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tuning.html">Tuning</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Dimensions and Limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python-sdk-101-03.html">Complete Reference</a></li>
 </ul>
 </details></li>
@@ -329,7 +329,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/tuning.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/limits.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -359,7 +359,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/sdk_ref/tuning.md" target="_blank"
+      <li><a href="../../_sources/vast_database/sdk_ref/limits.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +369,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -441,7 +441,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Performance Tuning</h1>
+    <h1>Dimensions and Limits</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -455,13 +455,49 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="performance-tuning">
-<h1>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading">#</a></h1>
-<p>See:</p>
-<ul class="simple">
-<li><p>vippools (coming soon)</p></li>
-<li><p><a class="reference internal" href="../tuning/python/howto.html"><span class="std std-doc">Python SDK Tuning</span></a></p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="dimensions-and-limits">
+<h1>Dimensions and Limits<a class="headerlink" href="#dimensions-and-limits" title="Link to this heading">#</a></h1>
+<p>Several limits are shared with other entities housed in VAST:
+tables are analogous to files thus table count limits are shared with files
+Snapshot count limits are shared across the system
+Database count limit is shared with the platform view count</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Domain</p></th>
+<th class="head text-left"><p>Limit</p></th>
+<th class="head text-left"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Max database count</p></td>
+<td class="text-left"><p>16,384</p></td>
+<td class="text-left"><p>This is limited by, and included in, the total number of views in the system</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Max table count</p></td>
+<td class="text-left"><p>1 billion per DBox</p></td>
+<td class="text-left"><p>Limited by, and included in, the max file count.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Max row count</p></td>
+<td class="text-left"><p>2^48 (256 Trillion)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Max column count</p></td>
+<td class="text-left"><p>31,936</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Max cell size</p></td>
+<td class="text-left"><p>126KB</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Snapshot limit</p></td>
+<td class="text-left"><p>1019</p></td>
+<td class="text-left"><p>Same as for file systems</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note!</strong>
+The maximum column count will be increased to 64k in VAST 5.1</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -495,20 +531,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="limit_n.html"
+       href="tuning.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">LIMIT n</p>
+        <p class="prev-next-title">Performance Tuning</p>
       </div>
     </a>
     <a class="right-next"
-       href="limits.html"
+       href="python-sdk-101-03.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Dimensions and Limits</p>
+        <p class="prev-next-title">Python SDK Reference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
