@@ -1,18 +1,17 @@
 # Trino Quickstart for Vast DB
 
-Trino provides a very powerful and flexible way to connect to the VAST Catalog. Trino allows querying the catalog from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.
+Trino provides a very powerful and flexible way to connect to the VAST DB. Trino allows querying the DB from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.
 
 ## Prerequisites
 
 This guide assumes that you have:
 
-- enabled the catalog
+- [configured](../overview/getting_started.md) a Vast database
 - have an identity policy granting access to it
 - have a user associated with the identity policy
 - the user has S3 credentials
-- a Linux system with docker installed and a user with permissions to start containers
+- docker installed and a user with permissions to start containers
 
-See Providing Client Access to VAST Catalog CLI in the VAST Support documentation for information on the first 4 items.
 
 ## Configure & start Trino container
 
@@ -50,7 +49,7 @@ custom_schema_separator=|
 
 Start the VAST-provided trino docker container – they already contain the connector and the correct jvm.config updates.
 
-The version of the trino container depends on your cluster version. See the full docs (https://support.vastdata.com/s/article/UUID-58380a6a-6594-914d-004b-b37d5a06692b) for details but in short:
+The version of the trino container depends on your cluster version. See the [full docs](https://support.vastdata.com/s/article/UUID-58380a6a-6594-914d-004b-b37d5a06692b) for details but in short:
 
 - 4.7 - use `vastdataorg/trino-vast:375`
 - 5.0 - use `vastdataorg/trino-vast:420`
@@ -75,8 +74,8 @@ docker exec -it trino trino
 Now you can execute queries against the server – you must start with the use command to set the context:
 
 ```sql
-use vast."vast-big-catalog-bucket|vast_big_catalog_schema";
+use vast."vast-db-bucket|vast_db_schema";
 
-show columns from vast_big_catalog_table;
-select * from vast_big_catalog_table limit 1;
+show columns from vast_db_table;
+select * from vast_db_table limit 1;
 ```

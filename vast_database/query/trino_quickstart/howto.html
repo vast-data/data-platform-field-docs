@@ -462,18 +462,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="trino-quickstart-for-vast-db">
 <h1>Trino Quickstart for Vast DB<a class="headerlink" href="#trino-quickstart-for-vast-db" title="Link to this heading">#</a></h1>
-<p>Trino provides a very powerful and flexible way to connect to the VAST Catalog. Trino allows querying the catalog from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.</p>
+<p>Trino provides a very powerful and flexible way to connect to the VAST DB. Trino allows querying the DB from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.</p>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <p>This guide assumes that you have:</p>
 <ul class="simple">
-<li><p>enabled the catalog</p></li>
+<li><p><a class="reference internal" href="#../overview/getting_started.md"><span class="xref myst">configured</span></a> a Vast database</p></li>
 <li><p>have an identity policy granting access to it</p></li>
 <li><p>have a user associated with the identity policy</p></li>
 <li><p>the user has S3 credentials</p></li>
-<li><p>a Linux system with docker installed and a user with permissions to start containers</p></li>
+<li><p>docker installed and a user with permissions to start containers</p></li>
 </ul>
-<p>See Providing Client Access to VAST Catalog CLI in the VAST Support documentation for information on the first 4 items.</p>
 </section>
 <section id="configure-start-trino-container">
 <h2>Configure &amp; start Trino container<a class="headerlink" href="#configure-start-trino-container" title="Link to this heading">#</a></h2>
@@ -508,7 +507,7 @@ vast.http-client.idle-timeout<span class="o">=</span>60m
 </pre></div>
 </div>
 <p>Start the VAST-provided trino docker container – they already contain the connector and the correct jvm.config updates.</p>
-<p>The version of the trino container depends on your cluster version. See the full docs (<a class="reference external" href="https://support.vastdata.com/s/article/UUID-58380a6a-6594-914d-004b-b37d5a06692b">https://support.vastdata.com/s/article/UUID-58380a6a-6594-914d-004b-b37d5a06692b</a>) for details but in short:</p>
+<p>The version of the trino container depends on your cluster version. See the <a class="reference external" href="https://support.vastdata.com/s/article/UUID-58380a6a-6594-914d-004b-b37d5a06692b">full docs</a> for details but in short:</p>
 <ul class="simple">
 <li><p>4.7 - use <code class="docutils literal notranslate"><span class="pre">vastdataorg/trino-vast:375</span></code></p></li>
 <li><p>5.0 - use <code class="docutils literal notranslate"><span class="pre">vastdataorg/trino-vast:420</span></code></p></li>
@@ -529,10 +528,10 @@ vast.http-client.idle-timeout<span class="o">=</span>60m
 </pre></div>
 </div>
 <p>Now you can execute queries against the server – you must start with the use command to set the context:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">use</span><span class="w"> </span><span class="n">vast</span><span class="p">.</span><span class="ss">&quot;vast-big-catalog-bucket|vast_big_catalog_schema&quot;</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">use</span><span class="w"> </span><span class="n">vast</span><span class="p">.</span><span class="ss">&quot;vast-db-bucket|vast_db_schema&quot;</span><span class="p">;</span>
 
-<span class="k">show</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">vast_big_catalog_table</span><span class="p">;</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">vast_big_catalog_table</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">show</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">vast_db_table</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">vast_db_table</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>
