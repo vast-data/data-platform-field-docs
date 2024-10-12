@@ -2,7 +2,7 @@
 
 This section lists reference architectures and whitepapers.
 
-## Powering AI with Optimized Data Infrastructure
+## AI Reference Architecture
 
 Traditional storage struggles with the demands of AI. VAST Data's "VAST Data AI Reference Architecture" white paper offers a solution, designed to:
 
