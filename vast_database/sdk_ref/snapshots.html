@@ -470,7 +470,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots"><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sdk-and-connect-to-vast-db">Install sdk and connect to Vast DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-snapshots">List Snapshots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots"><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -488,8 +492,46 @@ document.write(`
 <p class="admonition-title">Important</p>
 <p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
 </div>
+<section id="install-sdk-and-connect-to-vast-db">
+<h2>Install sdk and connect to Vast DB<a class="headerlink" href="#install-sdk-and-connect-to-vast-db" title="Link to this heading">#</a></h2>
+<p>Install vastdb library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--quiet<span class="w"> </span>vastdb
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change these variables to reflect your environment, E.g. </span>
+<span class="c1">#</span>
+<span class="c1"># ENDPOINT = &#39;http://your_vast_endpoint:12345&#39;</span>
+<span class="c1"># DATABASE_NAME = &#39;your_db&#39;</span>
+<span class="c1"># ACCESS_KEY = &#39;your_access_key&#39;</span>
+<span class="c1"># SECRET_KEY = &#39;your_secret_key&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Connect to Vast DB</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vastdb</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span>
+    <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+    <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="list-snapshots">
+<h2>List Snapshots<a class="headerlink" href="#list-snapshots" title="Link to this heading">#</a></h2>
 <section id="snapshots">
-<h2><code class="docutils literal notranslate"><span class="pre">snapshots</span></code><a class="headerlink" href="#snapshots" title="Link to this heading">#</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">snapshots</span></code><a class="headerlink" href="#snapshots" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Usage</strong>: Lists all snapshots of the current bucket. A snapshot is a read-only copy of a bucket at a certain point in time. This method returns a list of Bucket objects, each representing a snapshot.</p></li>
 <li><p><strong>Parameters</strong>:</p>
@@ -520,14 +562,8 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_28_15_UTC&#39;, tx=Transaction(id=0x0000300000000039))
-Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_35_25_UTC&#39;, tx=Transaction(id=0x0000300000000039))
-Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_50_25_UTC&#39;, tx=Transaction(id=0x0000300000000039))
-</pre></div>
 </div>
-</div>
-</div>
+</section>
 </section>
 </section>
 
@@ -595,7 +631,11 @@ Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_50_25_UTC&#39
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots"><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sdk-and-connect-to-vast-db">Install sdk and connect to Vast DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-snapshots">List Snapshots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots"><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
