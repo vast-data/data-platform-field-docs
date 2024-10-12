@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Apache NiFi &#8212; Data Platform Field Docs</title>
+    <title>Snapshots Management &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/ingestion/nifi';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/snapshots';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Spark Data Ingestion" href="spark.html" />
-    <link rel="prev" title="Python Data Ingestion" href="python.html" />
+    <link rel="next" title="Transaction Management" href="transactions.html" />
+    <link rel="prev" title="Importing Files using Pandas" href="importing_files_pandas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -206,13 +206,13 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="ingestion.html">Data Ingest/Transformation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="python.html">Python Data Ingestion</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Apache NiFi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spark.html">Spark Data Ingestion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python_kafka.html">Kafka via Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -222,21 +222,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/create_session.html">Create Session</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/schema_management.html">Scheme Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/table_management.html">Table Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/column_management.html">Column Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/querying.html">Querying Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/limit_n.html">Query with ‘LIMIT n’</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/projections.html">Projections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/manipulation.html">Manipulating Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/verify_parquet.html">Utility: Verify Parquet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files.html">Importing Files using API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files_pandas.html">Importing Files using Pandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/snapshots.html">Snapshots Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/transactions.html">Transaction Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/tuning.html">Performance Tuning</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tuning.html">Performance Tuning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../spark/overview.html">Spark Operations Guide</a></li>
@@ -346,7 +346,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/ingestion/nifi.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/snapshots.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -376,7 +376,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/ingestion/nifi.md" target="_blank"
+      <li><a href="../../_sources/vast_database/sdk_ref/snapshots.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,7 +386,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -447,7 +447,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -458,11 +460,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Apache NiFi</h1>
+    <h1>Snapshots Management</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots"><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -472,11 +482,53 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="apache-nifi">
-<h1>Apache NiFi<a class="headerlink" href="#apache-nifi" title="Link to this heading">#</a></h1>
-<p>Apache NiFi, a powerful dataflow system, is designed to handle large volumes of data efficiently. This document explores key NiFi patterns for ingesting, transforming, distributing, managing, and storing vast datasets.</p>
-<p>This documention will delve into specific NiFi patterns and provide practical examples. By understanding and implementing these patterns, you can effectively leverage NiFi to process vast datasets and extract valuable insights.</p>
-<p>See the <a class="reference internal" href="../nifi/overview.html"><span class="std std-doc">NiFi Patterns</span></a> documentation.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="snapshots-management">
+<h1>Snapshots Management<a class="headerlink" href="#snapshots-management" title="Link to this heading">#</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
+</div>
+<section id="snapshots">
+<h2><code class="docutils literal notranslate"><span class="pre">snapshots</span></code><a class="headerlink" href="#snapshots" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Lists all snapshots of the current bucket. A snapshot is a read-only copy of a bucket at a certain point in time. This method returns a list of Bucket objects, each representing a snapshot.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p>None</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">List[Bucket]</span></code>: A list of Bucket objects representing the snapshots of the current bucket.</p></li>
+</ul>
+</li>
+<li><p><strong>Note</strong>:</p>
+<ul>
+<li><p>The name of each snapshot is the name of the bucket followed by the snapshot name, separated by a slash.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">snapshots</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">snapshots</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">snapshots</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Issue retrieving snapshots:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_28_15_UTC&#39;, tx=Transaction(id=0x0000300000000039))
+Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_35_25_UTC&#39;, tx=Transaction(id=0x0000300000000039))
+Bucket(name=&#39;demo-database/.snapshot/big_catalog_2024-06-14_08_50_25_UTC&#39;, tx=Transaction(id=0x0000300000000039))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -492,7 +544,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./vast_database/ingestion"
+            path: "./vast_database/sdk_ref"
         },
         predefinedOutput: true
     }
@@ -510,20 +562,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="python.html"
+       href="importing_files_pandas.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Python Data Ingestion</p>
+        <p class="prev-next-title">Importing Files using Pandas</p>
       </div>
     </a>
     <a class="right-next"
-       href="spark.html"
+       href="transactions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Spark Data Ingestion</p>
+        <p class="prev-next-title">Transaction Management</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -533,6 +585,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshots"><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
