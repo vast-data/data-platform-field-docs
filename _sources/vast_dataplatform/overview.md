@@ -1,4 +1,4 @@
-# Vast Data Platform
+# Overview
 
 In today's data-centric world, the ability to store, access, and process massive datasets efficiently is paramount. 
 
