@@ -1,4 +1,4 @@
-# 'LIMIT n' functionality
+# Query with 'LIMIT n'
 
 ## Overview
 
