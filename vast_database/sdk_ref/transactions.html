@@ -447,7 +447,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -463,6 +465,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sdk-and-connect-to-vast-db">Install sdk and connect to Vast DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transactions">Transactions</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -479,7 +490,44 @@ document.write(`
 <p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
 </div>
 <p>VAST-DB is ACID compliant. All operations in VAST-DB are transactions, thus the boundaries of these transactions can be moved at will to cover very complex activities. The nature of how data is managed in the metastore makes transaction and transaction roll-back very low-latency. These mechanics are covered in the “Element Store” section.</p>
-<p>We have been using transactions extensively during this tutorial, for example:</p>
+<section id="install-sdk-and-connect-to-vast-db">
+<h2>Install sdk and connect to Vast DB<a class="headerlink" href="#install-sdk-and-connect-to-vast-db" title="Link to this heading">#</a></h2>
+<p>Install vastdb library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--quiet<span class="w"> </span>vastdb
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change these variables to reflect your environment, E.g. </span>
+<span class="c1">#</span>
+<span class="c1"># ENDPOINT = &#39;http://your_vast_endpoint:12345&#39;</span>
+<span class="c1"># DATABASE_NAME = &#39;your_db&#39;</span>
+<span class="c1"># ACCESS_KEY = &#39;your_access_key&#39;</span>
+<span class="c1"># SECRET_KEY = &#39;your_secret_key&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Connect to Vast DB</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vastdb</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span>
+    <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+    <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transactions">
+<h2>Transactions<a class="headerlink" href="#transactions" title="Link to this heading">#</a></h2>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATABASE_SCHEMA</span> <span class="o">=</span> <span class="s1">&#39;this_should_never_get_created&#39;</span>
@@ -526,12 +574,8 @@ Exception: Forcing a failure inside the transaction - transaction should rollbac
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Schema(name=&#39;demo-schema&#39;, bucket=Bucket(name=&#39;demo-database&#39;, tx=Transaction(id=0x000030000000003b))), Schema(name=&#39;python-sdk-schema&#39;, bucket=Bucket(name=&#39;demo-database&#39;, tx=Transaction(id=0x000030000000003b)))]
-</pre></div>
 </div>
-</div>
-</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -588,6 +632,22 @@ Exception: Forcing a failure inside the transaction - transaction should rollbac
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sdk-and-connect-to-vast-db">Install sdk and connect to Vast DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transactions">Transactions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
