@@ -493,7 +493,7 @@ document.write(`
 <span class="nb">export</span><span class="w"> </span><span class="nv">NIFI_HOST</span><span class="o">=</span>hostname_or_ipaddress
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NIFI_HOST</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;hostname_or_ipaddress&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: NIFI_HOST must be set for your environment.&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: NIFI_HOST variable MUST be set for your environment.&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
@@ -513,8 +513,11 @@ mkdir<span class="w"> </span>-p<span class="w"> </span>nifi_provenance
 wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://github.com/vast-data/vastdb_nifi/releases/download/v<span class="si">${</span><span class="nv">LATEST_RELEASE</span><span class="si">}</span>/vastdb_nifi-<span class="si">${</span><span class="nv">LATEST_RELEASE</span><span class="si">}</span>-linux-x86_64-py39.nar
 
 <span class="c1"># Include parquet support</span>
-wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w">  </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
-wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w">  </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-iceberg-processors-nar/2.0.0-M4/nifi-iceberg-processors-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-iceberg-services-api-nar/2.0.0-M4/nifi-iceberg-services-api-nar-2.0.0-M4.nar
+wget<span class="w"> </span>-c<span class="w"> </span>-P<span class="w"> </span>nifi_extensions<span class="w"> </span>https://repo1.maven.org/maven2/org/apache/nifi/nifi-iceberg-services-nar/2.0.0-M4/nifi-iceberg-services-nar-2.0.0-M4.nar
 
 docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-p<span class="w"> </span><span class="m">8443</span>:8443<span class="w"> </span><span class="se">\</span>

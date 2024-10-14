@@ -22,7 +22,7 @@ The following example experimental. Ensure you manually backup data that you can
 export NIFI_HOST=hostname_or_ipaddress
 
 if [[ "$NIFI_HOST" == "hostname_or_ipaddress" ]]; then
-    echo "ERROR: NIFI_HOST must be set for your environment."
+    echo "ERROR: NIFI_HOST variable MUST be set for your environment."
     exit 1
 fi
 
@@ -42,8 +42,11 @@ LATEST_RELEASE=$(python3 -c "import requests; print(requests.get('https://api.gi
 wget -c -P nifi_extensions https://github.com/vast-data/vastdb_nifi/releases/download/v${LATEST_RELEASE}/vastdb_nifi-${LATEST_RELEASE}-linux-x86_64-py39.nar
 
 # Include parquet support
-wget -c -P nifi_extensions  https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
-wget -c -P nifi_extensions  https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions https://repo1.maven.org/maven2/org/apache/nifi/nifi-parquet-nar/2.0.0-M4/nifi-parquet-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions https://repo1.maven.org/maven2/org/apache/nifi/nifi-hadoop-libraries-nar/2.0.0-M4/nifi-hadoop-libraries-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions https://repo1.maven.org/maven2/org/apache/nifi/nifi-iceberg-processors-nar/2.0.0-M4/nifi-iceberg-processors-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions https://repo1.maven.org/maven2/org/apache/nifi/nifi-iceberg-services-api-nar/2.0.0-M4/nifi-iceberg-services-api-nar-2.0.0-M4.nar
+wget -c -P nifi_extensions https://repo1.maven.org/maven2/org/apache/nifi/nifi-iceberg-services-nar/2.0.0-M4/nifi-iceberg-services-nar-2.0.0-M4.nar
 
 docker run --name nifi \
    -p 8443:8443 \
