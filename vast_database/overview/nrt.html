@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Create Session &#8212; Data Platform Field Docs</title>
+    <title>Near realtime workloads &#8212; Data Platform Field Docs</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/create_session';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/overview/nrt';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Scheme Management" href="schema_management.html" />
-    <link rel="prev" title="Python SDK Reference" href="intro.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Dimensions and Limits" href="limits.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -200,13 +200,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near realtime workloads</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">Overview</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Near realtime workloads</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
@@ -223,21 +223,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create Session</a></li>
-<li class="toctree-l2"><a class="reference internal" href="schema_management.html">Scheme Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="table_management.html">Table Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="column_management.html">Column Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="querying.html">Querying Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="limit_n.html">Query with ‘LIMIT n’</a></li>
-<li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Manipulating Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="verify_parquet.html">Utility: Verify Parquet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="importing_files.html">Importing Files using API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files using Pandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="snapshots.html">Snapshots Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transaction Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tuning.html">Performance Tuning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/tuning.html">Performance Tuning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../spark/overview.html">Spark Operations Guide</a></li>
@@ -347,7 +347,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/create_session.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/overview/nrt.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +377,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/sdk_ref/create_session.ipynb" target="_blank"
+      <li><a href="../../_sources/vast_database/overview/nrt.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +387,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -461,7 +461,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Create Session</h1>
+    <h1>Near realtime workloads</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -471,10 +471,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-import-the-vast-db-sdk">Install and import the Vast DB SDK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-initial-session">Creating the initial session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blogs">Blogs</a></li>
 </ul>
             </nav>
         </div>
@@ -486,87 +484,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="create-session">
-<h1>Create Session<a class="headerlink" href="#create-session" title="Link to this heading">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>This notebook provides a foundational setup for interacting with a Vast DB database. We’ll begin by installing and importing the necessary Vast DB SDK. Then, we’ll establish a session with the database using your specific endpoint, access key, and secret key.</p>
-<p>By completing these steps, we’ll have a solid starting point for exploring and working with Vast DB in subsequent sections of the notebook.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="near-realtime-workloads">
+<h1>Near realtime workloads<a class="headerlink" href="#near-realtime-workloads" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>VAST DataBase is a game-changer for near real-time workloads due to its unique architecture and optimizations. At its core, VAST is designed to handle both high-speed ingestion and rapid data retrieval, making it ideal for environments where timely insights are critical. Unlike traditional storage solutions, which may struggle with small files and high-frequency data updates, VAST efficiently manages dynamic datasets by transforming them into an optimized format suitable for both real-time operational and analytical queries.</p>
+<p>One of the standout features of VAST DataBase is its ability to ingest data in real time, breaking down the traditional silos between batch and stream processing. This ensures that incoming data is quickly organized and indexed for immediate querying without the usual delays associated with metadata management and file compaction. Its flash-native architecture, combined with columnar storage, allows for fast, efficient querying, even on massive datasets, making it perfect for industries where data-driven decisions must be made in near real-time.</p>
+<hr/>
 </section>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<section id="blogs">
+<h2>Blogs<a class="headerlink" href="#blogs" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Ensure you have followed the setup steps in the <a class="reference internal" href="../overview/getting_started.html"><span class="std std-doc">Getting Started</span></a> documentation.</p></li>
+<li><p><a class="reference external" href="https://www.vastdata.com/blog/the-data-lake-dilemma">The Data Lake Dilemma: Small Files</a></p></li>
 </ul>
-</section>
-<section id="install-and-import-the-vast-db-sdk">
-<h2>Install and import the Vast DB SDK<a class="headerlink" href="#install-and-import-the-vast-db-sdk" title="Link to this heading">#</a></h2>
-<p>Before doing anything else, we need to import the vastdb api library.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--quiet<span class="w"> </span>vastdb
-</pre></div>
-</div>
-</div>
-</div>
-<p>Next we need to import the vastdb library.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vastdb</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="creating-the-initial-session">
-<h2>Creating the initial session<a class="headerlink" href="#creating-the-initial-session" title="Link to this heading">#</a></h2>
-<p>You need to change these to reflect your environment.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change these variables to reflect your environment, E.g. </span>
-<span class="c1">#</span>
-<span class="c1"># ENDPOINT = &#39;http://your_vast_endpoint:12345&#39;</span>
-<span class="c1"># DATABASE_NAME = &#39;your_db&#39;</span>
-<span class="c1"># ACCESS_KEY = &#39;your_access_key&#39;</span>
-<span class="c1"># SECRET_KEY = &#39;your_secret_key&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can then connect to the database.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vastdb</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span>
-    <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
-    <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>It can be useful to know the Vast Database cluster version.  Let’s print it out.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vast Cluster version: &quot;</span><span class="p">,</span> <span class="n">session</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">vast_version</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Finally test we can access the database and print out the schemas.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
-    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
-
-    <span class="n">schemas</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schemas</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">schemas</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<hr/>
 </section>
 </section>
 
@@ -583,7 +514,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./vast_database/sdk_ref"
+            path: "./vast_database/overview"
         },
         predefinedOutput: true
     }
@@ -601,20 +532,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="limits.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Python SDK Reference</p>
+        <p class="prev-next-title">Dimensions and Limits</p>
       </div>
     </a>
     <a class="right-next"
-       href="schema_management.html"
+       href="getting_started.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Scheme Management</p>
+        <p class="prev-next-title">Getting Started</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -634,10 +565,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-import-the-vast-db-sdk">Install and import the Vast DB SDK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-initial-session">Creating the initial session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blogs">Blogs</a></li>
 </ul>
   </nav></div>
 
