@@ -1,4 +1,4 @@
-# Near realtime workloads
+# Near real-time workloads
 
 ## Overview
 
