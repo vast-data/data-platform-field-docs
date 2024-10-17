@@ -12,4 +12,4 @@ This documention will delve into specific NiFi patterns and provide practical ex
 ```{tableofcontents}
 ```
 
----
+<hr/>

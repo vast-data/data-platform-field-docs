@@ -5,4 +5,4 @@ Apache NiFi, a powerful dataflow system, is designed to handle large volumes of 
 This documention will delve into specific NiFi patterns and provide practical examples. By understanding and implementing these patterns, you can effectively leverage NiFi to process vast datasets and extract valuable insights.
 
 
-See the [NiFi Patterns](../nifi/overview.md) documentation.
+See the [Apache NiFi](../nifi/overview.md) documentation.
