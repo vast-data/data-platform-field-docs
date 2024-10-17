@@ -1,8 +1,6 @@
-# Apache NiFi Patterns
+# Apache NiFi
 
-## Patterns for Working with Vast Data
-
-### **Overview**
+## Overview
 
 Apache NiFi, a powerful dataflow system, is designed to handle large volumes of data efficiently. This document explores key NiFi patterns for ingesting, transforming, distributing, managing, and storing vast datasets.
 
@@ -13,3 +11,5 @@ This documention will delve into specific NiFi patterns and provide practical ex
 
 ```{tableofcontents}
 ```
+
+---

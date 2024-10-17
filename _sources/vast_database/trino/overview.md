@@ -1,4 +1,4 @@
-# Trino Patterns
+# Trino
 
 ## Introduction
 
