@@ -28,4 +28,19 @@ Download the white paper: [Cyber Lakehouse](https://www.vastdata.com/resources/w
 
 <hr/>
 
+## Real-Time Insights on Enterprise Data
+
+VAST InsightEngine is a groundbreaking platform designed to bring real-time insights to enterprise data, transforming how businesses leverage AI for faster, smarter decisions. With NVIDIA NIM integration, this solution enables:
+
+* **Agentic AI for autonomous decision-making:** Empower AI agents to autonomously process and act on dynamic data streams, ideal for real-time applications like financial services, cybersecurity, and healthcare.
+* **Streamlined data pipelines with NVIDIA NIM-powered automation:** Automate data workflows using inference microservices that trigger immediately upon data ingestion, drastically reducing operational complexity.
+* **Instant AI searchability with real-time data embedding:** Transform unstructured data into vector embeddings the moment it’s created, making it instantly searchable and actionable for AI tasks.
+* **Massive-scale AI retrieval:** Handle trillions of vector embeddings, enabling rapid, memory-speed searches for large-scale datasets without performance degradation.
+* **Simplified AI data management:** Leverage VAST’s unified architecture to manage real-time storage, processing, and retrieval, reducing the need for external data lakes or third-party tools.
+* **Atomic-level data security and compliance:** Ensure atomic-level security and regulatory compliance through embedded Access Control Lists (ACLs) and data provenance tracking.
+
+Learn more: [VAST InsightEngine with NVIDIA](https://www.vastdata.com/platform/insightengine-with-nvidia)
+
+<hr/>
+
 **More content coming soon...**
