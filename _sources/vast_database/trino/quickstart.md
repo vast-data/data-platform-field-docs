@@ -2,6 +2,8 @@
 
 Trino provides a very powerful and flexible way to connect to the VAST DB. Trino allows querying the DB from the Trino python client, Querybook, Grafana, and other software that can use Trino as a datasource. VAST has published docker containers with everything you need to connect to your VAST cluster.
 
+This article is based on the Vast 5.1 Trino [configuration documentation](https://support.vastdata.com/s/article/UUID-58380a6a-6594-914d-004b-b37d5a06692b).
+
 ## Prerequisites
 
 This guide assumes that you have:
@@ -60,6 +62,7 @@ docker run \
     --name trino \
     -p 8080:8080 -d \
     -v ./vast.properties:/etc/trino/catalog/vast.properties:ro \
+    --platform linux/amd64 \
     vastdataorg/trino-vast:429
 ```
 
