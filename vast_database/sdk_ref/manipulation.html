@@ -505,6 +505,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="manipulating-data">
 <h1>Manipulating Data<a class="headerlink" href="#manipulating-data" title="Link to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The Vast DB SDK API Documentation is available <a class="reference external" href="https://vastdb-sdk.readthedocs.io">here</a>.</p>
+</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
@@ -513,7 +517,7 @@ document.write(`
 <section id="insert">
 <h2><code class="docutils literal notranslate"><span class="pre">insert</span></code><a class="headerlink" href="#insert" title="Link to this heading">#</a></h2>
 <p>Row inserts into VAST-DB first occur into storage-class memory as discrete operations. While some combining of rows may occur when inserts are done very close together in time, it’s easier to think of a single SQL insert command as resulting in data chunks written to SCM.</p>
-<p><img alt="image" src="vast_database/sdk_ref/img/VAST-Insert.png" /></p>
+<!-- ![image](./img/VAST-Insert.png) -->
 <p>This insert occurs according to isolation rules: clients that are part of the insert transaction are exposed to the new data immediately. Clients that begin a transaction after the insert transaction is committed are then exposed to the data. As inserts and other ingest transactions occur, asynchronous tasks will trigger, combining all of these discrete objects in SCM, and writing them to read-intensive NVMe along with updates to the associated metadata structures upstream of it.</p>
 <p>Row inserts into VAST-DB first occur into storage-class memory as discrete operations. While some combining of rows may occur when inserts are done very close together in time, it’s easier to think of a single SQL insert command as resulting in data chunks written to SCM.</p>
 <ul class="simple">
@@ -745,7 +749,7 @@ If a row is too wide to be inserted, the method falls back to inserting in colum
 <section id="update">
 <h2><code class="docutils literal notranslate"><span class="pre">update</span></code><a class="headerlink" href="#update" title="Link to this heading">#</a></h2>
 <p>An update to a row results in new data written to SCM where metadata objects associated with the table are updated to link the newly written data in favor of the old (according to transaction isolation rules). Asynchronous tasks then combine all of the updates and rewrite data chunks in main storage as necessary to house updated data.</p>
-<p><img alt="image" src="vast_database/sdk_ref/img/VAST-Updates.png" /></p>
+<!-- ![image](./img/VAST-Updates.png) -->
 <p>An additional async task (called snap delete) will unlink chunks if they are part of an existing snapshot or if they are needed inside or outside of an ongoing transaction.</p>
 <ul class="simple">
 <li><p><strong>Usage</strong>: Updates a subset of cells in this table.</p></li>
@@ -986,7 +990,7 @@ If a row is too wide to be inserted, the method falls back to inserting in colum
 <h2><code class="docutils literal notranslate"><span class="pre">delete</span></code><a class="headerlink" href="#delete" title="Link to this heading">#</a></h2>
 <p>Row-level deletes work similarly to updates. Table metadata is updated, logically removing the row (tombstoning it).
 Eventually asynchronous processes will then relocate (rewrite and unlink) data as necessary to reclaim space in main storage - taking care to account for ongoing transactions and snapshots.</p>
-<p><img alt="image" src="vast_database/sdk_ref/img/VAST-Deletes.png" /></p>
+<!-- ![image](./img/VAST-Deletes.png) -->
 <ul class="simple">
 <li><p><strong>Usage</strong>: Deletes a subset of rows in this table.</p></li>
 <li><p><strong>Parameters</strong>:</p>

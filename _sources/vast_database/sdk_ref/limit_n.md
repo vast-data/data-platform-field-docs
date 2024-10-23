@@ -1,5 +1,9 @@
 # Query with 'LIMIT n'
 
+```{seealso}
+The Vast DB SDK API Documentation is available [here](https://vastdb-sdk.readthedocs.io).
+```
+
 ## Overview
 
 A common operation when interactively working with large datasets is to LIMIT the records returned so can quickly view some data without processing the whole dataset.

@@ -503,6 +503,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="querying-data">
 <h1>Querying Data<a class="headerlink" href="#querying-data" title="Link to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The Vast DB SDK API Documentation is available <a class="reference external" href="https://vastdb-sdk.readthedocs.io">here</a>.</p>
+</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
@@ -730,7 +734,7 @@ VAST-DB Supports filtering using a complete set of predicates. These predicates 
 </section>
 <section id="filter-predicates-in-vastdbapi">
 <h2>(Filter) Predicates in VastdbApi<a class="headerlink" href="#filter-predicates-in-vastdbapi" title="Link to this heading">#</a></h2>
-<ul>
+<ul class="simple">
 <li><p>You can use these predicates in the VastdbApi API:</p>
 <ul>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">eq</span></code></strong>: Equal -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['eq</span> <span class="pre">value']</span></code></p></li>
@@ -743,9 +747,7 @@ VAST-DB Supports filtering using a complete set of predicates. These predicates 
 <strong>Note:</strong></p></li>
 <li><p>If using pandas dataframe, pandas predicates can also be used. (Perfomance might be reflected because it’s not API-native filters)</p>
 <ul>
-<li><p><strong>Example</strong> <a class="reference internal" href="#query-a-table-using-pandas-predicates"><span class="xref myst">Query a table using Pandas predicates</span></a></p>
-<p><strong><a class="reference internal" href="#advanced-examples"><span class="xref myst">See more advanced examples on how to query data</span></a></strong></p>
-</li>
+<li><p><strong>Example</strong> <a class="reference internal" href="#query-a-table-using-pandas-predicates">Query a table using Pandas predicates</a></p></li>
 </ul>
 </li>
 </ul>
@@ -1037,7 +1039,7 @@ VAST-DB Supports filtering using a complete set of predicates. These predicates 
 </div>
 </section>
 <section id="query-a-table-using-pandas-predicates">
-<h2>Query a table using Pandas predicates<a class="headerlink" href="#query-a-table-using-pandas-predicates" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h2>Query a table using Pandas predicates<a class="headerlink" href="#query-a-table-using-pandas-predicates" title="Link to this heading">#</a></h2>
 <p>This performs client side querying.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
