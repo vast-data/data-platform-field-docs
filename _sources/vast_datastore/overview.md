@@ -1,0 +1,5 @@
+# Vast Datastore Introduction
+
+VAST Data Store is a revolutionary platform designed to meet the demands of modern data and AI workloads by delivering a highly scalable, high-performance storage solution. Built to handle the massive data volumes required by AI and machine learning applications, VAST’s disaggregated, all-flash architecture enables organizations to process vast datasets at incredible speed with low latency. With native support for high-throughput data ingestion, parallel processing, and seamless access to both structured and unstructured data, VAST empowers AI workloads to train models faster, extract deeper insights, and unlock the full potential of data-driven innovation. Its ability to consolidate data from various sources into a unified, accessible platform makes it ideal for enterprises looking to accelerate their AI initiatives and drive smarter, data-intensive applications.
+
+Watch this space for content for Vast DataStore!
