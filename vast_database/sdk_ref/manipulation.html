@@ -1,0 +1,1406 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Manipulating Data &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/manipulation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Utility: Verify Parquet" href="verify_parquet.html" />
+    <link rel="prev" title="Projections" href="projections.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/replication.html">Replication</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/manipulation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/sdk_ref/manipulation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Manipulating Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insert"><code class="docutils literal notranslate"><span class="pre">insert</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-table">Show table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insert-the-record">Insert the Record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-that-the-record-was-inserted">Show that the record was inserted</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update"><code class="docutils literal notranslate"><span class="pre">update</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-the-table">list the table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-the-citizen-experience-and-is-married-status-for-alice-bob">Update the Citizen_experience and Is_married status for Alice &amp; Bob</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-the-updates-for-alice-bob">validate the updates for Alice &amp; Bob</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delete"><code class="docutils literal notranslate"><span class="pre">delete</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-the-rows-in-the-table">List the rows in the table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-the-row-for-bob">Delete the Row for Bob</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="manipulating-data">
+<h1>Manipulating Data<a class="headerlink" href="#manipulating-data" title="Link to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The Vast DB SDK API Documentation is available <a class="reference external" href="https://vastdb-sdk.readthedocs.io">here</a>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
+</div>
+<p>CRUD operations in VAST-DB are designed to be low-latency to the user while improving the overall performance of the system by implementing background operations in such a way that unnecessary I/O is minimized or eliminated.</p>
+<section id="insert">
+<h2><code class="docutils literal notranslate"><span class="pre">insert</span></code><a class="headerlink" href="#insert" title="Link to this heading">#</a></h2>
+<p>Row inserts into VAST-DB first occur into storage-class memory as discrete operations. While some combining of rows may occur when inserts are done very close together in time, it’s easier to think of a single SQL insert command as resulting in data chunks written to SCM.</p>
+<!-- ![image](./img/VAST-Insert.png) -->
+<p>This insert occurs according to isolation rules: clients that are part of the insert transaction are exposed to the new data immediately. Clients that begin a transaction after the insert transaction is committed are then exposed to the data. As inserts and other ingest transactions occur, asynchronous tasks will trigger, combining all of these discrete objects in SCM, and writing them to read-intensive NVMe along with updates to the associated metadata structures upstream of it.</p>
+<p>Row inserts into VAST-DB first occur into storage-class memory as discrete operations. While some combining of rows may occur when inserts are done very close together in time, it’s easier to think of a single SQL insert command as resulting in data chunks written to SCM.</p>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Inserts a RecordBatch into this table.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">rows</span></code> (pa.RecordBatch): The record batch to be inserted into the table.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.NotSupportedCommand</span></code>: If the operation is not supported on the current table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.TooWideRow</span></code>: If the row to be inserted is too wide.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pa.ChunkedArray</span></code>: An array of internal row IDs of the inserted rows, if the feature is supported by the server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: If the feature of returning row IDs is not supported by the server.</p></li>
+</ul>
+</li>
+<li><p><strong>Note</strong>:
+If a row is too wide to be inserted, the method falls back to inserting in column batches.</p></li>
+</ul>
+<section id="show-table">
+<h3>Show table<a class="headerlink" href="#show-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_rows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Listing rows in: Database=&#39;</span><span class="si">{</span><span class="n">DATABASE_NAME</span><span class="si">}</span><span class="s2">&#39; Schema=&#39;</span><span class="si">{</span><span class="n">DATABASE_SCHEMA</span><span class="si">}</span><span class="s2">&#39; Table=&#39;</span><span class="si">{</span><span class="n">TABLE_NAME</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                    <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+                    <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                    <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                    <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="n">list_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in: Database=&#39;demo-database&#39; Schema=&#39;python-sdk-schema&#39; Table=&#39;pythonsdkcitizen&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="insert-the-record">
+<h3>Insert the Record<a class="headerlink" href="#insert-the-record" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ROWS</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span><span class="s1">&#39;Bob&#39;</span><span class="p">],</span> <span class="s1">&#39;Citizen_Age&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">24</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">PA_RECORD_BATCH</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecordBatch</span><span class="o">.</span><span class="n">from_pydict</span><span class="p">(</span><span class="n">ROWS</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">PA_RECORD_BATCH</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data inserted.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t insert data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data inserted.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-that-the-record-was-inserted">
+<h3>Show that the record was inserted<a class="headerlink" href="#show-that-the-record-was-inserted" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in: Database=&#39;demo-database&#39; Schema=&#39;python-sdk-schema&#39; Table=&#39;pythonsdkcitizen&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Alice</td>
+      <td>NaN</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>24</td>
+      <td>Bob</td>
+      <td>NaN</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="update">
+<h2><code class="docutils literal notranslate"><span class="pre">update</span></code><a class="headerlink" href="#update" title="Link to this heading">#</a></h2>
+<p>An update to a row results in new data written to SCM where metadata objects associated with the table are updated to link the newly written data in favor of the old (according to transaction isolation rules). Asynchronous tasks then combine all of the updates and rewrite data chunks in main storage as necessary to house updated data.</p>
+<!-- ![image](./img/VAST-Updates.png) -->
+<p>An additional async task (called snap delete) will unlink chunks if they are part of an existing snapshot or if they are needed inside or outside of an ongoing transaction.</p>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Updates a subset of cells in this table.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">rows</span></code> (Union[pa.RecordBatch, pa.Table]): The rows to be updated. Must include a special field named <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> of uint64 type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span></code> (Optional[List[str]]): The subset of columns to be updated. If None, all columns are updated.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.NotSupportedCommand</span></code>: If the operation is not supported on the current table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.MissingRowIdColumn</span></code>: If the <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> field is missing from the rows.</p></li>
+</ul>
+</li>
+<li><p><strong>Note</strong>:</p>
+<ul>
+<li><p>This function assumes that the <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> field is part of the input rows. The <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> field is used to specify the row IDs to be updated.</p></li>
+</ul>
+</li>
+</ul>
+<section id="list-the-table">
+<h3>list the table<a class="headerlink" href="#list-the-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in: Database=&#39;demo-database&#39; Schema=&#39;python-sdk-schema&#39; Table=&#39;pythonsdkcitizen&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Alice</td>
+      <td>NaN</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>24</td>
+      <td>Bob</td>
+      <td>NaN</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="update-the-citizen-experience-and-is-married-status-for-alice-bob">
+<h3>Update the Citizen_experience and Is_married status for Alice &amp; Bob<a class="headerlink" href="#update-the-citizen-experience-and-is-married-status-for-alice-bob" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the fields and their types</span>
+<span class="n">FIELDS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;$row_id&quot;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">uint64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;Citizen_experience&quot;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">float64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;Is_married&quot;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">bool_</span><span class="p">())</span>
+<span class="p">]</span>
+
+<span class="c1"># Define the values for each field</span>
+<span class="n">VALUES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>  <span class="c1"># values for &quot;$row_id&quot;</span>
+    <span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span>  <span class="c1"># values for &quot;Citizen_experience&quot;</span>
+    <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>  <span class="c1"># values for &quot;Is_married&quot;</span>
+<span class="p">]</span>
+
+<span class="c1"># Create a record batch</span>
+<span class="n">RECORD_BATCH</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">record_batch</span><span class="p">(</span><span class="n">VALUES</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">FIELDS</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                
+                <span class="c1"># Update the table</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">RECORD_BATCH</span><span class="p">)</span>
+                
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data updated.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t insert data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data updated.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="validate-the-updates-for-alice-bob">
+<h3>validate the updates for Alice &amp; Bob<a class="headerlink" href="#validate-the-updates-for-alice-bob" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in: Database=&#39;demo-database&#39; Schema=&#39;python-sdk-schema&#39; Table=&#39;pythonsdkcitizen&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Alice</td>
+      <td>43.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>24</td>
+      <td>Bob</td>
+      <td>28.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="delete">
+<h2><code class="docutils literal notranslate"><span class="pre">delete</span></code><a class="headerlink" href="#delete" title="Link to this heading">#</a></h2>
+<p>Row-level deletes work similarly to updates. Table metadata is updated, logically removing the row (tombstoning it).
+Eventually asynchronous processes will then relocate (rewrite and unlink) data as necessary to reclaim space in main storage - taking care to account for ongoing transactions and snapshots.</p>
+<!-- ![image](./img/VAST-Deletes.png) -->
+<ul class="simple">
+<li><p><strong>Usage</strong>: Deletes a subset of rows in this table.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">rows</span></code> (Union[pa.RecordBatch, pa.Table]): The rows to be deleted. Must include a special field named <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> of uint64 type.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.NotSupportedCommand</span></code>: If the operation is not supported on the current table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.MissingRowIdColumn</span></code>: If the <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> field is missing from the rows.</p></li>
+</ul>
+</li>
+<li><p><strong>Note</strong>:</p>
+<ul>
+<li><p>This function assumes that the <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> field is part of the input rows. The <code class="docutils literal notranslate"><span class="pre">$row_id</span></code> field is used to specify the row IDs to be deleted.</p></li>
+</ul>
+</li>
+</ul>
+<section id="list-the-rows-in-the-table">
+<h3>List the rows in the table<a class="headerlink" href="#list-the-rows-in-the-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in: Database=&#39;demo-database&#39; Schema=&#39;python-sdk-schema&#39; Table=&#39;pythonsdkcitizen&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Alice</td>
+      <td>43.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>24</td>
+      <td>Bob</td>
+      <td>28.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="delete-the-row-for-bob">
+<h3>Delete the Row for Bob<a class="headerlink" href="#delete-the-row-for-bob" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PREDICATE</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_Name</span> <span class="o">==</span> <span class="s1">&#39;Bob&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Is_married</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_experience&#39;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+
+                <span class="c1"># IMPORTANT: internal_row_id=True</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="n">PREDICATE</span><span class="p">,</span> <span class="n">internal_row_id</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_all</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No records found.&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Records to delete (note we ran select with `internal_row_id=True`) ...&quot;</span><span class="p">)</span>
+                    <span class="n">display</span><span class="p">(</span><span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span>
+    
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deleting rows&quot;</span><span class="p">);</span>
+                    <span class="n">table</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">pyarrow_table</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">traceback</span>
+                <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception encountered:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Records to delete (note we ran select with `internal_row_id=True`) ...
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>$row_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Deleting rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_rows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in: Database=&#39;demo-database&#39; Schema=&#39;python-sdk-schema&#39; Table=&#39;pythonsdkcitizen&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25</td>
+      <td>Alice</td>
+      <td>43.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24</td>
+      <td>Bob</td>
+      <td>28.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/sdk_ref"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="projections.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Projections</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="verify_parquet.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Utility: Verify Parquet</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insert"><code class="docutils literal notranslate"><span class="pre">insert</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-table">Show table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insert-the-record">Insert the Record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-that-the-record-was-inserted">Show that the record was inserted</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update"><code class="docutils literal notranslate"><span class="pre">update</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-the-table">list the table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-the-citizen-experience-and-is-married-status-for-alice-bob">Update the Citizen_experience and Is_married status for Alice &amp; Bob</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-the-updates-for-alice-bob">validate the updates for Alice &amp; Bob</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delete"><code class="docutils literal notranslate"><span class="pre">delete</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-the-rows-in-the-table">List the rows in the table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-the-row-for-bob">Delete the Row for Bob</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

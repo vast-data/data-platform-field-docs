@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Importing Files using API &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/importing_files';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Importing Files using Pandas" href="importing_files_pandas.html" />
+    <link rel="prev" title="Utility: Verify Parquet" href="verify_parquet.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/replication.html">Replication</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/importing_files.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/sdk_ref/importing_files.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Importing Files using API</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-database-session">Create a database session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-using-the-importer-on-cnodes">Import using the importer on Cnodes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-our-flight-data-parquet-file-into-s3-bucket">Import our flight data parquet file into s3 bucket</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-schema-and-use-the-api-to-start-the-import-on-the-cnodes">Create Schema and use the API to start the import on the Cnodes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="importing-files-using-api">
+<h1>Importing Files using API<a class="headerlink" href="#importing-files-using-api" title="Link to this heading">#</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The Vast DB SDK API Documentation is available <a class="reference external" href="https://vastdb-sdk.readthedocs.io">here</a>.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Bulk import of data into VAST-DB, can be done with any method supported by the analytics/query engine.</p>
+<p>Inserts, CTAS commands (CREATE TABLE AS [QUERY]), python scripts processing data frames, etc. Tools like Spark make this easy, but this type of processing will be slow compared to the LOAD operations supported by various databases. VAST-DB includes LOAD capabilities.</p>
+<p>Ingesting Serialized Data Objects (LOAD)
+Parquet objects housed on VAST can be ingested directly into a VAST-DB table using an RPC call issued via the VAST-DB APIs. Issuing these calls is supported from Trino and Spark and this will usually be how these calls are made. Import process will look like this:</p>
+<ul class="simple">
+<li><p>The target table with schema is prepared in VAST-DB</p></li>
+<li><p>Data is placed in an S3 bucket on VAST storage</p></li>
+<li><p>An RPC call is made to a VAST-DB CNode directing it to the object location(s) in VAST</p></li>
+<li><p>The VAST-DB CNode cluster will then divide the workload and import the data directly from the file and into the prepared table.</p></li>
+</ul>
+<p>Currently, Parquet is the only format supported for this operation, however creating additional filters for ORC, delimited text, CSV, JSON, etc. is a simple development task (if you want it, just ask).
+Bulk importation of data into VAST-DB, can be done with any method supported by the analytics/query engine. Inserts, CTAS commands (CREATE TABLE AS [QUERY]), python scripts processing data frames, etc. Tools like Spark make this easy, but this type of processing will be slow compared to the LOAD operations supported by various databases. VAST-DB includes LOAD capabilities.</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><strong>Method</strong>: table.import_file</p></li>
+<li><p><strong>Usage</strong>: Imports a list of Parquet files into this table. The files must be on the VAST S3 server and be accessible using current credentials.</p></li>
+<li><p><strong>Args</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">files_to_import</span></code> (Iterable[str]): An iterable of file paths to import.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> (Optional[ImportConfig], optional): Configuration for the import operation. Defaults to None.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.NotSupportedCommand</span></code>: If the operation is not supported on the current table.</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><strong>Method</strong>: table.import_partitioned_files</p></li>
+<li><p><strong>Usage</strong>: Imports a list of Parquet files into this table, with each file having its own partition values. The files must be on the VAST S3 server and be accessible using current credentials. Each file must have its own partition values defined as an Arrow RecordBatch.</p></li>
+<li><p><strong>Args</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">files_and_partitions</span></code> (Dict[str, pa.RecordBatch]): A dictionary mapping file paths to their corresponding partition values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> (Optional[ImportConfig], optional): Configuration for the import operation. Defaults to None.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.NotSupportedCommand</span></code>: If the operation is not supported on the current table.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="create-a-database-session">
+<h2>Create a database session<a class="headerlink" href="#create-a-database-session" title="Link to this heading">#</a></h2>
+<p>This section creates a session as detailed <a class="reference internal" href="create_session.html"><span class="std std-doc">here</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--quiet<span class="w"> </span>vastdb
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Change these variables to reflect your environment, E.g. </span>
+<span class="c1">#</span>
+<span class="c1"># ENDPOINT = &#39;http://your_vast_endpoint:12345&#39;</span>
+<span class="c1"># DATABASE_NAME = ...</span>
+
+<span class="n">ENDPOINT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;ENDPOINT&#39;</span><span class="p">]</span>
+<span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;ACCESS_KEY&#39;</span><span class="p">]</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span>
+
+<span class="n">DATABASE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DATABASE_NAME&#39;</span><span class="p">]</span>
+
+<span class="c1"># Schema and Table will get created if they doesn&#39;t exist </span>
+<span class="n">DATABASE_SCHEMA</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DATABASE_SCHEMA&#39;</span><span class="p">]</span>
+<span class="n">TABLE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TABLE_NAME&#39;</span><span class="p">]</span>
+
+<span class="c1"># S3 File Details</span>
+<span class="n">BUCKET_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">]</span>
+<span class="n">LOCAL_FILE_PATH</span> <span class="o">=</span> <span class="s1">&#39;flights.parquet&#39;</span>
+<span class="n">S3_FILE_KEY</span> <span class="o">=</span> <span class="s1">&#39;pythonsdk/import/flights.parquet&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell contains code you will need to run to establish a session.</p>
+<p>The cell is hidden because creating a connection is not the key focus of this tutorial.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="si">{</span><span class="n">ENDPOINT</span><span class="si">=}</span><span class="s2"> </span>
+<span class="si">{</span><span class="n">ACCESS_KEY</span><span class="si">=}</span>
+<span class="s2">---</span>
+<span class="si">{</span><span class="n">DATABASE_NAME</span><span class="si">=}</span>
+<span class="si">{</span><span class="n">DATABASE_SCHEMA</span><span class="si">=}</span>
+<span class="si">{</span><span class="n">TABLE_NAME</span><span class="si">=}</span>
+<span class="s2">---</span>
+<span class="si">{</span><span class="n">BUCKET_NAME</span><span class="si">=}</span>
+<span class="si">{</span><span class="n">LOCAL_FILE_PATH</span><span class="si">=}</span>
+<span class="si">{</span><span class="n">S3_FILE_KEY</span><span class="si">=}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">vastdb</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span>
+    <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+    <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vast Cluster version: &quot;</span><span class="p">,</span> <span class="n">session</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">vast_version</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="import-using-the-importer-on-cnodes">
+<h2>Import using the importer on Cnodes<a class="headerlink" href="#import-using-the-importer-on-cnodes" title="Link to this heading">#</a></h2>
+<p>The importer expects that S3 files are available in an S3 Bucket.
+For the tutorial we will upload an example airline parquet file to a VAST S3 Bucket</p>
+<section id="import-our-flight-data-parquet-file-into-s3-bucket">
+<h3>Import our flight data parquet file into s3 bucket<a class="headerlink" href="#import-our-flight-data-parquet-file-into-s3-bucket" title="Link to this heading">#</a></h3>
+<p>The next cell creates some utility functions, <code class="docutils literal notranslate"><span class="pre">upload_to_s3</span></code> and <code class="docutils literal notranslate"><span class="pre">list_objects_in_bucket</span></code>.  The cell is hidden because it is boilerplate code.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">NoCredentialsError</span>
+
+<span class="k">def</span> <span class="nf">upload_to_s3</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">s3_file</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="p">,</span> <span class="n">aws_secret_access_key</span><span class="p">,</span> <span class="n">s3_endpoint</span><span class="p">):</span>
+    <span class="c1"># Create an S3 client with custom endpoint</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">aws_access_key_id</span><span class="p">,</span> <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">aws_secret_access_key</span><span class="p">,</span> <span class="n">endpoint_url</span><span class="o">=</span><span class="n">s3_endpoint</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Upload the file</span>
+        <span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">s3_file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">local_file</span><span class="si">}</span><span class="s2"> uploaded to </span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">s3_file</span><span class="si">}</span><span class="s2"> successfully.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file </span><span class="si">{</span><span class="n">local_file</span><span class="si">}</span><span class="s2"> was not found.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">NoCredentialsError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available.&quot;</span><span class="p">)</span>
+        
+<span class="k">def</span> <span class="nf">list_objects_in_bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="p">,</span> <span class="n">aws_secret_access_key</span><span class="p">,</span> <span class="n">s3_endpoint</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Create an S3 client with custom endpoint</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">aws_access_key_id</span><span class="p">,</span> <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">aws_secret_access_key</span><span class="p">,</span> <span class="n">endpoint_url</span><span class="o">=</span><span class="n">s3_endpoint</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># List objects in the bucket with optional prefix</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Bucket&#39;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">prefix</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;Prefix&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">list_objects_v2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;Contents&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Objects in bucket </span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2"> with prefix &#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&#39;:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Contents&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; obj[&#39;Key&#39;]&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No objects found in bucket </span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2"> with prefix &#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">NoCredentialsError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upload_to_s3</span><span class="p">(</span>
+  <span class="n">LOCAL_FILE_PATH</span><span class="p">,</span> 
+  <span class="n">BUCKET_NAME</span><span class="p">,</span> 
+  <span class="n">S3_FILE_KEY</span><span class="p">,</span> 
+  <span class="n">ACCESS_KEY</span><span class="p">,</span> 
+  <span class="n">SECRET_KEY</span><span class="p">,</span> 
+  <span class="n">ENDPOINT</span><span class="p">)</span>
+
+<span class="n">list_objects_in_bucket</span><span class="p">(</span>
+  <span class="n">BUCKET_NAME</span><span class="p">,</span> 
+  <span class="n">ACCESS_KEY</span><span class="p">,</span> 
+  <span class="n">SECRET_KEY</span><span class="p">,</span> 
+  <span class="n">ENDPOINT</span><span class="p">,</span> 
+  <span class="n">S3_FILE_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="create-schema-and-use-the-api-to-start-the-import-on-the-cnodes">
+<h2>Create Schema and use the API to start the import on the Cnodes<a class="headerlink" href="#create-schema-and-use-the-api-to-start-the-import-on-the-cnodes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyarrow</span> <span class="k">as</span> <span class="nn">pa</span>
+<span class="kn">from</span> <span class="nn">vastdb.errors</span> <span class="kn">import</span> <span class="n">TableExists</span>
+
+<span class="c1"># create table schema before using the importer API</span>
+
+<span class="n">ARROW_SCHEMA</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">schema</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;FL_DATE&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">date32</span><span class="p">()),</span> 
+    <span class="p">(</span><span class="s1">&#39;DEP_DELAY&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int16</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;ARR_DELAY&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int16</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;AIR_TIME&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int16</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;DISTANCE&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int16</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;DEP_TIME&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">float32</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;ARR_TIME&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">float32</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+
+    <span class="c1"># first retrieve the schema</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">table_name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">ARROW_SCHEMA</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table created: </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">TableExists</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t create table because it already exists:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t create table:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Schema(name=&#39;python-sdk-schema&#39;, bucket=Bucket(name=&#39;demo-database&#39;, tx=Transaction(id=0x0000300000000033)))
+Table created: flights_cnode_importer
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FILES_TO_IMPORT</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">BUCKET_NAME</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">S3_FILE_KEY</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Importing </span><span class="si">{</span><span class="n">FILES_TO_IMPORT</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
+
+    <span class="c1"># first retrieve the schema</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">table</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">import_files</span><span class="p">(</span><span class="n">files_to_import</span><span class="o">=</span><span class="n">FILES_TO_IMPORT</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">traceback</span>
+            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t import files:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Importing [&#39;/demo-database/pythonsdk/import/flights.parquet&#39;]
+Schema(name=&#39;python-sdk-schema&#39;, bucket=Bucket(name=&#39;demo-database&#39;, tx=Transaction(id=0x0000300000000034)))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s verify the import…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Listing rows in </span><span class="si">{</span><span class="n">TABLE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Listing rows in flights_cnode_importer
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FL_DATE</th>
+      <th>DEP_DELAY</th>
+      <th>ARR_DELAY</th>
+      <th>AIR_TIME</th>
+      <th>DISTANCE</th>
+      <th>DEP_TIME</th>
+      <th>ARR_TIME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2006-01-01</td>
+      <td>5</td>
+      <td>19</td>
+      <td>350</td>
+      <td>2475</td>
+      <td>9.083333</td>
+      <td>12.483334</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2006-01-02</td>
+      <td>167</td>
+      <td>216</td>
+      <td>343</td>
+      <td>2475</td>
+      <td>11.783334</td>
+      <td>15.766666</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2006-01-03</td>
+      <td>-7</td>
+      <td>-2</td>
+      <td>344</td>
+      <td>2475</td>
+      <td>8.883333</td>
+      <td>12.133333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2006-01-04</td>
+      <td>-5</td>
+      <td>-13</td>
+      <td>331</td>
+      <td>2475</td>
+      <td>8.916667</td>
+      <td>11.950000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2006-01-05</td>
+      <td>-3</td>
+      <td>-17</td>
+      <td>321</td>
+      <td>2475</td>
+      <td>8.950000</td>
+      <td>11.883333</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>999995</th>
+      <td>2006-01-19</td>
+      <td>5</td>
+      <td>4</td>
+      <td>244</td>
+      <td>1781</td>
+      <td>15.000000</td>
+      <td>17.350000</td>
+    </tr>
+    <tr>
+      <th>999996</th>
+      <td>2006-01-20</td>
+      <td>14</td>
+      <td>12</td>
+      <td>240</td>
+      <td>1781</td>
+      <td>15.150000</td>
+      <td>17.483334</td>
+    </tr>
+    <tr>
+      <th>999997</th>
+      <td>2006-01-21</td>
+      <td>9</td>
+      <td>12</td>
+      <td>241</td>
+      <td>1781</td>
+      <td>15.066667</td>
+      <td>17.483334</td>
+    </tr>
+    <tr>
+      <th>999998</th>
+      <td>2006-01-22</td>
+      <td>-2</td>
+      <td>8</td>
+      <td>242</td>
+      <td>1781</td>
+      <td>14.883333</td>
+      <td>17.416666</td>
+    </tr>
+    <tr>
+      <th>999999</th>
+      <td>2006-01-23</td>
+      <td>1</td>
+      <td>-12</td>
+      <td>232</td>
+      <td>1781</td>
+      <td>14.933333</td>
+      <td>17.083334</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000000 rows × 7 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/sdk_ref"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="verify_parquet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Utility: Verify Parquet</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="importing_files_pandas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Importing Files using Pandas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-database-session">Create a database session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-using-the-importer-on-cnodes">Import using the importer on Cnodes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-our-flight-data-parquet-file-into-s3-bucket">Import our flight data parquet file into s3 bucket</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-schema-and-use-the-api-to-start-the-import-on-the-cnodes">Create Schema and use the API to start the import on the Cnodes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kafka Connect to Vast S3 &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_datastore/kafka_connect';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to VAST Database" href="../vast_database/overview/overview.html" />
+    <link rel="prev" title="Tagging Datastore S3 Objects" href="nifi/tagging_s3/overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Kafka Connect to Vast S3</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/replication.html">Replication</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_database/overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/operations_guide.html">Spark Operations Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/trino/howto.html">Tuning Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/misc/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/misc/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataengine/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_datastore/kafka_connect.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/vast_datastore/kafka_connect.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Kafka Connect to Vast S3</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Kafka Connect to Vast S3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-kafka-including-zookeeper-and-kafkaconnect">Setting up Kafka (including ZooKeeper) and KafkaConnect</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka">Kafka</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-topic">Creating new topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-messages-to-topic">Produce messages to topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consume-messages-from-topic">Consume messages from topic</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-connect">Kafka connect</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanity-check">Sanity check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-your-s3-sink-instance">Create your s3 sink instance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#config-file">Config file</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#critical-parameters">Critical parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-scenario">Running scenario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-connect-in-action">Kafka Connect in action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-files-are-on-s3">Verify files are on s3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s3-listing">S3 listing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="kafka-connect-to-vast-s3">
+<h1>Kafka Connect to Vast S3<a class="headerlink" href="#kafka-connect-to-vast-s3" title="Link to this heading">#</a></h1>
+<p><img alt="" src="data:image/png;base64,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bEQVEZaammZE26mTxyjgTuP06dOme/XChfNIpMhLTUlFRkaG6RqV7lFJjcrnRbAFB4VQkIUgnA0IMTExKF26DMpXqIgqcXGoWjUOcVWroULFSogtURJBpqmCXya3qhE3z05SP60ElIASUAKFiYAKuMJ0Wn68VkchJ92qwfQdCWRkLi09G/EJiRR0F1gvd55fFxB/9SqF3DUTkRMhl0MFJjYl4isXHh6OKEbcSpUqbZoRypYtj7LlyvH35RAZHsLmhEAj2rLYoHDjnire/PjR0KUpASWgBJSADwiogPMBVL2kJa4kDRrEbofgIFanMTqX6/xhBBh7DUyXqGNPgxWF4xffy/4IK0PLl0TYMjL5/qzcBgjzPRVt+pwpASWgBJRA8SWgAq74nr3vd26rM6O1LPFlm+/e6uZWdM2xY9XyfctTdbe6gH5fCSgBJaAElEARJqACrggfrr9szbHj1NnI2c1dqs5+zl/2rOtQAkpACSgBJeBLAirgfElXr60ElIASUAJKQAkoAR8QUAHnA6h6SSWgBJSAElACSkAJ+JKACjhf0tVrKwEloASUgBJQAkrABwRUwPkAql5SCSgBJaAElIASUAK+JKACzpd09dpKQAkoASWgBJSAEvABARVwPoCql1QCSkAJKAEloASUgC8JqIDzJV29thJQAkpACSgBJaAEfEBABZwPoOollYASUAJKQAkoASXgSwIq4HxJV6+tBJSAElACSkAJKAEfEFAB5wOoekkloASUgBJQAkpACfiSgAo4X9LVaysBJaAElIASUAJKwAcEVMD5AKpeUgkoASWgBJSAElACviTw/wFqF2DU2q4UswAAAABJRU5ErkJggg==" /></p>
+<p>Kafka Connect is an open-source framework that enables scalable and reliable streaming of data between Apache Kafka and other data systems. It provides a standardized way to build connectors that move large datasets in and out of Kafka, allowing for easy integration with databases, key-value stores, search indexes, and file systems.</p>
+<p><img alt="" src="data:image/png;base64,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" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Vast cluster</p></li>
+<li><p>View (s3)</p></li>
+<li><p>S3 bucket (only for kafka connect)</p></li>
+<li><p>S3 credentials (only for kafka connect)</p></li>
+<li><p>Host</p>
+<ul>
+<li><p>Docker</p></li>
+<li><p>docker-compose</p></li>
+<li><p>python3.9</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="setting-up-kafka-including-zookeeper-and-kafkaconnect">
+<h2>Setting up Kafka (including ZooKeeper) and KafkaConnect<a class="headerlink" href="#setting-up-kafka-including-zookeeper-and-kafkaconnect" title="Link to this heading">#</a></h2>
+<p>Put this docker-compose.yml file in your client (If you are not interested in kafka conenct you can drop this container)</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3&#39;</span><span class="w">  </span>
+<span class="nt">services</span><span class="p">:</span><span class="w">  </span>
+<span class="w">  </span><span class="nt">zookeeper</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-zookeeper:6.2.0</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">ZOOKEEPER_CLIENT_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2181</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">ZOOKEEPER_TICK_TIME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span>
+
+<span class="w">  </span><span class="nt">kafka1</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-kafka:6.2.0</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka1</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;9092:9092&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_BROKER_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_ZOOKEEPER_CONNECT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper:2181</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_ADVERTISED_LISTENERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://kafka1:29092,PLAINTEXT_HOST://${HOST_IP}:9092</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_INTER_BROKER_LISTENER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="w">  </span><span class="nt">kafka2</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-kafka:6.2.0</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka2</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;9093:9093&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_BROKER_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_ZOOKEEPER_CONNECT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper:2181</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_ADVERTISED_LISTENERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://kafka2:29093,PLAINTEXT_HOST://${HOST_IP}:9093</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_INTER_BROKER_LISTENER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="w">  </span><span class="nt">kafka3</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-kafka:6.2.0</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka3</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;9094:9094&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_BROKER_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_ZOOKEEPER_CONNECT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zookeeper:2181</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_ADVERTISED_LISTENERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://kafka3:29094,PLAINTEXT_HOST://${HOST_IP}:9094</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_INTER_BROKER_LISTENER_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="w">  </span><span class="nt">kafka-connect</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confluentinc/cp-kafka-connect:6.2.0</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka-connect</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka1</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka2</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka3</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minio</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8083:8083&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_BOOTSTRAP_SERVERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka1:29092,kafka2:29093,kafka3:29094</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_REST_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8083</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_GROUP_ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">compose-connect-group</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_CONFIG_STORAGE_TOPIC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker-connect-configs</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_OFFSET_STORAGE_TOPIC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker-connect-offsets</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_STATUS_STORAGE_TOPIC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker-connect-status</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_KEY_CONVERTER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.connect.json.JsonConverter</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_VALUE_CONVERTER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.connect.json.JsonConverter</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_INTERNAL_KEY_CONVERTER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.connect.json.JsonConverter</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_INTERNAL_VALUE_CONVERTER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.connect.json.JsonConverter</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_REST_ADVERTISED_HOST_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka-connect</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_LOG4J_ROOT_LOGLEVEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_LOG4J_LOGGERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_STATUS_STORAGE_REPLICATION_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">CONNECT_PLUGIN_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/share/java,/usr/share/confluent-hub-components</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bash</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-c</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w">  </span>
+<span class="w">        </span><span class="no">confluent-hub install --no-prompt confluentinc/kafka-connect-s3:latest  </span>
+<span class="w">        </span><span class="no">/etc/confluent/docker/run</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Keep an eye on <code class="docutils literal notranslate"><span class="pre">CONNECT_GROUP_ID:</span> <span class="pre">compose-connect-group</span></code>, this is the consumer group and it is defined at the worker level (not the same as we declare every time in consume request)</p></li>
+</ul>
+<p>Run the following docker compose command (in the same directory as the docker-compose.yml file)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">HOST_IP</span><span class="o">=</span><span class="k">$(</span>hostname<span class="w"> </span>-I<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kafka">
+<h1>Kafka<a class="headerlink" href="#kafka" title="Link to this heading">#</a></h1>
+<p>We will use simple kafka producer and consumer (python).</p>
+<p>Before running you should install python package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3.9<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>kafka-python
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Of course this command might be changed depends on your env</p></li>
+</ul>
+<section id="creating-new-topic">
+<h2>Creating new topic<a class="headerlink" href="#creating-new-topic" title="Link to this heading">#</a></h2>
+<p>You can skip this one as topics being created automatically while producing messages to non-exists topic. But, with kafka.admin you can apply partitions and replications.</p>
+<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAABHElEQVQ4T2NkoAFgpIGZDKOGUj9U6RumBQUFAn///hX+////d0ZGxreTJ0/+CfNTdna2MAcHB8+vX7/+AsWfoPsVp0vz8/ODmZiYEoAaLvz792/JxIkTb8I0FxYWxgMtcwDyP0yYMKGQaEOBGl2AGlOAGvSALt0GpFf8/v37GQsLiz+QHQLELEDxvf39/U1EG1pUVCQLNNQaiIOBmiSB+CbQkBdA2h0o9gZIHwfiXUCXgmgUgDeicnNz+YBBYAnEqUCDjIE6mYH4G9Dw6cDw3D516tRb2NIOUbEPNNyNmZk5B2iAGtDAPqAFm4EufI4rMRJlaGZmpiArK6s00DAuoOGPnz59+nb16tW/KDKU1OxBlEtHDSUpBIZOmAIACoVnFlzOmGcAAAAASUVORK5CYII=" />Creating new topic</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kafka.admin</span> <span class="kn">import</span> <span class="n">KafkaAdminClient</span><span class="p">,</span> <span class="n">NewTopic</span>
+
+<span class="c1"># Kafka Admin Configuration  </span>
+<span class="n">admin_client</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span>  
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&lt;YOUR_CLIENT_IP&gt;:9092&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;YOUR_CLIENT_IP&gt;:9093&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;YOUR_CLIENT_IP&gt;:9094&#39;</span><span class="p">],</span>  
+    <span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;python-admin-client&#39;</span>  
+<span class="p">)</span>
+
+<span class="c1"># Define a new topic with partitions and replication factor  </span>
+<span class="n">topic_name</span> <span class="o">=</span> <span class="s2">&quot;my-new-topic&quot;</span>  
+<span class="n">num_partitions</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">YOUR_NUMBER_OF_PARTITONS</span><span class="o">&gt;</span>  
+<span class="n">replication_factor</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">YOUR_NUMBER_OF_REPLICATION</span><span class="o">&gt;</span>
+
+<span class="n">topic</span> <span class="o">=</span> <span class="n">NewTopic</span><span class="p">(</span>  
+    <span class="n">name</span><span class="o">=</span><span class="n">topic_name</span><span class="p">,</span>  
+    <span class="n">num_partitions</span><span class="o">=</span><span class="n">num_partitions</span><span class="p">,</span>  
+    <span class="n">replication_factor</span><span class="o">=</span><span class="n">replication_factor</span>  
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>  
+    <span class="c1"># Create the topic  </span>
+    <span class="n">admin_client</span><span class="o">.</span><span class="n">create_topics</span><span class="p">(</span><span class="n">new_topics</span><span class="o">=</span><span class="p">[</span><span class="n">topic</span><span class="p">],</span> <span class="n">validate_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic &#39;</span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&#39; created successfully with </span><span class="si">{</span><span class="n">num_partitions</span><span class="si">}</span><span class="s2"> partitions and replication factor </span><span class="si">{</span><span class="n">replication_factor</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>  
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error creating topic: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  
+<span class="k">finally</span><span class="p">:</span>  
+    <span class="n">admin_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span><span class="n">Type</span> <span class="ow">or</span> <span class="n">paste</span> <span class="n">something</span> <span class="n">here</span> <span class="n">to</span> <span class="n">turn</span> <span class="n">it</span> <span class="n">into</span> <span class="n">an</span> <span class="n">excerpt</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="produce-messages-to-topic">
+<h2>Produce messages to topic<a class="headerlink" href="#produce-messages-to-topic" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaProducer</span>  
+<span class="kn">import</span> <span class="nn">json</span>  
+
+<span class="n">num_of_messages</span> <span class="o">=</span> <span class="c1"># Complete - the amount of messages to topic (can be also 1)  </span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;something&quot;</span><span class="p">}</span>  
+<span class="n">producer</span> <span class="o">=</span> <span class="n">KafkaProducer</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="o">=</span><span class="s1">&#39;&lt;YOUR_CLIENT_IP&gt;:9092&#39;</span><span class="p">,</span> <span class="n">value_serializer</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_of_messages</span><span class="p">):</span>  
+    <span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;&lt;YOUR_TOPIC_NAME&gt;&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    
+<span class="n">producer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Message sent to Kafka topic&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now the messages are in the topic and waiting to be read</p>
+</section>
+<section id="consume-messages-from-topic">
+<h2>Consume messages from topic<a class="headerlink" href="#consume-messages-from-topic" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaConsumer</span>
+
+<span class="n">consumer</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span>  
+    <span class="s1">&#39;new-topic&#39;</span><span class="p">,</span>  
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="s1">&#39;&lt;YOUR_CLIENT_IP&gt;:9092&#39;</span><span class="p">,</span>  
+    <span class="n">auto_offset_reset</span><span class="o">=</span><span class="s1">&#39;earliest&#39;</span><span class="p">,</span>  
+    <span class="n">enable_auto_commit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
+    <span class="n">group_id</span><span class="o">=</span><span class="s1">&#39;&lt;YOUR_CUNSUMER_GROUP&gt;&#39;</span><span class="p">,</span>  
+    <span class="n">session_timeout_ms</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span>  
+    <span class="n">heartbeat_interval_ms</span><span class="o">=</span><span class="mi">20000</span>  
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">consumer</span><span class="p">:</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received message: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code will run in infinite loop and print your Messages</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kafka-connect">
+<h1>Kafka connect<a class="headerlink" href="#kafka-connect" title="Link to this heading">#</a></h1>
+<section id="sanity-check">
+<h2>Sanity check<a class="headerlink" href="#sanity-check" title="Link to this heading">#</a></h2>
+<p>You can review your kafka connect modules with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://localhost:8083/connector-plugins
+</pre></div>
+</div>
+<p>You should get a list in return, one of them should be the s3 (the first item in my response)</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;io.confluent.connect.s3.S3SinkConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sink&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.5.17&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;io.confluent.connect.storage.tools.SchemaSourceConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.2.0-ccs&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.file.FileStreamSinkConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sink&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.2.0-ccs&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.file.FileStreamSourceConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.2.0-ccs&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.mirror.MirrorCheckpointConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.mirror.MirrorHeartbeatConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.mirror.MirrorSourceConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="create-your-s3-sink-instance">
+<h2>Create your s3 sink instance<a class="headerlink" href="#create-your-s3-sink-instance" title="Link to this heading">#</a></h2>
+<p>Make configuration file (you can call it “vast.json” like I did)</p>
+<section id="config-file">
+<h3>Config file<a class="headerlink" href="#config-file" title="Link to this heading">#</a></h3>
+<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAABHElEQVQ4T2NkoAFgpIGZDKOGUj9U6RumBQUFAn///hX+////d0ZGxreTJ0/+CfNTdna2MAcHB8+vX7/+AsWfoPsVp0vz8/ODmZiYEoAaLvz792/JxIkTb8I0FxYWxgMtcwDyP0yYMKGQaEOBGl2AGlOAGvSALt0GpFf8/v37GQsLiz+QHQLELEDxvf39/U1EG1pUVCQLNNQaiIOBmiSB+CbQkBdA2h0o9gZIHwfiXUCXgmgUgDeicnNz+YBBYAnEqUCDjIE6mYH4G9Dw6cDw3D516tRb2NIOUbEPNNyNmZk5B2iAGtDAPqAFm4EufI4rMRJlaGZmpiArK6s00DAuoOGPnz59+nb16tW/KDKU1OxBlEtHDSUpBIZOmAIACoVnFlzOmGcAAAAASUVORK5CYII=" />vast.json</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w">  </span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR_CONNECTOR_NAME&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;connector.class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;io.confluent.connect.s3.S3SinkConnector&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;tasks.max&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;topics&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR_TOPIC_NAME&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;s3.bucket.name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR_BUCKET_NAME&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;s3.region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;us-east-1&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;s3.part.size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5242880&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;flush.size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;storage.class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;io.confluent.connect.s3.storage.S3Storage&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;format.class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;io.confluent.connect.s3.format.json.JsonFormat&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;partitioner.class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;io.confluent.connect.storage.partitioner.DefaultPartitioner&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;schema.compatibility&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;store.url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;http://&lt;YOUR_ENDPOINT_URL&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;aws.access.key.id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR_KEY_ID&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;aws.secret.access.key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR_ACCESS_KEY&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;s3.path.style.access&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;key.converter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.json.JsonConverter&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;key.converter.schemas.enable&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;value.converter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;org.apache.kafka.connect.json.JsonConverter&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;value.converter.schemas.enable&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="w">  </span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>I disabled the schema because I wanted more flexible schemas but you can change it as you like.</p>
+<section id="critical-parameters">
+<h4>Critical parameters<a class="headerlink" href="#critical-parameters" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">flush.size</span></code> - Defines the number of records that must be accumulated before the connector writes a batch to S3.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rotate.interval.ms</span></code> - Defines the maximum amount of time, in milliseconds, before a batch is written to S3, regardless of the number of records accumulated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">region</span></code> - is not real but need to be supplied</p></li>
+</ul>
+<p>Launch the following http command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>--data<span class="w"> </span>@vast.json<span class="w"> </span>http://localhost:8083/connectors
+</pre></div>
+</div>
+<p>Let’s ensure the connector is running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://localhost:8083/connectors/&lt;YOUR_CONNECTOR_NAME&gt;/status
+</pre></div>
+</div>
+<p>The response should be:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR_CONNECTOR_NAME&gt;&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RUNNING&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&quot;worker_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kafka-connect:8083&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="p">},</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span>
+<span class="w">        </span><span class="p">{</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RUNNING&quot;</span><span class="p">,</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&quot;worker_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kafka-connect:8083&quot;</span><span class="w">  </span>
+<span class="w">        </span><span class="p">}</span><span class="w">  </span>
+<span class="w">    </span><span class="p">],</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sink&quot;</span><span class="w">  </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At this point the connector is running and listening to the target topic. Let’s examine the logic.</p>
+</section>
+</section>
+</section>
+<section id="running-scenario">
+<h2>Running scenario<a class="headerlink" href="#running-scenario" title="Link to this heading">#</a></h2>
+<p>We want to write messages to the target topic and see them in our s3 bucket.</p>
+<ul class="simple">
+<li><p>Use the above producer to write messages, let’s set it to number higher than 1000 as it the parameter that was declared in the configuration (<code class="docutils literal notranslate"><span class="pre">&quot;flush.size&quot;:</span> <span class="pre">&quot;1000&quot;</span></code>), so it would be written to s3 immediately.</p></li>
+</ul>
+<p>Once the topic reached the treshold of messages the kafka connect should start working</p>
+</section>
+<section id="kafka-connect-in-action">
+<h2>Kafka Connect in action<a class="headerlink" href="#kafka-connect-in-action" title="Link to this heading">#</a></h2>
+<p>At this point, that data should be written to your bucket.</p>
+<p>Let’s examine kafka-connect logs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>logs<span class="w"> </span>kafka-connect
+</pre></div>
+</div>
+<p>At the end of the line (in case you haven’t done further actions) you should see:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:22:14,015<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Assigned<span class="w"> </span>topic<span class="w"> </span>partitions:<span class="w"> </span><span class="o">[</span>your-topic-name-3-0<span class="o">]</span><span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.S3SinkTask<span class="o">)</span><span class="w">  </span>
+kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:23:06,941<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Creating<span class="w"> </span>S3<span class="w"> </span>output<span class="w"> </span>stream.<span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.storage.S3Storage<span class="o">)</span><span class="w">  </span>
+kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:23:06,942<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Create<span class="w"> </span>S3OutputStream<span class="w"> </span><span class="k">for</span><span class="w"> </span>bucket<span class="w"> </span><span class="s1">&#39;temp-db&#39;</span><span class="w"> </span>key<span class="w"> </span><span class="s1">&#39;topics/your-topic-name-3/partition=0/your-topic-name-3+0+0000000000.json&#39;</span><span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.storage.S3OutputStream<span class="o">)</span><span class="w">  </span>
+kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:23:06,955<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Starting<span class="w"> </span>commit<span class="w"> </span>and<span class="w"> </span>rotation<span class="w"> </span><span class="k">for</span><span class="w"> </span>topic<span class="w"> </span>partition<span class="w"> </span>your-topic-name-3-0<span class="w"> </span>with<span class="w"> </span>start<span class="w"> </span>offset<span class="w"> </span><span class="o">{</span><span class="nv">partition</span><span class="o">=</span><span class="nv">0</span><span class="o">=</span><span class="m">0</span><span class="o">}</span><span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.TopicPartitionWriter<span class="o">)</span><span class="w">  </span>
+kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:23:06,992<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Files<span class="w"> </span>committed<span class="w"> </span>to<span class="w"> </span>S3.<span class="w"> </span>Target<span class="w"> </span>commit<span class="w"> </span>offset<span class="w"> </span><span class="k">for</span><span class="w"> </span>your-topic-name-3-0<span class="w"> </span>is<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.TopicPartitionWriter<span class="o">)</span><span class="w">  </span>
+kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:23:06,992<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Creating<span class="w"> </span>S3<span class="w"> </span>output<span class="w"> </span>stream.<span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.storage.S3Storage<span class="o">)</span><span class="w">  </span>
+kafka-connect<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="o">[</span><span class="m">2024</span>-11-19<span class="w"> </span><span class="m">11</span>:23:06,994<span class="o">]</span><span class="w"> </span>INFO<span class="w"> </span>Create<span class="w"> </span>S3OutputStream<span class="w"> </span><span class="k">for</span><span class="w"> </span>bucket<span class="w"> </span><span class="s1">&#39;temp-db&#39;</span><span class="w"> </span>key<span class="w"> </span><span class="s1">&#39;topics/your-topic-name-3/partition=0/your-topic-name-3+0+0000001000.json&#39;</span><span class="w"> </span><span class="o">(</span>io.confluent.connect.s3.storage.S3OutputStream<span class="o">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Of course this log might be change according to your parameters</p></li>
+</ul>
+<p>At this point you should see the files in your s3 bucket</p>
+</section>
+<section id="verify-files-are-on-s3">
+<h2>Verify files are on s3<a class="headerlink" href="#verify-files-are-on-s3" title="Link to this heading">#</a></h2>
+<section id="s3-listing">
+<h3>S3 listing<a class="headerlink" href="#s3-listing" title="Link to this heading">#</a></h3>
+<p>Make configuration file</p>
+<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAABHElEQVQ4T2NkoAFgpIGZDKOGUj9U6RumBQUFAn///hX+////d0ZGxreTJ0/+CfNTdna2MAcHB8+vX7/+AsWfoPsVp0vz8/ODmZiYEoAaLvz792/JxIkTb8I0FxYWxgMtcwDyP0yYMKGQaEOBGl2AGlOAGvSALt0GpFf8/v37GQsLiz+QHQLELEDxvf39/U1EG1pUVCQLNNQaiIOBmiSB+CbQkBdA2h0o9gZIHwfiXUCXgmgUgDeicnNz+YBBYAnEqUCDjIE6mYH4G9Dw6cDw3D516tRb2NIOUbEPNNyNmZk5B2iAGtDAPqAFm4EufI4rMRJlaGZmpiArK6s00DAuoOGPnz59+nb16tW/KDKU1OxBlEtHDSUpBIZOmAIACoVnFlzOmGcAAAAASUVORK5CYII=" />vast.s3cfg</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c1">#  </span>
+<span class="nv">secret_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c1">#  </span>
+<span class="nv">host_base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c1">#  </span>
+<span class="nv">host_bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c1">#  </span>
+<span class="nv">use_https</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="c1">#</span>
+</pre></div>
+</div>
+<p>Run the following command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>s3cmd<span class="w"> </span>--config<span class="w"> </span>vast.s3cfg<span class="w"> </span>ls<span class="w"> </span>s3://&lt;YOUR_BUCKET_NAME&gt;/path/to/your/folder
+</pre></div>
+</div>
+<p>You should get in response all files written to s3.</p>
+<p>You can also download the folder with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>s3cmd<span class="w"> </span>--config<span class="w"> </span>vast.s3cfg<span class="w"> </span>get<span class="w"> </span>s3://&lt;YOUR_BUCKET_NAME&gt;/path/to/your/folder
+</pre></div>
+</div>
+<p>And explore the files</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_datastore"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nifi/tagging_s3/overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tagging Datastore S3 Objects</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../vast_database/overview/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to VAST Database</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Kafka Connect to Vast S3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-kafka-including-zookeeper-and-kafkaconnect">Setting up Kafka (including ZooKeeper) and KafkaConnect</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka">Kafka</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-topic">Creating new topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-messages-to-topic">Produce messages to topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consume-messages-from-topic">Consume messages from topic</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-connect">Kafka connect</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanity-check">Sanity check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-your-s3-sink-instance">Create your s3 sink instance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#config-file">Config file</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#critical-parameters">Critical parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-scenario">Running scenario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-connect-in-action">Kafka Connect in action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-files-are-on-s3">Verify files are on s3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s3-listing">S3 listing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

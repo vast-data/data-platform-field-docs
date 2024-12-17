@@ -1,0 +1,805 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Secure Deployment Pattern &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/admin/secure_deployment';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Extras" href="../misc/overview.html" />
+    <link rel="prev" title="VastDB restore procedure" href="restore.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/replication.html">Replication</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">Admininstration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/admin/secure_deployment.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/admin/secure_deployment.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Secure Deployment Pattern</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-design">High Level Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-and-caveats">Requirements and caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-request-s3-keys-using-s3keys-api">User request S3 keys using s3keys api</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-configuration">Bucket Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity-policy-configuration">Identity Policy - Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-python-code">Example Python code</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="secure-deployment-pattern">
+<h1>Secure Deployment Pattern<a class="headerlink" href="#secure-deployment-pattern" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>High Level Design</p></li>
+<li><p>Requirements and caveats</p></li>
+<li><p>Database Setup</p></li>
+<li><p>User request S3 keys using s3keys api</p></li>
+<li><p>Bucket Configuration</p></li>
+<li><p>Identity Policy - Configuration</p></li>
+<li><p>Example Python code</p></li>
+</ul>
+<p>This page is to help define a secure environment to allow multiple users to consume Vast Database and S3 buckets using python.</p>
+<section id="high-level-design">
+<h2>High Level Design<a class="headerlink" href="#high-level-design" title="Link to this heading">#</a></h2>
+<p><img alt="High level design" src="../../_images/high_level_design.jpg" /></p>
+</section>
+<section id="requirements-and-caveats">
+<h2>Requirements and caveats<a class="headerlink" href="#requirements-and-caveats" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>This design requires the Auth source for users to be within Active Directory. There seems to be a requirement on the s3keys API for AD auth users only.</p></li>
+<li><p>For this example we will show steps using Vast Database only. Standard S3 buckets will be similar but the sub bucket security may be limited by the file type used i.e. parquet, Delta lake etc.</p></li>
+<li><p>End users must have access to the VMS API to request the S3 keys for a given AD user.</p></li>
+<li><p>There is no Row or Column security here, just schema and table security. This will be until Vast implements row and column security on the database.</p></li>
+<li><p>There is limited management tools to administer and review the following security. Further work is required here.
+Database Setup
+For this example we will have a Database owner who creates the Database/View/Schemas and configures the identity policy for the two users to consume Schema 1 and Schema 2</p></li>
+</ol>
+<p><img alt="database setup" src="../../_images/database_setup.jpg" /></p>
+</section>
+<section id="user-request-s3-keys-using-s3keys-api">
+<h2>User request S3 keys using s3keys api<a class="headerlink" href="#user-request-s3-keys-using-s3keys-api" title="Link to this heading">#</a></h2>
+<p>Caveats</p>
+<ul class="simple">
+<li><p>User has to have an AD account, does not work against local vast users</p></li>
+<li><p>Each user can only have 2 access/secret keys. Once limit is reached a user can delete one of their existing access/secret keys before requesting a new access/secret key.</p></li>
+<li><p>Integration into python code should be done in a custom function but not covered here.</p></li>
+<li><p>There is no expiry time limits on Vast S3 keys atm.</p></li>
+<li><p>Further requirement for GUI front end to this s3keys function could be a good idea
+generate s3 keys against AD account.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;leon:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://10.143.11.204/api/s3keys/<span class="w"> </span>-k
+</pre></div>
+</div>
+<blockquote>
+<div><p>{“access_key”:”theaccesskey”,”secret_key”:”thesecretkey”}</p>
+</div></blockquote>
+<p>When you try to get a third key</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;leon:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>https://10.143.11.204/api/s3keys/<span class="w"> </span>-k
+</pre></div>
+</div>
+<blockquote>
+<div><p>{“detail”:”A user cannot have more than two access keys”}</p>
+</div></blockquote>
+<p>Delete a key</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;vms_ad_user:vastdata&quot;</span><span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://&lt;VMS_VIP&gt;/api/s3keys/<span class="w"> </span><span class="se">\</span>
+-d<span class="w"> </span><span class="s1">&#39;{&quot;access_key&quot;:&quot;&lt;ACCESS_KEY&gt;&quot;}&#39;</span><span class="w"> </span>-k<span class="w"> </span><span class="se">\</span>
+-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="bucket-configuration">
+<h2>Bucket Configuration<a class="headerlink" href="#bucket-configuration" title="Link to this heading">#</a></h2>
+<p>A simple Vast Data base View</p>
+<p><img alt="database view" src="../../_images/database_view.png" /></p>
+<p>Owner is a local user to the cluster. Could also be a AD user if required. Please note this use does not have access to the data</p>
+<p><img alt="database view owner" src="../../_images/database_view_owner.png" /></p>
+<p>Local user</p>
+<p><img alt="local user" src="../../_images/local_user.png" /></p>
+<p>Simple View policy for the database.</p>
+<p><img alt="simple view policy" src="../../_images/simple_view_policy.png" /></p>
+<p>Create two schemas in the the vastdbsec database</p>
+<p><img alt="create two schemas" src="../../_images/two_schemas.png" /></p>
+</section>
+<section id="identity-policy-configuration">
+<h2>Identity Policy - Configuration<a class="headerlink" href="#identity-policy-configuration" title="Link to this heading">#</a></h2>
+<p>The following identity policy is designed to give an AD user or group full access to the department_a schema within the vastdbsec database. This user or group will not be able to access the department_b schema although he will know of its existence when listing schemas.</p>
+<p><img alt="identify policy" src="../../_images/identify_policy.jpg" /></p>
+<p>Please note the following :-</p>
+<ol class="arabic simple">
+<li><p>HeadBucket is required on the vastdbsec bucket.</p></li>
+<li><p>TabularListSchemas is required on the vastdbsec bucket.</p></li>
+<li><p>TabularListTables and TabularCreateTable is required on both the root and all objects within a Schema i.e. vastdbsec/department_a and vastdbsec/department_a/*</p></li>
+</ol>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Policy1721818146435&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt1&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:HeadBucket&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt2&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularListSchemas&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt3&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularListTables&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularCreateTable&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec/department_a&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stmt4&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularListTables&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:TabularCreateTable&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vastdbsec/department_a/*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example attached to a user called department_a</p>
+<p><img alt="attached policy" src="../../_images/attached_policy.png" /></p>
+</section>
+<section id="example-python-code">
+<h2>Example Python code<a class="headerlink" href="#example-python-code" title="Link to this heading">#</a></h2>
+<p>This is only an example of how to in code get a access / secret key.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
+
+<span class="c1"># Retrieve environment variables - </span>
+<span class="n">vms_vip</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;VAST_VIP&#39;</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;VAST_USERNAME&#39;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;VAST_PASSWORD&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">vms_vip</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">]):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing one or more environment variables: VAST_VIP, VAST_USERNAME, VAST_PASSWORD&quot;</span><span class="p">)</span>
+
+<span class="c1"># Endpoint for requesting S3 keys</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://</span><span class="si">{</span><span class="n">vms_vip</span><span class="si">}</span><span class="s1">/api/s3keys/&#39;</span>
+
+<span class="c1"># Make the POST request to create a new S3 key</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">),</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Check if the request was successful</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="c1"># Parse the JSON response</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">access_key</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;access_key&#39;</span><span class="p">)</span>
+    <span class="n">secret_key</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;secret_key&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Print the access and secret keys</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Access Key: </span><span class="si">{</span><span class="n">access_key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Secret Key: </span><span class="si">{</span><span class="n">secret_key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># These variables can now be used in your SDK code</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Failed to get S3 keys: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/admin"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="restore.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">VastDB restore procedure</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../misc/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Extras</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-design">High Level Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-and-caveats">Requirements and caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-request-s3-keys-using-s3keys-api">User request S3 keys using s3keys api</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bucket-configuration">Bucket Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identity-policy-configuration">Identity Policy - Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-python-code">Example Python code</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

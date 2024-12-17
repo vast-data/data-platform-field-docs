@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/overview/introduction';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dimensions and Limits" href="limits.html" />
+    <link rel="prev" title="Introduction to VAST Database" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">Overview</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="replication.html">Replication</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/overview/introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/overview/introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-vast-db">What is VAST DB?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-what-is-it-used">For what is it used?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-architecture-overview">High Level Architecture Overview</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<section id="what-is-vast-db">
+<h2>What is VAST DB?<a class="headerlink" href="#what-is-vast-db" title="Link to this heading">#</a></h2>
+<p>The VAST DataBase has broken fundamental database tradeoffs to combine the transactional performance of a database, the query performance of an exabyte-scalable data warehouse at the cost of a data lake.</p>
+<p>VAST systems leverage deep write buffers built from low-cost persistent memory, this allows for every ACID transaction to be stored instantaneously.</p>
+<p>As tables fill, they are then migrated down to low-cost hyperscale flash and stored in a columnar format, so that queries also run instantaneously.</p>
+<p>Queries cut across both the long-term datastore and the write buffer, and even though data accessed in the buffer is row-based, the underlying persistent memory structures make any row
+reads lightning fast.</p>
+<p><img alt="image" src="../../_images/What-is-VASTDB.png" /></p>
+</section>
+<section id="for-what-is-it-used">
+<h2>For what is it used?<a class="headerlink" href="#for-what-is-it-used" title="Link to this heading">#</a></h2>
+<p>VAST DataBase is intended to solve large-scale data analysis problems where scale can be adjusted almost arbitrarily both horizontally and vertically.</p>
+<ol class="arabic simple">
+<li><p>Data lake scale with full low-latency transactional capabilities: VAST Database scales like a data lake while providing the low-latency transactional capabilities typically found in transactional databases.</p></li>
+<li><p>Data warehouse-like performance: VAST delivers high-performance, analytical capabilities akin to a data warehouse, even on large datasets.</p></li>
+<li><p>Efficient filtering on large datasets: The system is optimized for filtering and querying vast amounts of data, enabling fast access to relevant information.</p></li>
+<li><p>Simplicity: No need for sharding, high availability (HA) is built into the system, and there’s no need to manage immutable objects.</p></li>
+</ol>
+<p><strong>Content Recommendation</strong>
+By enabling real-time queries all the way down to the archive, the VAST Database enables content producers, e-commerce sites and social networks to query user interest profiles and to real-time and train new ML models.</p>
+<p><strong>Payment Fraud Analytics</strong>
+The VAST DataBase transforms fraud analytics by combining the transactional performance of a database with the scalable query performance of a data lake. By breaking the tradeoffs between a database and a data warehouse, the VAST DataBase enables payments providers to analyze and detect fraud in real time.</p>
+<p><strong>Targeted Advertising</strong>
+The VAST DataBase is used by leading advertisers and advertising networks to develop more targeted advertising techniques by mapping and correlating user behavior. VAST’s efficiency algorithms create all-flash data lakes with archive economics, ideal for optimizing ad network P&amp;L.</p>
+<p><strong>Homeland Security</strong>
+The VAST DataBase brings the ability to perform fine-grained queries all the way down to the archive. The platform is ideal for government agencies who struggle to find needles in haystacks… now, these needles can be found in real-time at exabyte-scale.</p>
+</section>
+<section id="high-level-architecture-overview">
+<h2>High Level Architecture Overview<a class="headerlink" href="#high-level-architecture-overview" title="Link to this heading">#</a></h2>
+<p><strong>VAST DB Ecosystem Overview</strong></p>
+<p><img alt="image" src="../../_images/VASTDB-Analytics.png" />)</p>
+<p><strong>Trino, Spark and Dremio</strong> are  distributed query engine and the “compute” part of our database. VAST provides database connectors for the different query engines. Trino and Dremio are federated query engines with support for multiple Data sources like RDBMS, NOSQL Databases, Data Warehouses, Data Lakes and allows Data Consumers to execute queries and join data from multiple data source together.
+Data Consumers are typically Data Engineers, Data Scientists and Data Analysts.
+They are connecting to a Query engine from multiple Client applications like Data transformation tools (dbt), BI Visualization tools like Tableau, Superset, Power BI … or  Notebooks like Jupyter or Querybook.</p>
+<p>Apache Spark provides some additional functionality like Data Streaming, ETL, Adhoc Analytics and Machine Learning Libraries.</p>
+<p><strong>VAST Python SDK</strong>
+The Vast Python SDK leverages the VAST REST API directly to access the Database via pyarrow. The API can be used to Ingest, Update, Delete, Import, Query &amp; Filter Data.
+This way Data Engineers or Data Scientist can programatically interact with the Database.</p>
+<p><strong>VAST Data Platform</strong>
+The VAST Data Platform offers a high performance flash based Datastore for unstructured data and a Database to store structured data.
+The VAST DASE Architecture excels in scalability, performance, and flexibility, providing cost-effective solutions for data analytics. It also ensures data management, protection, and adaptability to various use cases.</p>
+<p><strong>VAST Datastore</strong>
+The VAST Datastore is often used for Big data Analytics as the unstructured data repository of a data lake.
+It provides open File &amp; Object interfaces like S3,NFS,SMB that will provide Data and ML Engineers and easy way to ingest and access to the same data. Big Data Analytics tools will operate mainly on S3 Data, however the same Data is accessilbe through NFS (File based) which is the preferred access method for AI &amp; ML Frameworks. In a Bigdata context the VAST data store can act as the Landing - Staging area to store all the RAW data before they get structured in the VAST Database. Apache Spark or Trino are tools that are often used for these kind of ETL - data wrangling tasks.</p>
+<p><strong>VAST Database</strong>
+The VAST Database provides Data Warehouse functionality and a very fast access to structured data.  VAST DB supports multiple distributed query engines like Spark, Trino and Dremio to submit queries from BI, Notebooks and other tools.</p>
+<p>VAST provides a Trino connector to make the VAST DB available as a data source that support ACID transactions and performance improvements using Push downs.</p>
+<p>A connector adapts Trino to a data source such as Hive/S3 for the (VAST Datastore) or to a Warehouse like the VAST Database. You can think of a connector the same way you think of a driver for a database. It is an implementation of Trino’s SPI, which allows Trino to interact with a resource using a standard API.</p>
+<p><strong>VAST Catalog</strong>
+The VAST Catalog is leveraging the VAST Database to automatically index all the file and object metadata within the VAST Datastore. Customers can add user based tags to objects that will also be available in the VAST Catalog.  The VAST catalog can be connected to Trino and users can query all Metadata on the VAST Datastore.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/overview"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to VAST Database</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="limits.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dimensions and Limits</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-vast-db">What is VAST DB?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-what-is-it-used">For what is it used?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-architecture-overview">High Level Architecture Overview</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

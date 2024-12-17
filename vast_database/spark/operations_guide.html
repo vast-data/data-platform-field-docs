@@ -1,0 +1,1037 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Spark Operations Guide &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/spark/operations_guide';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Performance Tuning" href="../tuning/tuning.html" />
+    <link rel="prev" title="Apache Spark" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/replication.html">Replication</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">Apache Spark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Spark Operations Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/overview.html">Extras</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../misc/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Python SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/spark/operations_guide.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/spark/operations_guide.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spark Operations Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">Intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-connector-configuring-vastdb-with-spark-vanilla">Spark Connector - Configuring VastDB with Spark vanilla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-spark-connectors-jars">Configuring Spark connector’s jars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-spark-global-config-with-vastdb">Configuring Spark global config with VastDB</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-pyspark-data-frame-insert">Running the PySpark data-frame insert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-multiple-parquet-files-to-vast-db-table">Importing multiple Parquet files to VAST-DB table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-with-spark-sql-in-vast-database-with-tpcds-data">Querying with Spark SQL in VAST Database with TPCDS data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-spark-session-using-a-py-spark-driver-with-vastdb">Spawning Spark session using a Py-spark  driver with VastDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-running-py-spark-sql-with-explicit-transaction">Example: Running Py-Spark SQL with explicit transaction</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-spark-session-using-spark-sql-driver-with-vastdb">Spawning Spark session using Spark-sql driver with VastDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-data-retrieval">Basic Data Retrieval</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregate-functions">Aggregate Functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-queries">Complex Queries</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-schema-manipulations">Data &amp; Schema manipulations:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#altering-table-schema">Altering Table Schema</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-sql-operations-on-spark-driver-ui">Monitoring SQL operations on Spark-driver UI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="spark-operations-guide">
+<h1>Spark Operations Guide<a class="headerlink" href="#spark-operations-guide" title="Link to this heading">#</a></h1>
+<section id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Link to this heading">#</a></h2>
+<p>In the first section of this guide, we are going to perform data import to VAST-DB tables, for migration or other use-cases in which the data is exist on a tabular files - either locally or on S3 and should be ingested to VAST-DB tables.</p>
+<p>The second part will walk you through a common SQL operations to demonstrate basic &amp; advance sql-related usage on VastDB tables, using the spark-sql driver.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Spark 3.4.1 with scala 2.13 <a class="reference external" href="https://archive.apache.org/dist/spark/spark-3.4.1/">download</a></p></li>
+<li><p>Java 1.8.0</p></li>
+<li><p>VAST 4.7 or above</p></li>
+<li><p>Spark is up and running with master and worker(s) &amp; configured with VAST-DB</p></li>
+<li><p>VAST-DB Bucket’s created &amp; users have the needed user-identity-policy and roles to use database buckets.</p>
+<ul>
+<li><p>S3 User Access &amp; Secret Keys on VAST cluster <a class="reference external" href="https://support.vastdata.com/hc/en-us/articles/9859972743580#UUID-6a15026a-d0bd-ebe6-e281-4b980674cecc_section-idm4577174596542432775810296988">KB article</a></p></li>
+<li><p>Tabular Identity Policy with the proper permissions <a class="reference external" href="https://support.vastdata.com/hc/en-us/articles/9859958983708#UUID-c381c613-81bd-3c09-69c4-ba4dcd8e8d6d">KB article</a></p>
+<ul>
+<li><p>This is an example Identity Policy which will allow all S3 actions on all resources/buckets:</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VisualEditor0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:*&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="spark-connector-configuring-vastdb-with-spark-vanilla">
+<h2>Spark Connector - Configuring VastDB with Spark vanilla<a class="headerlink" href="#spark-connector-configuring-vastdb-with-spark-vanilla" title="Link to this heading">#</a></h2>
+<section id="configuring-spark-connectors-jars">
+<h3>Configuring Spark connector’s jars<a class="headerlink" href="#configuring-spark-connectors-jars" title="Link to this heading">#</a></h3>
+<p>The spark-connector jars can be found in one of your VAST cluster’s CNODE’s</p>
+<ul class="simple">
+<li><p>Specifically, inside the vast_platform docker container</p></li>
+<li><p>Copy the spark-connector jar’s from the container to outside /tmp dir &amp; create a tar.gz:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">docker</span> <span class="n">cp</span> <span class="n">vast_platform</span><span class="p">:</span><span class="o">/</span><span class="n">vast</span><span class="o">/</span><span class="n">spark3</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">spark3</span>
+  <span class="n">tar</span> <span class="o">-</span><span class="n">xczf</span> <span class="n">spark_vastdb</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">spark3</span><span class="o">/*</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Untar and copy to your host, where the spark is running.</p></li>
+<li><p>Place it inside a dir which is easy to access, like: /opt/spark_vastdb</p></li>
+<li><p>Using the examples below, you will see how a new spark session can be submitted, together with the spark_vastdb jars dir.</p></li>
+</ul>
+</section>
+<section id="configuring-spark-global-config-with-vastdb">
+<h3>Configuring Spark global config with VastDB<a class="headerlink" href="#configuring-spark-global-config-with-vastdb" title="Link to this heading">#</a></h3>
+<p>The Spark default config should have the next configuration block, in order to interact with VastDB:</p>
+<ul class="simple">
+<li><p><strong>endpoint</strong> is the IP address of the VAST Cluster</p></li>
+<li><p><strong>data_endpoint</strong> is the list of all IPs in the Virtual IP pool</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#[VastDB]</span>
+
+spark.ndb.endpoint<span class="o">=</span>http://172.19.124.1
+spark.ndb.data_endpoints<span class="o">=</span>http://172.19.124.1,http://172.19.124.2,http://172.19.124.3,http://172.19.124.4,http://172.19.124.5,http://172.19.124.6,http://172.19.124.7,http://172.19.124.8
+spark.ndb.access_key_id<span class="o">=</span>RW60SSX5SI..
+spark.ndb.secret_access_key<span class="o">=</span>/XSDz0N8S2FXuR..
+spark.ndb.num_of_splits<span class="o">=</span><span class="m">8</span>
+spark.ndb.num_of_sub_splits<span class="o">=</span><span class="m">8</span>
+spark.ndb.rowgroups_per_subsplit<span class="o">=</span><span class="m">1</span>
+spark.ndb.query_data_rows_per_split<span class="o">=</span><span class="m">4000000</span>
+spark.ndb.retry_max_count<span class="o">=</span><span class="m">3</span>
+spark.ndb.retry_sleep_duration<span class="o">=</span><span class="m">1</span>
+spark.ndb.parallel_import<span class="o">=</span><span class="nb">true</span>
+spark.ndb.dynamic_filter_compaction_threshold<span class="o">=</span><span class="m">100</span>
+spark.ndb.dynamic_filtering_wait_timeout<span class="o">=</span><span class="m">2</span>
+spark.sql.catalog.ndb<span class="o">=</span>spark.sql.catalog.ndb.VastCatalog
+spark.sql.extensions<span class="o">=</span>ndb.NDBSparkSessionExtension
+spark.python.authenticate.socketTimeout<span class="o">=</span>1m<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-the-pyspark-data-frame-insert">
+<h2>Running the PySpark data-frame insert<a class="headerlink" href="#running-the-pyspark-data-frame-insert" title="Link to this heading">#</a></h2>
+<p>Data-frame Spark write method <a class="reference external" href="https://spark.apache.org/docs/latest/sql-data-sources-load-save-functions.html">Apache Spark docs</a>. We are going to use a short PySpark scripts to make it more simple to follow.</p>
+<section id="importing-multiple-parquet-files-to-vast-db-table">
+<h3>Importing multiple Parquet files to VAST-DB table<a class="headerlink" href="#importing-multiple-parquet-files-to-vast-db-table" title="Link to this heading">#</a></h3>
+<p>A way to run the script :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spark-submit<span class="w"> </span>--master<span class="w"> </span>spark:master-ip:7077<span class="w"> </span><span class="se">\</span>
+&lt;pyspark_ingest_to_vastdb_df.py&gt;<span class="w"> </span><span class="se">\</span>
+&lt;bucket-name&gt;<span class="w"> </span>&lt;database-name&gt;<span class="w"> </span>&lt;table-name&gt;<span class="w"> </span>&lt;files-dir&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The script will loop through all files with ‘parquet’ extension in the directory you have passed (recursively), and will try to read &amp; ingest the retrieved data frame to a VastDB table.</p></li>
+<li><p>The bucket needs to be created in advance, from the VAST-VMS UI, but Schema &amp; Table names can be created by the script, by passing the names you want.</p></li>
+<li><p>NOTE : If the Schema and Table is already created, it will append the data to the table, if columns schema match.</p></li>
+</ul>
+<p>This script is accepting from the user</p>
+<ul class="simple">
+<li><p>VAST-DB bucket name</p></li>
+<li><p>DB/Schema name</p></li>
+<li><p>Table name</p></li>
+<li><p>The parquet file path</p>
+<ul>
+<li><p>Absolute path</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Usage: spark-submit &lt;pyspark_ingest_to_vastdb_df.py&gt; &lt;bucket-name&gt; &lt;database-name&gt; &lt;table-name&gt; &lt;files-dir&gt;&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">bucket_name</span><span class="p">,</span> <span class="n">database_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">files_dir</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+
+    <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+        <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;PySpark Data Ingestion to VASTDB Catalog&quot;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+    <span class="c1"># Creating the database (schema)</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CREATE DATABASE IF NOT EXISTS `ndb`.`</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">`.`</span><span class="si">{</span><span class="n">database_name</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Base directory containing Parquet files</span>
+    <span class="n">read_directory</span> <span class="o">=</span> <span class="n">files_dir</span>
+    <span class="n">catalog_table_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;`ndb`.`</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">`.`</span><span class="si">{</span><span class="n">database_name</span><span class="si">}</span><span class="s2">`.`</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">`&quot;</span>
+
+    <span class="c1"># Ingest data for each Parquet file in the directory</span>
+    <span class="n">total_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">read_directory</span><span class="p">,</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="s1">&#39;*.parquet&#39;</span><span class="p">),</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;append&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">catalog_table_name</span><span class="p">)</span>
+            
+            <span class="n">file_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2"> ingested in </span><span class="si">{</span><span class="n">file_end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">file_start_time</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+        
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred while processing </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+    <span class="n">total_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total ingestion time: </span><span class="si">{</span><span class="n">total_end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">total_start_time</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="querying-with-spark-sql-in-vast-database-with-tpcds-data">
+<h2>Querying with Spark SQL in VAST Database with TPCDS data<a class="headerlink" href="#querying-with-spark-sql-in-vast-database-with-tpcds-data" title="Link to this heading">#</a></h2>
+<p>This demonstrates using Spark SQL / Py-spark SQL to query tables in the VAST Database. The examples will illustrate various SQL operations, from basic to complex.</p>
+<section id="spawning-spark-session-using-a-py-spark-driver-with-vastdb">
+<h3>Spawning Spark session using a Py-spark  driver with VastDB<a class="headerlink" href="#spawning-spark-session-using-a-py-spark-driver-with-vastdb" title="Link to this heading">#</a></h3>
+<p>A Python interface for Apache Spark, allowing for data processing and analysis using Spark’s features within Python scripts.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spark-submit<span class="w"> </span>--master<span class="w"> </span>spark://master-ip:7077<span class="w">   </span><span class="se">\</span>
+<span class="w">  </span>--driver-class-path<span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>/opt/spark_vastdb/*.jar<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.executor.extraClassPath<span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>/opt/spark_vastdb/*.jar<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--jars<span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>/opt/spark_vastdb/*.jar<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.executor.userClassPathFirst<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.driver.userClassPathFirst<span class="o">=</span><span class="nb">true</span><span class="w"> </span>pyspark_transaction_example.py
+</pre></div>
+</div>
+<section id="example-running-py-spark-sql-with-explicit-transaction">
+<h4>Example: Running Py-Spark SQL with explicit transaction<a class="headerlink" href="#example-running-py-spark-sql-with-explicit-transaction" title="Link to this heading">#</a></h4>
+<p>In PySpark, SQL functionality enables you to run SQL queries on DataFrames, allowing for complex data manipulation and analysis using familiar SQL syntax within a Python environment.</p>
+<ul class="simple">
+<li><p>Using the spark.sql method you can run same sql operations / selects within a python script.</p></li>
+<li><p>This approach is also enables the use of VastDB explicit transactions, to ensure ACID operations.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="c1"># Initialize a Spark session</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;VastDB SQL Transaction Example&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Start transaction</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT ndb.create_tx()&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Execute two insert queries atomically</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO `ndb`.`vastdb-bucket`.`tpcds_schema`.`customer`</span>
+<span class="s2">        (c_customer_id, c_first_name, c_last_name)</span>
+<span class="s2">        VALUES (&#39;1003&#39;, &#39;John&#39;, &#39;Foo&#39;)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO `ndb`.`vastdb-bucket`.`tpcds_schema`.`customer`</span>
+<span class="s2">        (c_customer_id, c_first_name, c_last_name)</span>
+<span class="s2">        VALUES (&#39;1004&#39;, &#39;Jane&#39;, &#39;Bar&#39;)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Commit the transaction</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT ndb.commit_tx()&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Select to show added rows</span>
+    <span class="n">updated_rows</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        SELECT c_customer_id, c_first_name, c_last_name</span>
+<span class="s2">        FROM `ndb`.`vastdb-bucket`.`tpcds_schema`.`customer`</span>
+<span class="s2">        WHERE c_customer_id IN (&#39;1003&#39;, &#39;1004&#39;)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">updated_rows</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;An error occurred:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="c1"># Rollback the transaction in case of an error</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT ndb.rollback_tx()&quot;</span><span class="p">)</span>
+
+<span class="c1"># Stop the Spark session</span>
+
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="spawning-spark-session-using-spark-sql-driver-with-vastdb">
+<h3>Spawning Spark session using Spark-sql driver with VastDB<a class="headerlink" href="#spawning-spark-session-using-spark-sql-driver-with-vastdb" title="Link to this heading">#</a></h3>
+<p>Here we show how to use spark-sql CLI to - a command-line tool for directly executing SQL queries on a Spark cluster which is configured with VastDB spark connector</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spark-sql<span class="w"> </span>--master<span class="w"> </span>spark:master-ip:7077<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--driver-class-path<span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>/opt/spark_vastdb/*.jar<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.executor.extraClassPath<span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>/opt/spark_vastdb/*.jar<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--jars<span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>/opt/spark_vastdb/*.jar<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.executor.userClassPathFirst<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.driver.userClassPathFirst<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--conf<span class="w"> </span>spark.sql.catalogImplementation<span class="o">=</span><span class="k">in</span>-memory
+</pre></div>
+</div>
+<section id="basic-data-retrieval">
+<h4>Basic Data Retrieval<a class="headerlink" href="#basic-data-retrieval" title="Link to this heading">#</a></h4>
+<p><strong>Querying a Single Table</strong></p>
+<p>Operation: Retrieve specific columns.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">c_customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">c_first_name</span><span class="p">,</span><span class="w"> </span><span class="n">c_last_name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><em>Explanation:</em> Retrieves the first 10 records from the customer table, including customer ID, first name, and last name.</p>
+<p><strong>Filtering Data</strong></p>
+<p>Operation: Select data with conditions.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">store_sales</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ss_ticket_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12345</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><em>Explanation:</em> Retrieves records from store_sales where the ticket number is 12345.</p>
+</section>
+<section id="aggregate-functions">
+<h4>Aggregate Functions<a class="headerlink" href="#aggregate-functions" title="Link to this heading">#</a></h4>
+<p><strong>Summarizing Data</strong></p>
+<p>Operation: Aggregate data.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">cs_item_sk</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">cs_net_profit</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_profit</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">catalog_sales</span><span class="o">`</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cs_item_sk</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><em>Explanation</em>: Calculates the total net profit for each item in catalog_sales.
+Join Operations</p>
+<p><strong>Simple Join</strong></p>
+<p>Operation: Combining data from multiple tables.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">c_customer_id</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">c_first_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">c_last_name</span><span class="p">,</span><span class="w"> </span><span class="n">ca</span><span class="p">.</span><span class="n">ca_street_name</span><span class="p">,</span><span class="w"> </span><span class="n">ca</span><span class="p">.</span><span class="n">ca_city</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span><span class="w"> </span><span class="k">c</span><span class="w"> </span>
+<span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer_address</span><span class="o">`</span><span class="w"> </span><span class="n">ca</span><span class="w"> </span>
+<span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">c_current_addr_sk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ca</span><span class="p">.</span><span class="n">ca_address_sk</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><em>Explanation</em>: Joins customer and customer_address tables to retrieve customer details along with their addresses.</p>
+</section>
+<section id="complex-queries">
+<h4>Complex Queries<a class="headerlink" href="#complex-queries" title="Link to this heading">#</a></h4>
+<p><strong>Multi-table Join with Filtering and Sorting</strong></p>
+<p>Operation: Advanced join with filtering and ordering.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="k">c</span><span class="p">.</span><span class="n">c_customer_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">c</span><span class="p">.</span><span class="n">c_first_name</span><span class="p">,</span>
+<span class="w">    </span><span class="k">c</span><span class="p">.</span><span class="n">c_last_name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ss</span><span class="p">.</span><span class="n">ss_sales_price</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ss</span><span class="p">.</span><span class="n">ss_quantity</span><span class="p">,</span>
+<span class="w">    </span><span class="n">i</span><span class="p">.</span><span class="n">i_item_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">i</span><span class="p">.</span><span class="n">i_item_desc</span><span class="p">,</span>
+<span class="w">    </span><span class="n">i</span><span class="p">.</span><span class="n">i_category</span>
+<span class="k">FROM</span><span class="w"> </span>
+<span class="w">    </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span><span class="w"> </span><span class="k">c</span>
+<span class="k">JOIN</span><span class="w"> </span>
+<span class="w">    </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">store_sales</span><span class="o">`</span><span class="w"> </span><span class="n">ss</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">c_customer_sk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ss</span><span class="p">.</span><span class="n">ss_customer_sk</span>
+<span class="k">JOIN</span><span class="w"> </span>
+<span class="w">    </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">item</span><span class="o">`</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">ss</span><span class="p">.</span><span class="n">ss_item_sk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">i_item_sk</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span>
+<span class="w">    </span><span class="n">ss</span><span class="p">.</span><span class="n">ss_sales_price</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><em>Explanation</em>:  A multi-join query using the customer, store_sales, and item tables, retrieves a detailed view of the sales transactions, combining customer information with details of the items they’ve purchased.</p>
+</section>
+<section id="data-schema-manipulations">
+<h4>Data &amp; Schema manipulations:<a class="headerlink" href="#data-schema-manipulations" title="Link to this heading">#</a></h4>
+<p><strong>Inserting Data</strong></p>
+<p>Insert a Single Row</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="p">(</span><span class="n">c_customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">c_first_name</span><span class="p">,</span><span class="w"> </span><span class="n">c_last_name</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;1001&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;John&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Doe&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Insert Multiple Rows</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="p">(</span><span class="n">c_customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">c_first_name</span><span class="p">,</span><span class="w"> </span><span class="n">c_last_name</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;1002&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Smith&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;1003&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Johnson&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Deleting Data</strong></p>
+<p>Delete Specific Rows</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">c_customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1003&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Delete with Condition</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">c_last_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Johnson&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="altering-table-schema">
+<h4>Altering Table Schema<a class="headerlink" href="#altering-table-schema" title="Link to this heading">#</a></h4>
+<p>Add a New Column</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">c_phone_number</span><span class="w"> </span><span class="n">STRING</span><span class="p">;</span>
+
+<span class="k">Drop</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="k">Existing</span><span class="w"> </span><span class="k">Column</span>
+
+<span class="o">```</span><span class="k">sql</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">ndb</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">vastdb</span><span class="o">-</span><span class="n">bucket</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">tpcds_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">c_phone_number</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="monitoring-sql-operations-on-spark-driver-ui">
+<h4>Monitoring SQL operations on Spark-driver UI<a class="headerlink" href="#monitoring-sql-operations-on-spark-driver-ui" title="Link to this heading">#</a></h4>
+<p>The Spark UI, accessible at http://[driver-node]:4040, is an essential tool for monitoring Spark SQL queries.</p>
+<ul class="simple">
+<li><p><strong>SQL Tab</strong>: Displays a list of executed Spark SQL queries with status, duration, and detailed execution plans.</p></li>
+<li><p><strong>Query Details</strong>: Displays insights into logical and physical plans, job and stage info, and execution metrics like time and memory usage.</p></li>
+<li><p><strong>Performance Metrics</strong>: Shows execution times, task counts, shuffle read/write metrics, and memory usage for identifying bottlenecks.</p></li>
+<li><p><strong>Resource Utilization</strong>: Helps in tuning spark resource allocation by displaying how each executor contributes to query execution.</p></li>
+</ul>
+<p><img alt="Spark UI" src="../../_images/sparkui.png" /></p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/spark"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Apache Spark</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tuning/tuning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Performance Tuning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">Intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-connector-configuring-vastdb-with-spark-vanilla">Spark Connector - Configuring VastDB with Spark vanilla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-spark-connectors-jars">Configuring Spark connector’s jars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-spark-global-config-with-vastdb">Configuring Spark global config with VastDB</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-pyspark-data-frame-insert">Running the PySpark data-frame insert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-multiple-parquet-files-to-vast-db-table">Importing multiple Parquet files to VAST-DB table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-with-spark-sql-in-vast-database-with-tpcds-data">Querying with Spark SQL in VAST Database with TPCDS data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-spark-session-using-a-py-spark-driver-with-vastdb">Spawning Spark session using a Py-spark  driver with VastDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-running-py-spark-sql-with-explicit-transaction">Example: Running Py-Spark SQL with explicit transaction</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-spark-session-using-spark-sql-driver-with-vastdb">Spawning Spark session using Spark-sql driver with VastDB</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-data-retrieval">Basic Data Retrieval</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregate-functions">Aggregate Functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-queries">Complex Queries</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-schema-manipulations">Data &amp; Schema manipulations:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#altering-table-schema">Altering Table Schema</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-sql-operations-on-spark-driver-ui">Monitoring SQL operations on Spark-driver UI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
