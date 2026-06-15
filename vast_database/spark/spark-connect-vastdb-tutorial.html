@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Apache NiFi &#8212; Data Platform Field Docs</title>
+    <title>Querying VAST NDB with Spark Connect &#8212; Data Platform Field Docs</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/nifi/overview';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/spark/spark-connect-vastdb-tutorial';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="NiFi 2.x Quickstart" href="quickstart.html" />
-    <link rel="prev" title="Spark Predicate Pushdown" href="../tuning/Spark_Predicate_Pushdown.html" />
+    <link rel="next" title="Performance Tuning" href="../tuning/tuning.html" />
+    <link rel="prev" title="Architecting Apache Spark on the VAST Data Platform" href="architecting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -251,11 +251,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../sdk_ref/15_recordbatchreader.html">RecordBatchReader functionality</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../spark/upserts.html">Spark Upserts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../spark/architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../spark/spark-connect-vastdb-tutorial.html">Querying VAST NDB with Spark Connect</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">Apache Spark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="operations_guide.html">Spark Operations Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upserts.html">Spark Upserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Querying VAST NDB with Spark Connect</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -266,10 +266,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../tuning/Spark_Predicate_Pushdown.html">Spark Predicate Pushdown</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Apache NiFi</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html">NiFi 2.x Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bulk_import.html">Bulk Import from S3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="salesforce/query.html">Salesforce to VAST DB</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -410,7 +410,7 @@
       
       
       
-      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/nifi/overview.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/spark/spark-connect-vastdb-tutorial.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -440,7 +440,7 @@
       
       
       
-      <li><a href="../../_sources/vast_database/nifi/overview.md" target="_blank"
+      <li><a href="../../_sources/vast_database/spark/spark-connect-vastdb-tutorial.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -450,7 +450,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -516,7 +516,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Apache NiFi</h1>
+    <h1>Querying VAST NDB with Spark Connect</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -526,8 +526,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-caveats">Key caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-the-connect-server">Step 1 — Start the Connect Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-the-client">Step 2 — Install the client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-connect">Step 3 — Connect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-query-vast-ndb">Step 4 — Query VAST NDB</a></li>
 </ul>
             </nav>
         </div>
@@ -539,23 +544,192 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="apache-nifi">
-<h1>Apache NiFi<a class="headerlink" href="#apache-nifi" title="Link to this heading">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Apache NiFi, a powerful dataflow system, is designed to handle large volumes of data efficiently. This document explores key NiFi patterns for ingesting, transforming, distributing, managing, and storing vast datasets.</p>
-<p>This documention will delve into specific NiFi patterns and provide practical examples. By understanding and implementing these patterns, you can effectively leverage NiFi to process vast datasets and extract valuable insights.</p>
-</section>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">NiFi 2.x Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bulk_import.html">Bulk Import from S3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="salesforce/query.html">Salesforce to VAST DB</a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="querying-vast-ndb-with-spark-connect">
+<h1>Querying VAST NDB with Spark Connect<a class="headerlink" href="#querying-vast-ndb-with-spark-connect" title="Link to this heading">#</a></h1>
+<p>Spark Connect (introduced in Spark 3.4) provides a lightweight gRPC-based client that lets you run Spark queries remotely — no local Spark installation required beyond <code class="docutils literal notranslate"><span class="pre">pyspark[connect]</span></code>.</p>
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  Your notebook / script
+  (pyspark[connect] only)
+         │  sc://  (gRPC)
+         ▼
+  Spark Connect Server  ──────►  Spark Cluster
+  (172.200.13.12:15002)               │
+                                       ▼
+                               VAST NDB Catalog
+                               (172.200.204.12)
+</pre></div>
 </div>
-<hr/></section>
+<p>All Spark and VAST NDB configuration lives on the server side. The client just sends SQL or DataFrame operations over gRPC.</p>
+</section>
+<section id="key-caveats">
+<h2>Key caveats<a class="headerlink" href="#key-caveats" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Direct connection required.</strong> Connect only works when the client connects directly to the server endpoint. No proxy or gateway in between.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Use <code class="docutils literal notranslate"><span class="pre">spark.executor.instances</span></code> for parallelism</strong>, not <code class="docutils literal notranslate"><span class="pre">spark.ndb.data_endpoints</span></code>.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Scala version:</strong> the server must run against the system Spark at <code class="docutils literal notranslate"><span class="pre">/opt/spark</span></code> (Scala 2.13). <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pyspark</span></code> bundles Scala 2.12 and will not work on the server side.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Spark master</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spark://172.200.204.12:2424</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>NDB endpoint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">http://172.200.204.12</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Driver host</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">172.200.13.12</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Connect port</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">15002</span></code> (default)</p></td>
+</tr>
+<tr class="row-even"><td><p>VAST JARs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/opt/spark/vast/*.jar</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Example dataset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nba-db</span></code> / <code class="docutils literal notranslate"><span class="pre">games_schema</span></code> / <code class="docutils literal notranslate"><span class="pre">games_tbl</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="step-1-start-the-connect-server">
+<h2>Step 1 — Start the Connect Server<a class="headerlink" href="#step-1-start-the-connect-server" title="Link to this heading">#</a></h2>
+<p>Run this once on the Spark driver node. All VAST NDB configuration is passed here — the client needs none of it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run in a terminal on the Spark driver node</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">/opt/spark/sbin/start-connect-server.sh </span><span class="se">\\</span>
+<span class="s2">  --master spark://172.200.204.12:2424 </span><span class="se">\\</span>
+<span class="s2">  --conf spark.executor.memory=10g </span><span class="se">\\</span>
+<span class="s2">  --conf spark.executor.instances=3 </span><span class="se">\\</span>
+<span class="s2">  --conf spark.executor.cores=3 </span><span class="se">\\</span>
+<span class="s2">  --driver-class-path $(echo /opt/spark/vast/*.jar | tr &#39; &#39; &#39;:&#39;) </span><span class="se">\\</span>
+<span class="s2">  --conf spark.executor.extraClassPath=$(echo /opt/spark/vast/*.jar | tr &#39; &#39; &#39;:&#39;) </span><span class="se">\\</span>
+<span class="s2">  --jars $(echo /opt/spark/vast/*.jar | tr &#39; &#39; &#39;,&#39;) </span><span class="se">\\</span>
+<span class="s2">  --conf spark.executor.userClassPathFirst=true </span><span class="se">\\</span>
+<span class="s2">  --conf spark.driver.userClassPathFirst=true </span><span class="se">\\</span>
+<span class="s2">  --conf spark.driver.host=172.200.13.12 </span><span class="se">\\</span>
+<span class="s2">  --conf spark.ndb.endpoint=http://172.200.204.12 </span><span class="se">\\</span>
+<span class="s2">  --conf spark.ndb.access_key_id=G7H5I7QSQ7CSSZYGO3K8 </span><span class="se">\\</span>
+<span class="s2">  --conf spark.ndb.secret_access_key=R2C/CmJFAMHfYirPpxbbG+2g3hI8UhH6p/UUWo6u </span><span class="se">\\</span>
+<span class="s2">  --conf spark.sql.catalog.ndb=spark.sql.catalog.ndb.VastCatalog </span><span class="se">\\</span>
+<span class="s2">  --conf spark.sql.extensions=ndb.NDBSparkSessionExtension </span><span class="se">\\</span>
+<span class="s2">  --conf spark.sql.catalogImplementation=in-memory </span><span class="se">\\</span>
+<span class="s2">  --driver-memory 32g</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-install-the-client">
+<h2>Step 2 — Install the client<a class="headerlink" href="#step-2-install-the-client" title="Link to this heading">#</a></h2>
+<p>On the client machine (your notebook or script), install only the Connect extras — no full Spark needed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># pip install pyspark[connect]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-connect">
+<h2>Step 3 — Connect<a class="headerlink" href="#step-3-connect" title="Link to this heading">#</a></h2>
+<p>Use a <code class="docutils literal notranslate"><span class="pre">sc://</span></code> URI pointing directly at the Connect server. No Spark configuration required on the client.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="n">CONNECT_HOST</span> <span class="o">=</span> <span class="s2">&quot;172.200.13.12&quot;</span>
+<span class="n">CONNECT_PORT</span> <span class="o">=</span> <span class="mi">15002</span>            <span class="c1"># default Spark Connect gRPC port</span>
+<span class="n">TABLE_FQN</span>    <span class="o">=</span> <span class="s2">&quot;ndb.`nba-db`.games_schema.games_tbl&quot;</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+    <span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sc://</span><span class="si">{</span><span class="n">CONNECT_HOST</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">CONNECT_PORT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected. Spark version: </span><span class="si">{</span><span class="n">spark</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-query-vast-ndb">
+<h2>Step 4 — Query VAST NDB<a class="headerlink" href="#step-4-query-vast-ndb" title="Link to this heading">#</a></h2>
+<p>Once connected, use <code class="docutils literal notranslate"><span class="pre">spark.sql()</span></code> or the DataFrame API exactly as you would in a local session. The catalog reference format is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ndb.`&lt;bucket&gt;`.&lt;schema&gt;.&lt;table&gt;
+</pre></div>
+</div>
+<p>Backticks are required around bucket names that contain hyphens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect the schema</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DESCRIBE TABLE </span><span class="si">{</span><span class="n">TABLE_FQN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Row count</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT COUNT(*) FROM </span><span class="si">{</span><span class="n">TABLE_FQN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total games: </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample rows</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT gameId, gameDate, hometeamName, awayteamName, homeScore, awayScore, gameType</span>
+<span class="s2">    FROM </span><span class="si">{</span><span class="n">TABLE_FQN</span><span class="si">}</span>
+<span class="s2">    LIMIT 10</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aggregation</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT gameType, COUNT(*) AS games</span>
+<span class="s2">    FROM </span><span class="si">{</span><span class="n">TABLE_FQN</span><span class="si">}</span>
+<span class="s2">    GROUP BY gameType</span>
+<span class="s2">    ORDER BY games DESC</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -571,7 +745,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./vast_database/nifi"
+            path: "./vast_database/spark"
         },
         predefinedOutput: true
     }
@@ -589,20 +763,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../tuning/Spark_Predicate_Pushdown.html"
+       href="architecting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Spark Predicate Pushdown</p>
+        <p class="prev-next-title">Architecting Apache Spark on the VAST Data Platform</p>
       </div>
     </a>
     <a class="right-next"
-       href="quickstart.html"
+       href="../tuning/tuning.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">NiFi 2.x Quickstart</p>
+        <p class="prev-next-title">Performance Tuning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -624,8 +798,13 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-caveats">Key caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-the-connect-server">Step 1 — Start the Connect Server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-install-the-client">Step 2 — Install the client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-connect">Step 3 — Connect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-query-vast-ndb">Step 4 — Query VAST NDB</a></li>
 </ul>
   </nav></div>
 
