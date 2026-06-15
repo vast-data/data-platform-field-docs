@@ -1,0 +1,1223 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>RAG with Row-Level Security on VAST DB &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_vectordb/rag-security-tutorial';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to VAST Event Broker" href="../vast_kafka/overview.html" />
+    <link rel="prev" title="VAST Query Engine" href="query_engine.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/iac.html">Infrastructure as code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../vast_datastore/s3a_magics/instructions.html">Hadoop S3A Functional Tester (Also Magic Committer) - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/replication.html">Replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/sequences.html">Sequences</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_database/overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_netcdf_import.html">Python SDK - import netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/ray_daft_vastdb.html">Ray and Daft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/01_create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/02_schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/03_table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/04_column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/05_querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/06_limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/07_projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/08_manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/09_verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/10_importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/11_importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/12_snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/13_transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/14_tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/15_recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/operations_guide.html">Spark Operations Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/upserts.html">Spark Upserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/cnodes_and_vips.html">CNODES and VIPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/splits.html">Splits and Subsplits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/trino/howto.html">Tuning Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/Spark_Predicate_Pushdown.html">Spark Predicate Pushdown</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/vastdb_py_setup2.html">VAST Database Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_database/integrations/integrations.html">Integrations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Vector Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart-new.html">Vector DB Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_engine.html">VAST Query Engine</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">RAG with Row-Level Security on VAST DB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Event Broker</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_kafka/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_kafka/101/VAST-EventBroker-101.html">VAST Event Broker 101</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../vast_kafka/trino_direct_query.html">Kafka to VastDB with Trino Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_kafka/zeek_to_vast_kafka.html">Zeek PCAP to VAST Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_kafka/utils.html">Kafka Utils</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/python-sdk-vast-catalog.html">Catalog - Python SDK Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_dataengine/spark/overview.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/spark/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/spark/ports.html">Spark Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/spark/spark_ui_proxying.html">Spark UI Proxying</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../vast_dataengine/spark/notebooks/overview.html">Notebook Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vast_dataengine/spark/notebooks/1_connectivity_test.html">Connectivity Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vast_dataengine/spark/notebooks/2_basic_workload_test.html">Basic Workload Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vast_dataengine/spark/notebooks/3_add_libraries.html">Adding Spark libraries</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_dataengine/functions/overview.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/functions/workshop/workshop.html">Workshop</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_vectordb/rag-security-tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/vast_vectordb/rag-security-tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>RAG with Row-Level Security on VAST DB</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-authenticate-with-huggingface">Step 1 — Authenticate with HuggingFace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configuration">Step 2 — Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-connect-to-vast-db">Step 3 — Connect to VAST DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-define-the-embedding-function">Step 4 — Define the Embedding Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-chunk-the-documents">Step 5 — Chunk the Documents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-chunk-the-open-pdf">5a — Chunk the Open PDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-chunk-the-restricted-csv">5b — Chunk the Restricted CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-prepare-chunks-with-s3-path-labels">Step 6 — Prepare Chunks with S3 Path Labels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-generate-embeddings">Step 7 — Generate Embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-load-into-vast-db">Step 8 — Load into VAST DB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-clear-existing-rows">8a — Clear existing rows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-insert-all-chunks">8b — Insert all chunks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-set-up-the-query-engine">Step 9 — Set Up the Query Engine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-10-build-the-rag-agent">Step 10 — Build the RAG Agent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-11-rag-demo-open-question">Step 11 — RAG Demo: Open Question</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-12-security-demo-restricted-data">Step 12 — Security Demo: Restricted Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-s3-bucket-policy">The S3 Bucket Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-db-iam-policy-key-setting">The DB IAM Policy (key setting)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-rowfilterbys3pathauth-false-security-disabled">12a — <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">False</span></code> (security disabled)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-rowfilterbys3pathauth-true-security-enabled">12b — <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">True</span></code> (security enabled)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="rag-with-row-level-security-on-vast-db">
+<h1>RAG with Row-Level Security on VAST DB<a class="headerlink" href="#rag-with-row-level-security-on-vast-db" title="Link to this heading">#</a></h1>
+<p>This tutorial demonstrates how to build a <strong>Retrieval-Augmented Generation (RAG)</strong> pipeline that respects fine-grained data access controls.</p>
+<p>We will:</p>
+<ol class="arabic simple">
+<li><p>Load two documents — an <strong>open-access PDF</strong> (the Greek Constitution) and a <strong>restricted CSV</strong> (salary data)</p></li>
+<li><p>Chunk, embed, and store both in a VAST DB vector table</p></li>
+<li><p>Build a simple RAG agent using an LLM via HuggingFace</p></li>
+<li><p>Show that <strong>without</strong> row-level security, sensitive data leaks through retrieval</p></li>
+<li><p>Show that <strong>with</strong> row-level security enabled, restricted data is automatically filtered out</p></li>
+</ol>
+<hr class="docutils" />
+<section id="architecture-overview">
+<h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  Documents (PDF + CSV)
+        │
+        ▼
+  Chunk + Embed (nomic-embed-text)
+        │
+        ▼
+  VAST DB Vector Table  ◄──────── S3 Bucket IAM Policy
+  (embeddings + S3 path)           (nireny/open/ = allowed)
+        │                          (nireny/restricted/ = denied)
+        ▼
+  Cosine Similarity Search  ◄───── RowFilterByS3PathAuth
+        │
+        ▼
+   Context → LLM → Answer
+</pre></div>
+</div>
+<p>The key insight: each vector row stores a <code class="docutils literal notranslate"><span class="pre">vastdb_s3_path_auth</span></code> column pointing to the source file’s S3 path. When <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth</span></code> is enabled in the DB IAM policy, VAST DB checks the caller’s S3 permissions and silently drops rows whose paths are inaccessible — before results are returned.</p>
+</section>
+<hr class="docutils" />
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>vastdb<span class="w"> </span>adbc-driver-vastdb<span class="w"> </span>sentence-transformers<span class="w"> </span>langchain-community<span class="w"> </span>openai<span class="w"> </span>huggingface_hub
+</pre></div>
+</div>
+</section>
+<section id="step-1-authenticate-with-huggingface">
+<h2>Step 1 — Authenticate with HuggingFace<a class="headerlink" href="#step-1-authenticate-with-huggingface" title="Link to this heading">#</a></h2>
+<p>We use HuggingFace both to download the embedding model and to access the LLM inference router.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">login</span>
+<span class="n">login</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-configuration">
+<h2>Step 2 — Configuration<a class="headerlink" href="#step-2-configuration" title="Link to this heading">#</a></h2>
+<p>Set your VAST DB and S3 endpoints, credentials, and file paths.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VASTDB_ENDPOINT</span></code></p></td>
+<td><p>VAST DB native API endpoint</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">QE_ENDPOINT</span></code></p></td>
+<td><p>VAST Query Engine (SQL over ADBC) endpoint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DB_BUCKET_NAME</span></code></p></td>
+<td><p>S3 bucket holding the vector table</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BUCKET_NAME</span></code></p></td>
+<td><p>S3 bucket holding source files</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">O_FILE</span></code></p></td>
+<td><p>Open-access PDF document</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">R_FILE</span></code></p></td>
+<td><p>Restricted CSV document</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">vastdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">adbc_driver_vastdb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">adbc_driver_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">dbapi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sentence_transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SentenceTransformer</span>
+
+<span class="n">VASTDB_ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;http://172.200.204.2&#39;</span>
+<span class="n">QE_ENDPOINT</span>     <span class="o">=</span> <span class="s1">&#39;http://172.200.204.8&#39;</span>
+
+<span class="n">AWS_ACCESS_KEY_ID</span>     <span class="o">=</span> <span class="s1">&#39;XXXXX&#39;</span>
+<span class="n">AWS_SECRET_ACCESS_KEY</span> <span class="o">=</span> <span class="s1">&#39;XXXXX&#39;</span>
+
+<span class="n">DB_BUCKET_NAME</span> <span class="o">=</span> <span class="s1">&#39;nireny-db&#39;</span>
+<span class="n">BUCKET_NAME</span>    <span class="o">=</span> <span class="s1">&#39;nireny&#39;</span>
+<span class="n">SCHEMA_NAME</span>    <span class="o">=</span> <span class="s1">&#39;db&#39;</span>
+<span class="n">TABLE_NAME</span>     <span class="o">=</span> <span class="s1">&#39;embeddings&#39;</span>
+
+<span class="n">O_FILE</span> <span class="o">=</span> <span class="s2">&quot;THE CONSTITUTION OF GREECE.pdf&quot;</span>  <span class="c1"># stored at nireny/open/</span>
+<span class="n">R_FILE</span> <span class="o">=</span> <span class="s2">&quot;salary.csv&quot;</span>                       <span class="c1"># stored at nireny/restricted/</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-connect-to-vast-db">
+<h2>Step 3 — Connect to VAST DB<a class="headerlink" href="#step-3-connect-to-vast-db" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">VASTDB_ENDPOINT</span><span class="p">,</span>
+    <span class="n">access</span><span class="o">=</span><span class="n">AWS_ACCESS_KEY_ID</span><span class="p">,</span>
+    <span class="n">secret</span><span class="o">=</span><span class="n">AWS_SECRET_ACCESS_KEY</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-define-the-embedding-function">
+<h2>Step 4 — Define the Embedding Function<a class="headerlink" href="#step-4-define-the-embedding-function" title="Link to this heading">#</a></h2>
+<p>We use <a class="reference external" href="https://huggingface.co/nomic-ai/nomic-embed-text-v1.5"><code class="docutils literal notranslate"><span class="pre">nomic-ai/nomic-embed-text-v1.5</span></code></a>, a high-quality open embedding model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">embed_text</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;nomic-ai/nomic-embed-text-v1.5&#39;</span><span class="p">,</span> <span class="n">trust_remote_code</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">embeddings</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-chunk-the-documents">
+<h2>Step 5 — Chunk the Documents<a class="headerlink" href="#step-5-chunk-the-documents" title="Link to this heading">#</a></h2>
+<p>Good chunking is critical for retrieval quality. We use two different strategies:</p>
+<ul class="simple">
+<li><p><strong>PDF</strong>: section-aware chunking via <code class="docutils literal notranslate"><span class="pre">UnstructuredPDFLoader</span></code> — splits on titles, respects heading hierarchy</p></li>
+<li><p><strong>CSV</strong>: one chunk per record row via <code class="docutils literal notranslate"><span class="pre">CSVLoader</span></code> — each row becomes its own retrievable unit</p></li>
+</ul>
+<section id="a-chunk-the-open-pdf">
+<h3>5a — Chunk the Open PDF<a class="headerlink" href="#a-chunk-the-open-pdf" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnstructuredPDFLoader</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_pdf_by_sections</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">):</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">UnstructuredPDFLoader</span><span class="p">(</span>
+        <span class="n">pdf_path</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;elements&quot;</span><span class="p">,</span>
+        <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;fast&quot;</span><span class="p">,</span>
+        <span class="n">chunking_strategy</span><span class="o">=</span><span class="s2">&quot;by_title&quot;</span><span class="p">,</span>
+        <span class="n">max_characters</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span>
+        <span class="n">new_after_n_chars</span><span class="o">=</span><span class="mi">3800</span><span class="p">,</span>
+        <span class="n">combine_text_under_n_chars</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">section_chunks</span> <span class="o">=</span> <span class="n">load_pdf_by_sections</span><span class="p">(</span><span class="n">O_FILE</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully created </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">section_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> section-aware chunks.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-chunk-the-restricted-csv">
+<h3>5b — Chunk the Restricted CSV<a class="headerlink" href="#b-chunk-the-restricted-csv" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">CSVLoader</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">CSVLoader</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="n">R_FILE</span><span class="p">)</span>
+<span class="n">record_chunks</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully created </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">record_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> record chunks.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-6-prepare-chunks-with-s3-path-labels">
+<h2>Step 6 — Prepare Chunks with S3 Path Labels<a class="headerlink" href="#step-6-prepare-chunks-with-s3-path-labels" title="Link to this heading">#</a></h2>
+<p>This is the key security step: each chunk is tagged with its <strong>S3 path</strong> via the <code class="docutils literal notranslate"><span class="pre">vastdb_s3_path_auth</span></code> column.</p>
+<ul class="simple">
+<li><p>Open chunks → <code class="docutils literal notranslate"><span class="pre">nireny/open/&lt;filename&gt;</span></code> (accessible to all)</p></li>
+<li><p>Restricted chunks → <code class="docutils literal notranslate"><span class="pre">nireny/restricted/&lt;filename&gt;</span></code> (blocked by S3 bucket policy)</p></li>
+</ul>
+<p>VAST DB will use these paths when <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth</span></code> is enabled.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">o_chunks</span> <span class="o">=</span> <span class="p">[(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">BUCKET_NAME</span><span class="si">}</span><span class="s1">/open/</span><span class="si">{</span><span class="n">O_FILE</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">,</span>       <span class="n">chunk</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">section_chunks</span><span class="p">]</span>
+<span class="n">r_chunks</span> <span class="o">=</span> <span class="p">[(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">BUCKET_NAME</span><span class="si">}</span><span class="s1">/restricted/</span><span class="si">{</span><span class="n">R_FILE</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">,</span> <span class="n">chunk</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">record_chunks</span><span class="p">]</span>
+
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">o_chunks</span> <span class="o">+</span> <span class="n">r_chunks</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vastdb_s3_path_auth&#39;</span><span class="p">,</span> <span class="s1">&#39;chunk&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total chunks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">  (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">o_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> open, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> restricted)&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-7-generate-embeddings">
+<h2>Step 7 — Generate Embeddings<a class="headerlink" href="#step-7-generate-embeddings" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">embed_text</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;chunk&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;embedding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">dimensions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Embedding dimensions: </span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-8-load-into-vast-db">
+<h2>Step 8 — Load into VAST DB<a class="headerlink" href="#step-8-load-into-vast-db" title="Link to this heading">#</a></h2>
+<p>First, clear any existing rows (useful when re-running the notebook). Then insert all chunks as a typed PyArrow table.</p>
+<section id="a-clear-existing-rows">
+<h3>8a — Clear existing rows<a class="headerlink" href="#a-clear-existing-rows" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DB_BUCKET_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">SCHEMA_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">internal_row_id</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_all</span><span class="p">()</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">pyarrow_table</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Existing rows cleared.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-insert-all-chunks">
+<h3>8b — Insert all chunks<a class="headerlink" href="#b-insert-all-chunks" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">schema</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;vastdb_s3_path_auth&quot;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;chunk&quot;</span><span class="p">,</span>              <span class="n">pa</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span>          <span class="n">pa</span><span class="o">.</span><span class="n">list_</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;item&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">float32</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">dimensions</span><span class="p">))</span>
+<span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DB_BUCKET_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">SCHEMA_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DB_BUCKET_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">SCHEMA_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">arrow_table</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">arrow_table</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inserted </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">arrow_table</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-9-set-up-the-query-engine">
+<h2>Step 9 — Set Up the Query Engine<a class="headerlink" href="#step-9-set-up-the-query-engine" title="Link to this heading">#</a></h2>
+<p>We use VAST’s ADBC SQL driver to run cosine similarity searches directly in SQL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify the table contents</span>
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DB_BUCKET_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">SCHEMA_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">read_all</span><span class="p">()</span>
+
+<span class="n">results</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()[[</span><span class="s1">&#39;vastdb_s3_path_auth&#39;</span><span class="p">,</span> <span class="s1">&#39;chunk&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">full_table_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">DB_BUCKET_NAME</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">SCHEMA_NAME</span><span class="si">}</span><span class="s1">&quot;.</span><span class="si">{</span><span class="n">TABLE_NAME</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_query</span><span class="p">(</span><span class="n">query</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">driver</span><span class="o">=</span><span class="n">adbc_driver_vastdb</span><span class="o">.</span><span class="n">get_driver_path</span><span class="p">(),</span>
+        <span class="n">db_kwargs</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;vast.db.endpoint&quot;</span><span class="p">:</span>   <span class="n">QE_ENDPOINT</span><span class="p">,</span>
+            <span class="s2">&quot;vast.db.access_key&quot;</span><span class="p">:</span> <span class="n">AWS_ACCESS_KEY_ID</span><span class="p">,</span>
+            <span class="s2">&quot;vast.db.secret_key&quot;</span><span class="p">:</span> <span class="n">AWS_SECRET_ACCESS_KEY</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetch_arrow_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect the table schema</span>
+<span class="n">run_query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DESCRIBE TABLE </span><span class="si">{</span><span class="n">full_table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-10-build-the-rag-agent">
+<h2>Step 10 — Build the RAG Agent<a class="headerlink" href="#step-10-build-the-rag-agent" title="Link to this heading">#</a></h2>
+<p>The agent takes a question, searches for relevant chunks using cosine distance, and passes them as context to the LLM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">env</span><span class="w"> </span><span class="kn">import</span> <span class="n">HF_API_KEY</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://router.huggingface.co/v1&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">HF_API_KEY</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_agent</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ask the LLM a question, optionally with retrieved context.&quot;&quot;&quot;</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;meta-llama/Llama-3.1-8B-Instruct:cheapest&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;You are a helpful assistant. Use the provided Context to answer questions. &quot;</span>
+                           <span class="s2">&quot;If you don&#39;t have the answer just say you don&#39;t know.&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-11-rag-demo-open-question">
+<h2>Step 11 — RAG Demo: Open Question<a class="headerlink" href="#step-11-rag-demo-open-question" title="Link to this heading">#</a></h2>
+<p>First, let’s confirm RAG works correctly for public data. We’ll ask about the Greek Constitution.</p>
+<p><strong>Without RAG</strong>, the LLM has no context:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;According to the greek constitution, what does part two article 4 say?&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Without RAG ===&quot;</span><span class="p">)</span>
+<span class="n">my_agent</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>With RAG</strong>, we retrieve the relevant chunks first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">question_embedding</span> <span class="o">=</span> <span class="n">embed_text</span><span class="p">([</span><span class="n">question</span><span class="p">])</span>
+<span class="n">dimensions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">question_embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">run_query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT chunk FROM </span><span class="si">{</span><span class="n">full_table_name</span><span class="si">}</span>
+<span class="s2">    ORDER BY</span>
+<span class="s2">        array_cosine_distance(embedding, </span><span class="si">{</span><span class="n">question_embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">::FLOAT[</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2">])</span>
+<span class="s2">    LIMIT 15</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">contexts</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;chunk&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieved </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks.&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">contexts</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># preview</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== With RAG ===&quot;</span><span class="p">)</span>
+<span class="n">my_agent</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-12-security-demo-restricted-data">
+<h2>Step 12 — Security Demo: Restricted Data<a class="headerlink" href="#step-12-security-demo-restricted-data" title="Link to this heading">#</a></h2>
+<p>Now we test with a question that requires salary data from <code class="docutils literal notranslate"><span class="pre">salary.csv</span></code>, which is stored under <code class="docutils literal notranslate"><span class="pre">nireny/restricted/</span></code>.</p>
+<section id="the-s3-bucket-policy">
+<h3>The S3 Bucket Policy<a class="headerlink" href="#the-s3-bucket-policy" title="Link to this heading">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DefaultAccess&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:*&quot;</span><span class="p">,</span><span class="w">          </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nireny/*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;nireny&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DenyAccess&quot;</span><span class="p">,</span><span class="w">     </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Deny&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nireny/restricted/*&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="the-db-iam-policy-key-setting">
+<h3>The DB IAM Policy (key setting)<a class="headerlink" href="#the-db-iam-policy-key-setting" title="Link to this heading">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NirenyDbRowFilterByS3PathAuth&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RowColumnSecurity&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::nireny-db/*&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RowFilterByS3PathAuth&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;True&quot;</span><span class="w">    </span><span class="err">←</span><span class="w"> </span><span class="err">Toggle</span><span class="w"> </span><span class="kc">t</span><span class="err">his</span><span class="w"> </span><span class="kc">t</span><span class="err">o</span><span class="w"> </span><span class="err">see</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="err">di</span><span class="kc">fferen</span><span class="err">ce</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="a-rowfilterbys3pathauth-false-security-disabled">
+<h3>12a — <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">False</span></code> (security disabled)<a class="headerlink" href="#a-rowfilterbys3pathauth-false-security-disabled" title="Link to this heading">#</a></h3>
+<p>With security off, retrieval returns chunks from <strong>both</strong> open and restricted files. The LLM can answer with salary data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;What is the salary of the CEO?&quot;</span>
+
+<span class="n">question_embedding</span> <span class="o">=</span> <span class="n">embed_text</span><span class="p">([</span><span class="n">question</span><span class="p">])</span>
+<span class="n">dimensions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">question_embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">run_query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT chunk FROM </span><span class="si">{</span><span class="n">full_table_name</span><span class="si">}</span>
+<span class="s2">    ORDER BY</span>
+<span class="s2">        array_cosine_distance(embedding, </span><span class="si">{</span><span class="n">question_embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">::FLOAT[</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2">])</span>
+<span class="s2">    LIMIT 5</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">contexts</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;chunk&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retrieved chunks (includes restricted data):&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== LLM Answer (security OFF) ===&quot;</span><span class="p">)</span>
+<span class="n">my_agent</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-rowfilterbys3pathauth-true-security-enabled">
+<h3>12b — <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">True</span></code> (security enabled)<a class="headerlink" href="#b-rowfilterbys3pathauth-true-security-enabled" title="Link to this heading">#</a></h3>
+<p>Now enable the setting in your DB IAM policy and re-run.</p>
+<p>VAST DB checks S3 <code class="docutils literal notranslate"><span class="pre">GetObject</span></code> permissions for each row’s path. Rows under <code class="docutils literal notranslate"><span class="pre">nireny/restricted/</span></code> are denied by the bucket policy, so they are <strong>filtered out before being returned</strong>. The same query now returns only open-access chunks, and the LLM correctly says it doesn’t know the salary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the identical query — now with RowFilterByS3PathAuth: True in the DB policy</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">run_query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT chunk FROM </span><span class="si">{</span><span class="n">full_table_name</span><span class="si">}</span>
+<span class="s2">    ORDER BY</span>
+<span class="s2">        array_cosine_distance(embedding, </span><span class="si">{</span><span class="n">question_embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">::FLOAT[</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2">])</span>
+<span class="s2">    LIMIT 5</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">contexts</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;chunk&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retrieved chunks (restricted rows filtered out):&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== LLM Answer (security ON) ===&quot;</span><span class="p">)</span>
+<span class="n">my_agent</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Salary in retrieved chunks?</p></th>
+<th class="head"><p>LLM leaks salary?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">False</span></code></p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">True</span></code></p></td>
+<td><p>❌ No</p></td>
+<td><p>❌ No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>By tagging each vector row with its source S3 path and enabling <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth</span></code>, VAST DB transparently enforces your existing S3 access policies on vector search results — <strong>no changes required in your RAG application code</strong>.</p>
+<p>This pattern composes well: different users or roles can have different S3 permissions, and the same vector table serves all of them securely.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_vectordb"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="query_engine.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">VAST Query Engine</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../vast_kafka/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to VAST Event Broker</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-authenticate-with-huggingface">Step 1 — Authenticate with HuggingFace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configuration">Step 2 — Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-connect-to-vast-db">Step 3 — Connect to VAST DB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-define-the-embedding-function">Step 4 — Define the Embedding Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-chunk-the-documents">Step 5 — Chunk the Documents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-chunk-the-open-pdf">5a — Chunk the Open PDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-chunk-the-restricted-csv">5b — Chunk the Restricted CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-prepare-chunks-with-s3-path-labels">Step 6 — Prepare Chunks with S3 Path Labels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-generate-embeddings">Step 7 — Generate Embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-load-into-vast-db">Step 8 — Load into VAST DB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-clear-existing-rows">8a — Clear existing rows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-insert-all-chunks">8b — Insert all chunks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-set-up-the-query-engine">Step 9 — Set Up the Query Engine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-10-build-the-rag-agent">Step 10 — Build the RAG Agent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-11-rag-demo-open-question">Step 11 — RAG Demo: Open Question</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-12-security-demo-restricted-data">Step 12 — Security Demo: Restricted Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-s3-bucket-policy">The S3 Bucket Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-db-iam-policy-key-setting">The DB IAM Policy (key setting)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-rowfilterbys3pathauth-false-security-disabled">12a — <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">False</span></code> (security disabled)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-rowfilterbys3pathauth-true-security-enabled">12b — <code class="docutils literal notranslate"><span class="pre">RowFilterByS3PathAuth:</span> <span class="pre">True</span></code> (security enabled)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
