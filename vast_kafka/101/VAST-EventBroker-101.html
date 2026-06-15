@@ -1,0 +1,1730 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>VAST Event Broker 101 &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_kafka/101/VAST-EventBroker-101';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Kafka to VastDB with Trino Lookup" href="../trino_direct_query.html" />
+    <link rel="prev" title="Introduction to VAST Event Broker" href="../overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/iac.html">Infrastructure as code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/s3a_magics/instructions.html">Hadoop S3A Functional Tester (Also Magic Committer) - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/overview/replication.html">Replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/overview/sequences.html">Sequences</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_database/overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python_sdk_netcdf_import.html">Python SDK - import netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/query/ray_daft_vastdb.html">Ray and Daft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/01_create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/02_schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/03_table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/04_column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/05_querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/06_limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/07_projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/08_manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/09_verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/10_importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/11_importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/12_snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/13_transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/14_tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/sdk_ref/15_recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/spark/operations_guide.html">Spark Operations Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/spark/upserts.html">Spark Upserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/spark/architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/tuning/cnodes_and_vips.html">CNODES and VIPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/tuning/splits.html">Splits and Subsplits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/tuning/trino/howto.html">Tuning Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/tuning/Spark_Predicate_Pushdown.html">Spark Predicate Pushdown</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_database/admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/admin/vastdb_py_setup2.html">VAST Database Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_database/admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_database/integrations/integrations.html">Integrations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Vector Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/quickstart-new.html">Vector DB Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/query_engine.html">VAST Query Engine</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Event Broker</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">VAST Event Broker 101</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../trino_direct_query.html">Kafka to VastDB with Trino Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zeek_to_vast_kafka.html">Zeek PCAP to VAST Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Kafka Utils</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Catalog - Python SDK Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_dataengine/spark/overview.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/ports.html">Spark Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/spark_ui_proxying.html">Spark UI Proxying</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/overview.html">Notebook Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/1_connectivity_test.html">Connectivity Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/2_basic_workload_test.html">Basic Workload Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/3_add_libraries.html">Adding Spark libraries</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_dataengine/functions/overview.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/functions/workshop/workshop.html">Workshop</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_kafka/101/VAST-EventBroker-101.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_kafka/101/VAST-EventBroker-101.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>VAST Event Broker 101</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">VAST Event Broker 101</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-overview">VAST EventBroker Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-use-cases">VAST EventBroker Use Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#realtime-analytics">📊 Realtime Analytics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iot-data">📡 IoT Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notification-systems">🔔 Notification Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-pipelines">🤖 AI Pipelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-concepts">VAST EventBroker Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-considerations">Design Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions-in-apache-kafka">Partitions in Apache Kafka</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-messages-are-assigned-to-partitions">How Messages are Assigned to Partitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-topics-the-importance-of-partitions">Designing Topics: The Importance of Partitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-api">Kafka API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-vast-eventbroker">Setup VAST EventBroker</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-vip-pool">Create VIP Pool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-cnodes-to-vip-pool">Assign CNodes to VIP Pool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-kafka-view">Create Kafka View</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-topic">Create a Topic</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-101-kafka-api">VAST EventBroker 101 - Kafka API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-python-api">Install Python API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-your-environment">Configure your environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Create a topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-topics">List topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-topic-details">Show Topic Details</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-messages">Produce messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consume-messages">Consume messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reprocess-kafka-messages">Reprocess Kafka Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-all-consumer-groups-on-a-broker">List All Consumer Groups on a Broker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-topic">Delete Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">List Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-all-topics-and-all-consumer-groups-in-a-kafka-cluster">Delete All Topics and All Consumer Groups in a Kafka Cluster</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="vast-event-broker-101">
+<h1>VAST Event Broker 101<a class="headerlink" href="#vast-event-broker-101" title="Link to this heading">#</a></h1>
+<section id="vast-eventbroker-overview">
+<h2>VAST EventBroker Overview<a class="headerlink" href="#vast-eventbroker-overview" title="Link to this heading">#</a></h2>
+<p>The VAST DATA EventBroker
+The VAST DATA EventBroker is a modern, high-performance event streaming platform designed as a powerful alternative to Apache Kafka. Built on the scalable and efficient VAST Data Platform, it offers a Kafka-compatible API while fundamentally re-architecting the underlying system to overcome the limitations of traditional Kafka deployments. This innovative approach delivers significant improvements in performance, scalability, and cost-efficiency for real-time data pipelines and AI-driven applications.</p>
+<p><img alt="Architecture" src="../../_images/EventBroker_Architecture.jpg" /></p>
+<p>Key Features and Architecture
+At its core, the EventBroker leverages a disaggregated and shared-everything (DASE) architecture. Unlike traditional Kafka, which co-locates compute and storage on the same broker nodes, VAST separates these two layers. This allows for independent and granular scaling of compute resources (the “brokers”) and storage capacity, eliminating common bottlenecks and simplifying cluster management.</p>
+<p><strong>Key advantages of this design include:</strong></p>
+<p>Kafka Compatibility:
+The EventBroker presents a compatible Kafka API.
+This means existing producers, consumers, and applications that use the Kafka protocol can connect.</p>
+<p>Enhanced Performance:
+By running on an all-flash, high-performance data platform, the EventBroker dramatically reduces latency and accelerates metadata operations. This results in faster message processing and more responsive real-time analytics.</p>
+<p>Simplified Management:
+The underlying VAST Data Platform handles data placement, protection, and tiering automatically. This eliminates the manual and often complex tasks associated with managing Kafka, such as partition rebalancing, data replication, and tiered storage configurations.</p>
+<p>Lower Total Cost of Ownership (TCO):
+With its efficient data reduction capabilities and the ability to scale storage and compute independently, the EventBroker provides a more cost-effective solution for storing and processing vast streams of event data over long periods. It effectively creates an “infinite” retention window without the performance penalties of traditional tiered storage.</p>
+<p>In essence, the VAST DATA EventBroker combines the ubiquity of the Kafka API with a next-generation data platform, offering a powerful, scalable, and simplified solution for enterprise event streaming needs.</p>
+<p><img alt="Architecture" src="../../_images/EventBroker_Backend.jpg" /></p>
+<p>Architecture Overview
+The VAST Event Broker leverages VAST DB as its persistence layer, creating a direct pathway from an event stream to a queryable table. This integration enables SQL-based analysis on streaming data.</p>
+<p>Querying with Trino
+Once data is persisted in VAST DB, you can connect a distributed SQL query engine like Trino to it. This allows you to run standard SQL queries against the event data</p>
+</section>
+<section id="vast-eventbroker-use-cases">
+<h2>VAST EventBroker Use Cases<a class="headerlink" href="#vast-eventbroker-use-cases" title="Link to this heading">#</a></h2>
+</section>
+<section id="realtime-analytics">
+<h2>📊 Realtime Analytics<a class="headerlink" href="#realtime-analytics" title="Link to this heading">#</a></h2>
+<p><strong>Description:</strong> Streaming event logs for immediate processing.</p>
+<ul class="simple">
+<li><p><strong>Use Cases:</strong></p>
+<ul>
+<li><p>Fraud detection</p></li>
+<li><p>Personalized customer support</p></li>
+<li><p>Inventory optimization</p></li>
+<li><p>Cyberlake Threat Intelligence Integration</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="iot-data">
+<h2>📡 IoT Data<a class="headerlink" href="#iot-data" title="Link to this heading">#</a></h2>
+<p><strong>Description:</strong> Device telemetry data for real-time processing.</p>
+<ul class="simple">
+<li><p><strong>Use Cases:</strong></p>
+<ul>
+<li><p>Fleet management</p></li>
+<li><p>Warehouse sensor tracking</p></li>
+<li><p>Shipping and logistics management</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="notification-systems">
+<h2>🔔 Notification Systems<a class="headerlink" href="#notification-systems" title="Link to this heading">#</a></h2>
+<p><strong>Description:</strong> Event-driven user updates.</p>
+<ul class="simple">
+<li><p><strong>Use Cases:</strong></p>
+<ul>
+<li><p>App notifications</p></li>
+<li><p>Order updates</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="ai-pipelines">
+<h2>🤖 AI Pipelines<a class="headerlink" href="#ai-pipelines" title="Link to this heading">#</a></h2>
+<p><strong>Description:</strong> Streaming data to models for real-time training or inference.</p>
+<ul class="simple">
+<li><p><strong>Use Cases:</strong></p>
+<ul>
+<li><p>Real-time anomaly detection in healthcare</p></li>
+<li><p>Predictive analytics in finance</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="vast-eventbroker-concepts">
+<h2>VAST EventBroker Concepts<a class="headerlink" href="#vast-eventbroker-concepts" title="Link to this heading">#</a></h2>
+<p><img alt="Architecture" src="../../_images/VAST_EventBroker_Concepts.jpg" /></p>
+<p>The Core Components:
+Events, Topics, Partitions, and Offsets:</p>
+<p><strong>Event:</strong> The fundamental unit of data in Kafka. An event, often called a message, represents a single piece of information. It consists of a key, a value, a timestamp, and optional metadata headers.</p>
+<p><strong>Topic:</strong> A logical channel or category to which events are published. Think of a topic as a table in a database, but for a continuous stream of data. Producers write events to topics, and consumers read events from them.</p>
+<p><strong>Partition:</strong> To enable scalability and parallelism, topics are divided into one or more partitions. Each partition is an ordered, immutable sequence of events. Events are appended to the end of a partition’s log. By distributing partitions across different servers, Kafka can handle a massive amount of data.</p>
+<p><strong>Offset</strong>: Each event within a partition is assigned a unique, sequential ID number called an offset. The offset serves as a pointer to a specific event within that partition, allowing consumers to track their progress and resume reading from where they left off.</p>
+<p>The Players:
+Producers and Consumers:</p>
+<p><strong>Producers</strong>: These are client applications responsible for creating and sending events to Kafka topics. Producers can choose to send events to a specific partition or allow Kafka to distribute them based on the event’s key.</p>
+<p><strong>Consumers</strong>: These are client applications that subscribe to one or more topics to read and process the events. Consumers read events in the order they were written to a partition.</p>
+<p><strong>Consumer Groups</strong>: Consumers can be organized into consumer groups. Each consumer within a group is assigned a unique set of partitions from the subscribed topics, allowing for parallel processing of the data. This is a key feature for achieving high-throughput consumption.</p>
+<p><strong>VAST EventBroker Infrastructure</strong>
+The VAST EventBroker system is built on a distributed architecture of brokers that work together in a cluster to provide a scalable and fault-tolerant event streaming service.</p>
+<p>Core Components
+Broker: A single server in the system is called a broker. It is responsible for handling all the core tasks: receiving events from producers, storing them securely, and serving them to consumers.</p>
+<p><strong>Cluster</strong>: A cluster consists of one or more brokers operating as a team. This distributed setup ensures high availability and scalability. If one broker fails, the others automatically take over its responsibilities, preventing downtime.</p>
+<p>VAST Architectural Model
+In VAST’s implementation, brokers are organized and accessed through Views and VIP Pools.</p>
+<p><strong>Views</strong>: Each VAST EventBroker Cluster is associated with a view, which defines the specific storage location where the broker will organize messages into topics and partitions in the VAST ElementStore.</p>
+<p><strong>VIP Pools</strong>: To make the broker accessible on the network, its view is assigned to a VIP Pool. This is a collection of Virtual IP addresses (VIPs) that are distributed across a set of compute nodes (CNodes). Client applications connect to the broker using a bootstrap server list, which is composed of the IP addresses from this VIP Pool.</p>
+<p><strong>Multi-Tenancy</strong> and <strong>Network Isolation</strong>
+A single VAST Cluster can support multiple, independent EventBroker Clusters, making it ideal for multi-tenant environments where different users or applications require their own dedicated broker cluster.</p>
+<p>You can enforce network isolation by assigning VIP Pools to specific CNodes. This separation can be done physically through different network segments or logically using VLANs, ensuring traffic remains segregated.</p>
+</section>
+<section id="design-considerations">
+<h2>Design Considerations<a class="headerlink" href="#design-considerations" title="Link to this heading">#</a></h2>
+<p>The table outlines the design considerations and limitations for a VAST Cluster’s EventBroker system. Think of these as the fundamental rules or architectural boundaries of the platform. They define the maximum capacity and operational limits for key components like topics, partitions, and messages.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Capacity Parameter</p></th>
+<th class="head text-left"><p>Limit</p></th>
+<th class="head text-left"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Max number of EventBrokers per VAST Cluster</p></td>
+<td class="text-left"><p>512</p></td>
+<td class="text-left"><p>Bounded by the number of VIP Pools per Cluster</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Max partitions per EventBroker</p></td>
+<td class="text-left"><p>200000</p></td>
+<td class="text-left"><p>The total number of partitions managed by a broker across all topics</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Consumer Group API - Max consumer groups per EventBroker</p></td>
+<td class="text-left"><p>256</p></td>
+<td class="text-left"><p>The maximum number of consumer groups per EventBroker</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Max number of Topics per EventBroker</p></td>
+<td class="text-left"><p>10000</p></td>
+<td class="text-left"><p>At least 10K topics per view. Bounded by the size of the reply to the Metadata API request</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Max partitions per topic</p></td>
+<td class="text-left"><p>20000</p></td>
+<td class="text-left"><p>The number of partitions in a topic cannot be changed after the topic</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Max number of events per partition</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(2^{48}\)</span></p></td>
+<td class="text-left"><p>Currently this is also the max that can be ingested in the lifetime of the partition.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Producer API - Max message size</p></td>
+<td class="text-left"><p>1MB</p></td>
+<td class="text-left"><p>This refers to the maximum allowable size for a single message that can be sent by a Kafka producer. It’s a critical configuration that impacts performance, resource utilization, and the types of data that can be transmitted through the system. This Limit will be increase to multiple MBs in the next VAST 5.5 release</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Producer API - Keys and Values in event records within messages (including keys and values in event record headers)</p></td>
+<td class="text-left"><p>125KB each</p></td>
+<td class="text-left"><p>Each message sent via the Producer API—structured with a key for routing, a value for the payload—is currently limited to 125KB, but this limit will increased to multiple MB in the next VAST 5.5 release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="partitions-in-apache-kafka">
+<h3>Partitions in Apache Kafka<a class="headerlink" href="#partitions-in-apache-kafka" title="Link to this heading">#</a></h3>
+<p>A <strong>partition</strong> is the fundamental unit of parallelism and scalability in Kafka. When you create a topic, you split it into one or more partitions. Think of a topic as a category of messages (like <code class="docutils literal notranslate"><span class="pre">user_signups</span></code>), and each partition as an independent, ordered log file within that category.</p>
+<p>``</p>
+</section>
+<hr class="docutils" />
+<section id="key-concepts">
+<h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Ordered Log:</strong> Each partition is an immutable, append-only sequence of records. Messages written to a partition are assigned a sequential ID number called an <strong>offset</strong>, which uniquely identifies each record within that partition. This guarantees the order of messages <em>within a single partition</em>.</p></li>
+<li><p><strong>Parallelism:</strong> Splitting a topic into multiple partitions allows multiple consumers to read from that topic simultaneously. In a consumer group, each consumer can be assigned one or more partitions, enabling parallel processing and dramatically increasing read throughput. 🚀</p></li>
+<li><p><strong>Scalability:</strong> If you need to increase the read/write capacity for a topic, you have to create a topic with multiple partitions to scale out your consumer applications accordingly. This allows Kafka to handle massive message volumes.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="how-messages-are-assigned-to-partitions">
+<h3>How Messages are Assigned to Partitions<a class="headerlink" href="#how-messages-are-assigned-to-partitions" title="Link to this heading">#</a></h3>
+<p>When a producer sends a message to a topic, Kafka needs to decide which partition to write it to. This is typically done in one of three ways:</p>
+<ol class="arabic simple">
+<li><p><strong>By Message Key (Most Common):</strong> If a message includes a key (e.g., a <code class="docutils literal notranslate"><span class="pre">user_id</span></code> or <code class="docutils literal notranslate"><span class="pre">order_id</span></code>), Kafka will hash the key to determine the partition. This ensures that all messages with the <strong>same key</strong> will always go to the <strong>same partition</strong>. This is crucial for guaranteeing the order of related events. ⛓️</p></li>
+<li><p><strong>Round-Robin:</strong> If no message key is provided, Kafka will distribute messages across all available partitions in a round-robin fashion to ensure an even load balance.</p></li>
+<li><p><strong>Custom Partitioner:</strong> You can implement your own logic to decide how messages are assigned to partitions based on specific business rules.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="designing-topics-the-importance-of-partitions">
+<h3>Designing Topics: The Importance of Partitions<a class="headerlink" href="#designing-topics-the-importance-of-partitions" title="Link to this heading">#</a></h3>
+<p>When designing your topics, the number of partitions is a critical parameter that directly impacts parallelism and throughput. While the system supports up to 1,000 partitions per topic, a well-chosen number is key to optimal performance.</p>
+<p>A good rule of thumb is to configure more partitions than the number of silos per CNode (the compute nodes in the VAST cluster). This ensures that workloads can be spread evenly across all available processing units, preventing hotspots and maximizing parallel processing capabilities.</p>
+<p>Recommendations
+Recommended Baseline: Start with at least 40+ partitions per topic.</p>
+<p>Optimal Performance: For many use cases, a higher count of around 100 partitions is even better, as it provides greater flexibility for consumer scaling and load distribution.</p>
+<p>By over-provisioning partitions relative to the physical compute resources (silos), you enable the system to distribute data and processing more effectively, which is essential for achieving high throughput and low latency.</p>
+</section>
+<section id="kafka-api">
+<h3>Kafka API<a class="headerlink" href="#kafka-api" title="Link to this heading">#</a></h3>
+<p>Please review the APIs implemented on the VAST Documentation Site [Link coming soon..]</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup-vast-eventbroker">
+<h1>Setup VAST EventBroker<a class="headerlink" href="#setup-vast-eventbroker" title="Link to this heading">#</a></h1>
+<p><img alt="Architecture" src="../../_images/EventBroker-Setup.png" /></p>
+<section id="create-vip-pool">
+<h2>Create VIP Pool<a class="headerlink" href="#create-vip-pool" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Configuration Option</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Name</strong></p></td>
+<td class="text-left"><p>A unique identifier for the VIP Pool.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Tenant</strong></p></td>
+<td class="text-left"><p>Specifies which tenant the VIP pool will serve. It can be dedicated to a single tenant or shared across all tenants.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>IP Ranges</strong></p></td>
+<td class="text-left"><p>The list of contiguous IP addresses that will be included in the pool. Both IPv4 and IPv6 are supported.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Subnet CIDR</strong></p></td>
+<td class="text-left"><p>The subnet mask for the IP addresses in the pool, defined in CIDR notation.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Gateway</strong></p></td>
+<td class="text-left"><p>The gateway IP address for the VIP pool’s subnet.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>VLAN</strong></p></td>
+<td class="text-left"><p>Allows for the tagging of the VIP pool with a specific VLAN ID, enabling network segmentation at Layer 2.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Role</strong></p></td>
+<td class="text-left"><p>Defines the primary purpose of the VIP pool. Common roles include: <strong>Protocols</strong> (for general data access via NFS, S3, SMB), <strong>Replication</strong> (for dedicated replication traffic), and <strong>Big Catalog</strong> (for optimizing metadata queries).</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>CNode Affinity</strong></p></td>
+<td class="text-left"><p>Determines which CNodes will host the VIPs in the pool. This can be all CNodes in the cluster or a specific subset, which is useful for isolating workloads or dedicating more powerful hardware to demanding applications.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Port Membership</strong></p></td>
+<td class="text-left"><p>Specifies which network ports on the assigned CNodes (e.g., left or right) will be used for the VIPs in the pool.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>VMS Preferred</strong></p></td>
+<td class="text-left"><p>Indicates that the CNodes in this pool are preferred for running the VAST Management Service (VMS), influencing failover decisions for the management interface.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>VIP Pool Domain Name</strong></p></td>
+<td class="text-left"><p>When using the VAST DNS service, this assigns a domain name to the VIP pool, allowing for DNS-based load balancing and simplified client configuration.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>By leveraging these configuration options, administrators can create a highly flexible and resilient network architecture that aligns with their application performance, security, and data segregation requirements.</p>
+<p><img alt="Architecture" src="../../_images/VIP_Pools.png" /></p>
+</section>
+<section id="assign-cnodes-to-vip-pool">
+<h2>Assign CNodes to VIP Pool<a class="headerlink" href="#assign-cnodes-to-vip-pool" title="Link to this heading">#</a></h2>
+<p>Advantage of CNode Affinity
+CNode Affinity is the ability to dedicate a specific group of CNodes to a particular workload or tenant via a VIP Pool. This provides several key benefits:</p>
+<p>Guaranteed Performance: Ensures critical applications always have the compute power they need.</p>
+<p>Workload Isolation: Prevents a busy application from slowing down others.</p>
+<p>Enhanced Security: Isolates traffic by dedicating CNodes to specific network segments.</p>
+<p>Hardware Optimization: Allows you to assign the most demanding jobs to your most powerful hardware.</p>
+<p><img alt="Architecture" src="../../_images/CNodes.png" /></p>
+</section>
+<section id="create-kafka-view">
+<h2>Create Kafka View<a class="headerlink" href="#create-kafka-view" title="Link to this heading">#</a></h2>
+<p><strong>Using the VAST Web UI:</strong></p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>Element Store</strong> &gt; <strong>Views</strong>.</p></li>
+<li><p>Click <strong>Create View</strong>.</p></li>
+<li><p>In the <strong>General</strong> tab:</p>
+<ul class="simple">
+<li><p>Enter a <strong>Name</strong> for your view.</p></li>
+<li><p>Provide the <strong>Path</strong> on the VAST cluster that this view will expose (e.g., <code class="docutils literal notranslate"><span class="pre">/kafka-data</span></code>).</p></li>
+<li><p>From the <strong>Protocols</strong> dropdown, select <strong>KAFKA</strong>.</p></li>
+<li><p>Select the <strong>View Policy</strong> you created earlier.</p></li>
+</ul>
+</li>
+</ol>
+<p>Click Create.</p>
+<p><img alt="Architecture" src="../../_images/View.png" /></p>
+<ol class="arabic simple" start="4">
+<li><p>Go to the <strong>Kafka</strong> tab:</p>
+<ul class="simple">
+<li><p>From the <strong>VIP Pools</strong> dropdown, select the VIP pool you created.</p></li>
+</ul>
+</li>
+<li><p>Click <strong>Create</strong>.</p></li>
+</ol>
+<p><img alt="Architecture" src="../../_images/View-VIP-Pool.png" /></p>
+</section>
+<section id="create-a-topic">
+<h2>Create a Topic<a class="headerlink" href="#create-a-topic" title="Link to this heading">#</a></h2>
+<p>Once the Kafka-enabled view is created, a corresponding VAST Database is automatically generated. You can then create and manage Kafka topics within this database.</p>
+<p><strong>Using the VAST Web UI:</strong></p>
+<ol class="arabic simple">
+<li><p>Go to <strong>DataBase</strong> &gt; <strong>VAST Database</strong>.</p></li>
+<li><p>Locate the database named after your Kafka-enabled view and expand it.</p></li>
+<li><p>Click on <strong>Kafka-Compatible Broker Topics</strong>.</p></li>
+<li><p>Click the <strong>Add Topic</strong> button.</p></li>
+<li><p>Provide a <strong>Topic Name</strong> and specify the <strong>Number of Partitions</strong> and <strong>Retention Period</strong>.</p></li>
+<li><p>Click <strong>Create</strong>.</p></li>
+</ol>
+<p><img alt="Architecture" src="../../_images/Create_Topic.png" /></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="vast-eventbroker-101-kafka-api">
+<h1>VAST EventBroker 101 - Kafka API<a class="headerlink" href="#vast-eventbroker-101-kafka-api" title="Link to this heading">#</a></h1>
+<section id="install-python-api">
+<h2>Install Python API<a class="headerlink" href="#install-python-api" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span> --no-stderr
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">-</span><span class="n">U</span> <span class="n">kafka</span><span class="o">-</span><span class="n">python</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="configure-your-environment">
+<h2>Configure your environment<a class="headerlink" href="#configure-your-environment" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topic_to_create</span> <span class="o">=</span> <span class="s2">&quot;cctv&quot;</span>
+<span class="n">broker_servers</span> <span class="o">=</span> <span class="s2">&quot;172.200.204.244:9092&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Create a topic<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaAdminClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewTopic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kafka.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">TopicAlreadyExistsError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_kafka_topic</span><span class="p">(</span><span class="n">topic_name</span><span class="p">,</span> <span class="n">num_partitions</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replication_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bootstrap_servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a Kafka topic if it doesn&#39;t already exist.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        topic_name (str): The name of the topic to create.</span>
+<span class="sd">        num_partitions (int): The number of partitions for the topic.</span>
+<span class="sd">        replication_factor (int): The replication factor for the topic.</span>
+<span class="sd">        bootstrap_servers (str): Comma-separated list of Kafka broker addresses.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">admin_client</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">bootstrap_servers</span><span class="p">)</span>
+        <span class="n">topic_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">NewTopic</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">topic_name</span><span class="p">,</span> <span class="n">num_partitions</span><span class="o">=</span><span class="n">num_partitions</span><span class="p">,</span> <span class="n">replication_factor</span><span class="o">=</span><span class="n">replication_factor</span><span class="p">)]</span>
+        <span class="n">admin_client</span><span class="o">.</span><span class="n">create_topics</span><span class="p">(</span><span class="n">new_topics</span><span class="o">=</span><span class="n">topic_list</span><span class="p">,</span> <span class="n">validate_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic &#39;</span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&#39; created successfully.&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">TopicAlreadyExistsError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic &#39;</span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&#39; already exists.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;admin_client&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+            <span class="n">admin_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="n">create_kafka_topic</span><span class="p">(</span><span class="n">topic_to_create</span><span class="p">,</span> <span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">)</span>
+<span class="n">create_kafka_topic</span><span class="p">(</span><span class="n">topic_to_create</span><span class="p">,</span> <span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">)</span> <span class="c1"># demonstrating the already exists portion.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic &#39;cctv&#39; created successfully.
+Topic &#39;cctv&#39; already exists.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="list-topics">
+<h2>List topics<a class="headerlink" href="#list-topics" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaAdminClient</span>
+
+<span class="c1"># Define the Kafka broker (adjust the host/port as needed)</span>
+
+<span class="c1"># Create an admin client</span>
+<span class="n">admin_client</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">)</span>
+
+<span class="c1"># Fetch the list of topics</span>
+<span class="n">topics</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">list_topics</span><span class="p">()</span>
+
+<span class="c1"># Print the list of topics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kafka Topics:&quot;</span><span class="p">,</span> <span class="n">topics</span><span class="p">)</span>
+
+<span class="c1"># Close the admin client</span>
+<span class="n">admin_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kafka Topics: [&#39;cctv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-topic-details">
+<h2>Show Topic Details<a class="headerlink" href="#show-topic-details" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaAdminClient</span><span class="p">,</span> <span class="n">ConfigResource</span><span class="p">,</span> <span class="n">ConfigResourceType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kafka.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaError</span>
+
+<span class="c1"># --- Configuration ---</span>
+<span class="c1"># Replace with your Kafka brokers&#39; addresses</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">describe_topic_configs</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">topic_names</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Describes the configuration for a list of topics.&quot;&quot;&quot;</span>
+    <span class="n">config_resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConfigResource</span><span class="p">(</span><span class="n">ConfigResourceType</span><span class="o">.</span><span class="n">TOPIC</span><span class="p">,</span> <span class="n">topic</span><span class="p">)</span> <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topic_names</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">describe_configs</span><span class="p">(</span><span class="n">config_resources</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">KafkaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error describing topic configs: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 1. Create the Admin Client</span>
+    <span class="n">admin_client</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span>
+        <span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">,</span>
+        <span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;my_admin_client&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 2. Get the list of all topic names</span>
+    <span class="n">topic_names</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">list_topics</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">topic_names</span><span class="p">)</span><span class="si">}</span><span class="s2"> topics: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic_names</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Topic Details ---&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 3. Describe the topics to get their details</span>
+    <span class="k">if</span> <span class="n">topic_names</span><span class="p">:</span>
+        <span class="n">topic_details</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">describe_topics</span><span class="p">(</span><span class="n">topic_names</span><span class="p">)</span>
+        <span class="n">topic_configs</span> <span class="o">=</span> <span class="n">describe_topic_configs</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">topic_names</span><span class="p">)</span>
+
+        <span class="c1"># 4. Iterate and print the details for each topic</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topic_details</span><span class="p">):</span>
+            <span class="n">topic_name</span> <span class="o">=</span> <span class="n">topic</span><span class="p">[</span><span class="s1">&#39;topic&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Topic: </span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Internal: </span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;is_internal&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Print retention policy</span>
+            <span class="k">if</span> <span class="n">topic_configs</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">topic_configs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">retention_ms</span> <span class="o">=</span> <span class="s1">&#39;N/A&#39;</span>
+                <span class="k">for</span> <span class="n">config_entry</span> <span class="ow">in</span> <span class="n">topic_configs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">resources</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">config_entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;retention.ms&#39;</span><span class="p">:</span>
+                        <span class="n">retention_ms</span> <span class="o">=</span> <span class="n">config_entry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">break</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Retention (ms): </span><span class="si">{</span><span class="n">retention_ms</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Partitions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    - Partition ID: </span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;partition&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Leader: </span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;leader&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Replicas: </span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;replicas&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      In-Sync Replicas (ISR): </span><span class="si">{</span><span class="n">partition</span><span class="p">[</span><span class="s1">&#39;isr&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">KafkaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="c1"># 5. Close the admin client connection</span>
+    <span class="k">if</span> <span class="s1">&#39;admin_client&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="ow">and</span> <span class="n">admin_client</span><span class="p">:</span>
+        <span class="n">admin_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Admin client closed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 1 topics: cctv
+
+--- Topic Details ---
+
+Topic: cctv
+  Internal: False
+  Retention (ms): 604800000
+  Partitions: 1
+    - Partition ID: 0
+      Leader: 1
+      Replicas: [1]
+      In-Sync Replicas (ISR): [1]
+
+Admin client closed.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="produce-messages">
+<h2>Produce messages<a class="headerlink" href="#produce-messages" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaProducer</span>
+
+
+<span class="c1"># --- Initialize Kafka Producer ---</span>
+<span class="n">producer</span> <span class="o">=</span> <span class="n">KafkaProducer</span><span class="p">(</span>
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">,</span>
+    <span class="n">value_serializer</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># --- Data for Simulation ---</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Main Entrance&quot;</span><span class="p">,</span> <span class="s2">&quot;Parking Lot B&quot;</span><span class="p">,</span> <span class="s2">&quot;Warehouse Dock 3&quot;</span><span class="p">,</span> <span class="s2">&quot;Lobby&quot;</span><span class="p">,</span> <span class="s2">&quot;Floor 2 Hallway&quot;</span><span class="p">]</span>
+<span class="n">event_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Motion Detected&quot;</span><span class="p">,</span> <span class="s2">&quot;Person Detected&quot;</span><span class="p">,</span> <span class="s2">&quot;Vehicle Entry&quot;</span><span class="p">,</span> <span class="s2">&quot;Package Left&quot;</span><span class="p">,</span> <span class="s2">&quot;Door Opened&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sending 10 CCTV event messages to Kafka...&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Generate and Send Messages ---</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="c1"># Create a unique, realistic CCTV event message</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()),</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s2">&quot;camera_id&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;cam_</span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span><span class="w"> </span><span class="mi">105</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">locations</span><span class="p">),</span>
+        <span class="s2">&quot;event_type&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">event_types</span><span class="p">),</span>
+        <span class="s2">&quot;confidence_score&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">&quot;objects_detected&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;person&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;bounding_box&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">220</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">450</span><span class="p">)]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Send the message</span>
+    <span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">topic_to_create</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    
+    <span class="c1"># Print a confirmation to the console</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sent message </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;event_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ensure all messages are sent before exiting</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All  messages sent successfully to the Kafka topic.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sending 10 CCTV event messages to Kafka...
+Sent message 1: Motion Detected at Warehouse Dock 3
+Sent message 2: Door Opened at Main Entrance
+Sent message 3: Person Detected at Main Entrance
+Sent message 4: Motion Detected at Parking Lot B
+Sent message 5: Vehicle Entry at Lobby
+
+All  messages sent successfully to the Kafka topic.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="consume-messages">
+<h2>Consume messages<a class="headerlink" href="#consume-messages" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaConsumer</span>
+
+<span class="c1"># Assume these variables are defined elsewhere, for example:</span>
+
+<span class="n">consumer</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span>
+    <span class="n">topic_to_create</span><span class="p">,</span>
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="p">[</span><span class="n">broker_servers</span><span class="p">],</span>
+    <span class="n">auto_offset_reset</span><span class="o">=</span><span class="s1">&#39;earliest&#39;</span><span class="p">,</span>
+    <span class="n">group_id</span><span class="o">=</span><span class="s1">&#39;cctv_consumer&#39;</span><span class="p">,</span>
+    <span class="c1"># This is the key change:</span>
+    <span class="c1"># Stop iterating if no message is received for 5000ms (5 seconds).</span>
+    <span class="n">consumer_timeout_ms</span><span class="o">=</span><span class="mi">5000</span> 
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting to consume available messages...&quot;</span><span class="p">)</span>
+
+<span class="n">message_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">consumer</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received message: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">message_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Finished consuming. Found </span><span class="si">{</span><span class="n">message_count</span><span class="si">}</span><span class="s2"> messages.&quot;</span><span class="p">)</span>
+
+<span class="c1"># It&#39;s good practice to explicitly close the consumer.</span>
+<span class="n">consumer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting to consume available messages...
+
+Finished consuming. Found 0 messages.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reprocess-kafka-messages">
+<h2>Reprocess Kafka Messages<a class="headerlink" href="#reprocess-kafka-messages" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaConsumer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Assume these variables are defined elsewhere:</span>
+<span class="c1"># topic_to_create = &quot;your_topic&quot;</span>
+<span class="c1"># broker_servers = &quot;localhost:9092&quot;</span>
+
+<span class="n">consumer</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span>
+    <span class="c1"># NOTE: Do not pass the topic here if you plan to seek.</span>
+    <span class="c1"># We will subscribe after initialization.</span>
+    <span class="n">bootstrap_servers</span><span class="o">=</span><span class="p">[</span><span class="n">broker_servers</span><span class="p">],</span>
+    <span class="n">auto_offset_reset</span><span class="o">=</span><span class="s1">&#39;earliest&#39;</span><span class="p">,</span>
+    <span class="n">group_id</span><span class="o">=</span><span class="s1">&#39;cctv_reprocessing&#39;</span><span class="p">,</span>
+    <span class="c1"># A short timeout is fine for the initial poll.</span>
+    <span class="n">consumer_timeout_ms</span><span class="o">=</span><span class="mi">1000</span>
+<span class="p">)</span>
+
+<span class="c1"># 1. Subscribe to the topic</span>
+<span class="n">consumer</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="n">topic_to_create</span><span class="p">])</span>
+
+<span class="c1"># 2. Poll the consumer to trigger partition assignment.</span>
+<span class="c1"># This is the crucial step. We poll until we get an assignment.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Waiting for partition assignment...&quot;</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">consumer</span><span class="o">.</span><span class="n">assignment</span><span class="p">():</span>
+    <span class="n">consumer</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">timeout_ms</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># Poll with a timeout</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Still no partitions assigned, waiting...&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Partitions assigned: </span><span class="si">{</span><span class="n">consumer</span><span class="o">.</span><span class="n">assignment</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Now that partitions are assigned, you can safely seek.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Seeking to the beginning of all assigned partitions...&quot;</span><span class="p">)</span>
+<span class="n">consumer</span><span class="o">.</span><span class="n">seek_to_beginning</span><span class="p">()</span>
+
+<span class="c1"># 4. Start consuming messages from the beginning.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting to consume available messages...&quot;</span><span class="p">)</span>
+<span class="n">message_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># The main loop now starts consuming from the beginning.</span>
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">consumer</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received message: Offset=</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">offset</span><span class="si">}</span><span class="s2">, Value=</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">message_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Finished consuming. Found </span><span class="si">{</span><span class="n">message_count</span><span class="si">}</span><span class="s2"> messages.&quot;</span><span class="p">)</span>
+
+<span class="n">consumer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Waiting for partition assignment...
+Still no partitions assigned, waiting...
+Still no partitions assigned, waiting...
+Still no partitions assigned, waiting...
+Partitions assigned: {TopicPartition(topic=&#39;cctv&#39;, partition=0)}
+Seeking to the beginning of all assigned partitions...
+Starting to consume available messages...
+Received message: Offset=0, Value={&quot;event_id&quot;: &quot;b2f3c75c-38d1-4876-84c5-54b97ff9871e&quot;, &quot;timestamp&quot;: &quot;2025-10-15T05:57:10.452992+00:00&quot;, &quot;camera_id&quot;: &quot;cam_103&quot;, &quot;location&quot;: &quot;Warehouse Dock 3&quot;, &quot;event_type&quot;: &quot;Motion Detected&quot;, &quot;confidence_score&quot;: 0.94, &quot;objects_detected&quot;: [{&quot;class&quot;: &quot;person&quot;, &quot;bounding_box&quot;: [149, 250, 205, 448]}]}
+Received message: Offset=1, Value={&quot;event_id&quot;: &quot;256fd484-0e20-4b69-b451-218b32858a02&quot;, &quot;timestamp&quot;: &quot;2025-10-15T05:57:10.559749+00:00&quot;, &quot;camera_id&quot;: &quot;cam_103&quot;, &quot;location&quot;: &quot;Main Entrance&quot;, &quot;event_type&quot;: &quot;Door Opened&quot;, &quot;confidence_score&quot;: 0.94, &quot;objects_detected&quot;: [{&quot;class&quot;: &quot;person&quot;, &quot;bounding_box&quot;: [114, 201, 189, 434]}]}
+Received message: Offset=2, Value={&quot;event_id&quot;: &quot;eb122bf7-34a3-42e2-adc6-f14e068e74f6&quot;, &quot;timestamp&quot;: &quot;2025-10-15T05:57:10.559967+00:00&quot;, &quot;camera_id&quot;: &quot;cam_105&quot;, &quot;location&quot;: &quot;Main Entrance&quot;, &quot;event_type&quot;: &quot;Person Detected&quot;, &quot;confidence_score&quot;: 0.97, &quot;objects_detected&quot;: [{&quot;class&quot;: &quot;person&quot;, &quot;bounding_box&quot;: [142, 226, 182, 438]}]}
+Received message: Offset=3, Value={&quot;event_id&quot;: &quot;94468338-2025-4288-9867-54bf9db74f6c&quot;, &quot;timestamp&quot;: &quot;2025-10-15T05:57:10.560107+00:00&quot;, &quot;camera_id&quot;: &quot;cam_102&quot;, &quot;location&quot;: &quot;Parking Lot B&quot;, &quot;event_type&quot;: &quot;Motion Detected&quot;, &quot;confidence_score&quot;: 0.88, &quot;objects_detected&quot;: [{&quot;class&quot;: &quot;person&quot;, &quot;bounding_box&quot;: [143, 225, 205, 409]}]}
+Received message: Offset=4, Value={&quot;event_id&quot;: &quot;2c4f94d3-819e-4aa5-8df6-03e6cd8e1623&quot;, &quot;timestamp&quot;: &quot;2025-10-15T05:57:10.560272+00:00&quot;, &quot;camera_id&quot;: &quot;cam_104&quot;, &quot;location&quot;: &quot;Lobby&quot;, &quot;event_type&quot;: &quot;Vehicle Entry&quot;, &quot;confidence_score&quot;: 0.91, &quot;objects_detected&quot;: [{&quot;class&quot;: &quot;person&quot;, &quot;bounding_box&quot;: [143, 228, 198, 450]}]}
+
+Finished consuming. Found 5 messages.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="list-all-consumer-groups-on-a-broker">
+<h2>List All Consumer Groups on a Broker<a class="headerlink" href="#list-all-consumer-groups-on-a-broker" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaAdminClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kafka.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoBrokersAvailable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="c1"># --- Main Script ---</span>
+<span class="n">admin_client</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Initialize to ensure it&#39;s defined for the finally block</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 1. Create an Admin Client</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to Kafka brokers at </span><span class="si">{</span><span class="n">broker_servers</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">admin_client</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span>
+        <span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">,</span>
+        <span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;my_admin_client&#39;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully connected to Kafka.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. List all consumer groups</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fetching consumer groups...&quot;</span><span class="p">)</span>
+    <span class="n">consumer_groups</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">list_consumer_groups</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">consumer_groups</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No consumer groups found on the broker.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">consumer_groups</span><span class="p">)</span><span class="si">}</span><span class="s2"> consumer groups:&quot;</span><span class="p">)</span>
+        <span class="c1"># The result is a list of tuples: (group_id, protocol_type)</span>
+        <span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">protocol_type</span> <span class="ow">in</span> <span class="n">consumer_groups</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Group ID: </span><span class="si">{</span><span class="n">group_id</span><span class="si">}</span><span class="s2">, Protocol Type: </span><span class="si">{</span><span class="n">protocol_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">NoBrokersAvailable</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Could not connect to any of the specified brokers: </span><span class="si">{</span><span class="n">BROKER_SERVERS</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please ensure the broker address is correct and Kafka is running.&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="c1"># 3. Close the client connection</span>
+    <span class="k">if</span> <span class="n">admin_client</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Closing admin client connection.&quot;</span><span class="p">)</span>
+        <span class="n">admin_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Connecting to Kafka brokers at 172.200.204.244:9092...
+Successfully connected to Kafka.
+
+Fetching consumer groups...
+
+Found 2 consumer groups:
+  - Group ID: cctv_reprocessing, Protocol Type: consumer
+  - Group ID: cctv_consumer, Protocol Type: consumer
+
+Closing admin client connection.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="delete-topic">
+<h2>Delete Topic<a class="headerlink" href="#delete-topic" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaAdminClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kafka.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnknownTopicOrPartitionError</span><span class="p">,</span> <span class="n">TopicAlreadyExistsError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_kafka_topic</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a specific Kafka topic.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        admin_client (KafkaAdminClient): The admin client connected to Kafka.</span>
+<span class="sd">        topic_name (str): The name of the topic to delete.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attempting to delete topic: &#39;</span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&#39;...&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># The delete_topics method expects a list of topic names</span>
+        <span class="n">admin_client</span><span class="o">.</span><span class="n">delete_topics</span><span class="p">(</span><span class="n">topics</span><span class="o">=</span><span class="p">[</span><span class="n">topic_name</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully initiated deletion for topic: &#39;</span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Note: Deletion in Kafka is asynchronous and may take a moment to complete on the broker.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">UnknownTopicOrPartitionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Topic &#39;</span><span class="si">{</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">&#39; does not exist. Nothing to delete.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">admin</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Initialize admin to None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Create a KafkaAdminClient instance</span>
+        <span class="n">admin</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span>
+            <span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">,</span>
+            <span class="n">client_id</span><span class="o">=</span><span class="s1">&#39;my_consumer_group&#39;</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Call the function to delete the topic</span>
+        <span class="n">delete_kafka_topic</span><span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">topic_to_create</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to connect to Kafka or create admin client: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Ensure the admin client connection is closed</span>
+        <span class="k">if</span> <span class="n">admin</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closing admin client.&quot;</span><span class="p">)</span>
+            <span class="n">admin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attempting to delete topic: &#39;cctv&#39;...
+Successfully initiated deletion for topic: &#39;cctv&#39;.
+Note: Deletion in Kafka is asynchronous and may take a moment to complete on the broker.
+Closing admin client.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>List Topics<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaAdminClient</span>
+
+<span class="c1"># Define the Kafka broker (adjust the host/port as needed)</span>
+
+<span class="c1"># Create an admin client</span>
+<span class="n">admin_client</span> <span class="o">=</span> <span class="n">KafkaAdminClient</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="o">=</span><span class="n">broker_servers</span><span class="p">)</span>
+
+<span class="c1"># Fetch the list of topics</span>
+<span class="n">topics</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">list_topics</span><span class="p">()</span>
+
+<span class="c1"># Print the list of topics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kafka Topics:&quot;</span><span class="p">,</span> <span class="n">topics</span><span class="p">)</span>
+
+<span class="c1"># Close the admin client</span>
+<span class="n">admin_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kafka Topics: []
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="delete-all-topics-and-all-consumer-groups-in-a-kafka-cluster">
+<h2>Delete All Topics and All Consumer Groups in a Kafka Cluster<a class="headerlink" href="#delete-all-topics-and-all-consumer-groups-in-a-kafka-cluster" title="Link to this heading">#</a></h2>
+<p>“⚠️ This is a destructive operation and cannot be undone.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install --quiet -U confluent-kafka
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 1. Import necessary libraries ---</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">confluent_kafka.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdminClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">confluent_kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaException</span>
+
+<span class="c1"># --- 2. Define the functions ---</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_topics</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">topic_names</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deletes a list of topics.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">topic_names</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔵 No topics found to delete.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Proceeding to delete </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">topic_names</span><span class="p">)</span><span class="si">}</span><span class="s2"> topic(s)...&quot;</span><span class="p">)</span>
+    <span class="c1"># Delete topics; this returns a dictionary of futures</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">delete_topics</span><span class="p">(</span><span class="n">topic_names</span><span class="p">)</span>
+
+    <span class="c1"># Wait for each operation to complete</span>
+    <span class="k">for</span> <span class="n">topic</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>  <span class="c1"># The result() will raise an exception if the deletion failed</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Topic &#39;</span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&#39; deleted successfully.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">KafkaException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to delete topic &#39;</span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ An unexpected error occurred while deleting topic &#39;</span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_consumer_groups</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">group_ids</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deletes a list of consumer groups.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">group_ids</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔵 No consumer groups found to delete.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Proceeding to delete </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">group_ids</span><span class="p">)</span><span class="si">}</span><span class="s2"> consumer group(s)...&quot;</span><span class="p">)</span>
+    <span class="c1"># Delete consumer groups; this returns a dictionary of futures</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">delete_consumer_groups</span><span class="p">(</span><span class="n">group_ids</span><span class="p">)</span>
+
+    <span class="c1"># Wait for each operation to complete</span>
+    <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>  <span class="c1"># The result() will raise an exception if the deletion failed</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Consumer group &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; deleted successfully.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">KafkaException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to delete consumer group &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ An unexpected error occurred while deleting group &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 3. Set your server and run the script ---</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># ⚠️ IMPORTANT: This is set to the address you provided.</span>
+    <span class="n">BOOTSTRAP_SERVER</span> <span class="o">=</span> <span class="s1">&#39;172.200.204.244:9092&#39;</span>
+
+    <span class="c1"># The exact phrase you must type to confirm the action.</span>
+    <span class="n">confirmation_phrase</span> <span class="o">=</span> <span class="s2">&quot;delete_all&quot;</span>
+    
+    <span class="c1"># Create a single AdminClient instance</span>
+    <span class="n">admin_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="n">BOOTSTRAP_SERVER</span><span class="p">}</span>
+    <span class="n">admin_client</span> <span class="o">=</span> <span class="n">AdminClient</span><span class="p">(</span><span class="n">admin_config</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔎 Connecting to </span><span class="si">{</span><span class="n">BOOTSTRAP_SERVER</span><span class="si">}</span><span class="s2"> to list items...&quot;</span><span class="p">)</span>
+    
+    <span class="n">topic_names_to_delete</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">group_ids_to_delete</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># List all topics</span>
+        <span class="n">topics_metadata</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">list_topics</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">topics</span>
+        <span class="n">topic_names_to_delete</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">topics_metadata</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># List all consumer groups</span>
+        <span class="n">list_groups_future</span> <span class="o">=</span> <span class="n">admin_client</span><span class="o">.</span><span class="n">list_consumer_groups</span><span class="p">()</span>
+        <span class="n">groups_result</span> <span class="o">=</span> <span class="n">list_groups_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="n">group_ids_to_delete</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">group_id</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups_result</span><span class="o">.</span><span class="n">valid</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Items Scheduled for Deletion ---&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">topic_names_to_delete</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topics: </span><span class="si">{</span><span class="n">topic_names_to_delete</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topics: None found.&quot;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">group_ids_to_delete</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Consumer Groups: </span><span class="si">{</span><span class="n">group_ids_to_delete</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Consumer Groups: None found.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># If there&#39;s nothing to delete, exit gracefully.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">topic_names_to_delete</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">group_ids_to_delete</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎉 Nothing to delete. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="n">KafkaException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Error connecting to Kafka or listing items: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># Prompt the user for confirmation.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ This is a destructive operation and cannot be undone.&quot;</span><span class="p">)</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To proceed, please type &#39;</span><span class="si">{</span><span class="n">confirmation_phrase</span><span class="si">}</span><span class="s2">&#39; and press Enter: &quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if the user&#39;s input matches.</span>
+    <span class="k">if</span> <span class="n">user_input</span> <span class="o">==</span> <span class="n">confirmation_phrase</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Confirmation received. Proceeding with deletion...&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Execute the functions with the pre-fetched lists</span>
+        <span class="n">delete_topics</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">topic_names_to_delete</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="n">delete_consumer_groups</span><span class="p">(</span><span class="n">admin_client</span><span class="p">,</span> <span class="n">group_ids_to_delete</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎉 Operation complete.&quot;</span><span class="p">)</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">❌ Operation cancelled. The input did not match.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔎 Connecting to 172.200.204.244:9092 to list items...
+
+--- Items Scheduled for Deletion ---
+Topics: None found.
+Consumer Groups: [&#39;cctv_reprocessing&#39;, &#39;cctv_consumer&#39;]
+------------------------------------
+
+⚠️ This is a destructive operation and cannot be undone.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>To proceed, please type &#39;delete_all&#39; and press Enter:  delete_all
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Confirmation received. Proceeding with deletion...
+🔵 No topics found to delete.
+--------------------
+
+Proceeding to delete 2 consumer group(s)...
+✅ Consumer group &#39;cctv_reprocessing&#39; deleted successfully.
+✅ Consumer group &#39;cctv_consumer&#39; deleted successfully.
+
+🎉 Operation complete.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_kafka/101"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to VAST Event Broker</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../trino_direct_query.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kafka to VastDB with Trino Lookup</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">VAST Event Broker 101</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-overview">VAST EventBroker Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-use-cases">VAST EventBroker Use Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#realtime-analytics">📊 Realtime Analytics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iot-data">📡 IoT Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notification-systems">🔔 Notification Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-pipelines">🤖 AI Pipelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-concepts">VAST EventBroker Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-considerations">Design Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions-in-apache-kafka">Partitions in Apache Kafka</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-messages-are-assigned-to-partitions">How Messages are Assigned to Partitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-topics-the-importance-of-partitions">Designing Topics: The Importance of Partitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-api">Kafka API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-vast-eventbroker">Setup VAST EventBroker</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-vip-pool">Create VIP Pool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-cnodes-to-vip-pool">Assign CNodes to VIP Pool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-kafka-view">Create Kafka View</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-topic">Create a Topic</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-eventbroker-101-kafka-api">VAST EventBroker 101 - Kafka API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-python-api">Install Python API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-your-environment">Configure your environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Create a topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-topics">List topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-topic-details">Show Topic Details</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-messages">Produce messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consume-messages">Consume messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reprocess-kafka-messages">Reprocess Kafka Messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-all-consumer-groups-on-a-broker">List All Consumer Groups on a Broker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-topic">Delete Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">List Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-all-topics-and-all-consumer-groups-in-a-kafka-cluster">Delete All Topics and All Consumer Groups in a Kafka Cluster</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

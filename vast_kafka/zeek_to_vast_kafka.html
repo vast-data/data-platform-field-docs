@@ -1,0 +1,988 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Zeek PCAP to VAST Kafka &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_kafka/zeek_to_vast_kafka';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Kafka Utils" href="utils.html" />
+    <link rel="prev" title="Kafka to VastDB with Trino Lookup" href="trino_direct_query.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataplatform/iac.html">Infrastructure as code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../vast_datastore/s3a_magics/instructions.html">Hadoop S3A Functional Tester (Also Magic Committer) - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/replication.html">Replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/overview/sequences.html">Sequences</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_database/overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_sdk_netcdf_import.html">Python SDK - import netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/ray_daft_vastdb.html">Ray and Daft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/01_create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/02_schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/03_table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/04_column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/05_querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/06_limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/07_projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/08_manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/09_verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/10_importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/11_importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/12_snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/13_transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/14_tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/sdk_ref/15_recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/operations_guide.html">Spark Operations Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/upserts.html">Spark Upserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/spark/architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/cnodes_and_vips.html">CNODES and VIPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/splits.html">Splits and Subsplits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/trino/howto.html">Tuning Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/tuning/Spark_Predicate_Pushdown.html">Spark Predicate Pushdown</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_database/admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/vastdb_py_setup2.html">VAST Database Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_database/admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_database/integrations/integrations.html">Integrations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Vector Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_vectordb/overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_vectordb/quickstart-new.html">Vector DB Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_vectordb/query_engine.html">VAST Query Engine</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Event Broker</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="101/VAST-EventBroker-101.html">VAST Event Broker 101</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="trino_direct_query.html">Kafka to VastDB with Trino Lookup</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Zeek PCAP to VAST Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Kafka Utils</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/python-sdk-vast-catalog.html">Catalog - Python SDK Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_dataengine/spark/overview.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/spark/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/spark/ports.html">Spark Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/spark/spark_ui_proxying.html">Spark UI Proxying</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../vast_dataengine/spark/notebooks/overview.html">Notebook Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vast_dataengine/spark/notebooks/1_connectivity_test.html">Connectivity Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vast_dataengine/spark/notebooks/2_basic_workload_test.html">Basic Workload Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vast_dataengine/spark/notebooks/3_add_libraries.html">Adding Spark libraries</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vast_dataengine/functions/overview.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vast_dataengine/functions/workshop/workshop.html">Workshop</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_kafka/zeek_to_vast_kafka.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/vast_kafka/zeek_to_vast_kafka.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Zeek PCAP to VAST Kafka</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-build-the-zeek-kafka-docker-image">Step 1: Build the Zeek-Kafka Docker Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configure-zeek-for-kafka-integration">Step 2: Configure Zeek for Kafka Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options-explained">Configuration Options Explained</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-capture-network-packets">Step 3: Capture Network Packets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-network-interface">Identify Network Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-packets-with-tcpdump">Capture Packets with tcpdump</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tcpdump-parameters">tcpdump Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-process-pcap-with-zeek">Step 4: Process PCAP with Zeek</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-directory-structure">Setup Directory Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-zeek-processing">Run Zeek Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-run-parameters">Docker Run Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-verify-vast-integration">Step 5: Verify VAST Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query-zeek-logs-with-vastdb">Query Zeek Logs with VASTDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#view-zeek-log-details">View Zeek Log Details</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#security-considerations">Security Considerations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="zeek-pcap-to-vast-kafka">
+<h1>Zeek PCAP to VAST Kafka<a class="headerlink" href="#zeek-pcap-to-vast-kafka" title="Link to this heading">#</a></h1>
+<p>This tutorial demonstrates how to capture network packets, process them with Zeek, and send the resulting logs to a VAST Kafka cluster for SIEM analysis.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The workflow involves three main steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Capture</strong> network packets using tcpdump</p></li>
+<li><p><strong>Process</strong> PCAP files with Zeek using Docker</p></li>
+<li><p><strong>Stream</strong> Zeek logs to VAST Kafka cluster</p></li>
+</ol>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Docker installed and running</p></li>
+<li><p>Root/sudo access for packet capture</p></li>
+<li><p>Network access to VAST Kafka cluster (e.g. 172.200.204.1:9092)</p></li>
+<li><p>Basic understanding of network protocols</p></li>
+</ul>
+</section>
+<section id="project-structure">
+<h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>zeek-compose/
+├── Dockerfile
+├── run.sh
+├── zeek-config/
+│   └── kafka-pcap.zeek
+├── pcap-files/
+│   └── [captured packets]
+└── zeek-logs/
+    └── [zeek output logs]
+</pre></div>
+</div>
+</section>
+<section id="step-1-build-the-zeek-kafka-docker-image">
+<h2>Step 1: Build the Zeek-Kafka Docker Image<a class="headerlink" href="#step-1-build-the-zeek-kafka-docker-image" title="Link to this heading">#</a></h2>
+<p>First, create the Dockerfile with all necessary dependencies:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="c"># Use official Zeek Docker image as base</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">zeek/zeek:latest</span>
+
+<span class="c"># Install required build dependencies</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>g++<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>make<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libpcap-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libsasl2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libssl-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>pkg-config<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Install librdkafka</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/tmp</span>
+<span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>https://github.com/edenhill/librdkafka/archive/v1.4.4.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xvz<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>librdkafka-1.4.4/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>./configure<span class="w"> </span>--enable-sasl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ldconfig<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/librdkafka-1.4.4
+
+<span class="c"># Install Zeek Kafka plugin using zkg</span>
+<span class="k">RUN</span><span class="w"> </span>zkg<span class="w"> </span>install<span class="w"> </span>seisollc/zeek-kafka<span class="w"> </span>--version<span class="w"> </span>v1.2.0<span class="w"> </span>--force
+
+<span class="c"># Verify plugin installation</span>
+<span class="k">RUN</span><span class="w"> </span>zeek<span class="w"> </span>-N<span class="w"> </span>Seiso::Kafka
+
+<span class="c"># Set working directory back to default</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/</span>
+
+<span class="c"># Default command</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;zeek&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Build the Docker image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>zeek-kafka<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="step-2-configure-zeek-for-kafka-integration">
+<h2>Step 2: Configure Zeek for Kafka Integration<a class="headerlink" href="#step-2-configure-zeek-for-kafka-integration" title="Link to this heading">#</a></h2>
+<p>Create the Zeek configuration file <code class="docutils literal notranslate"><span class="pre">zeek-config/kafka-pcap.zeek</span></code>:</p>
+<p>NOTE: Change the <code class="docutils literal notranslate"><span class="pre">metadata.broker.list</span></code> to reflect your environment.</p>
+<div class="highlight-zeek notranslate"><div class="highlight"><pre><span></span><span class="c"># Configuration for processing PCAP files and sending to Kafka</span>
+<span class="cp">@load base/protocols/conn</span>
+<span class="cp">@load base/protocols/dns</span>
+<span class="cp">@load base/protocols/http</span>
+<span class="cp">@load base/protocols/ssl</span>
+<span class="cp">@load Seiso/Kafka</span>
+
+<span class="c"># Kafka configuration</span>
+<span class="k">redef</span><span class="w"> </span><span class="n">Kafka</span><span class="p">::</span><span class="n">topic_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;zeek-pcap-logs&quot;</span><span class="p">;</span>
+<span class="k">redef</span><span class="w"> </span><span class="n">Kafka</span><span class="p">::</span><span class="n">kafka_conf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">table</span><span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="s">&quot;metadata.broker.list&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;172.200.204.1:9092&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="s">&quot;client.id&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;zeek-pcap-processor&quot;</span>
+<span class="p">);</span>
+
+<span class="c"># Enable all active logs to be sent to Kafka</span>
+<span class="k">redef</span><span class="w"> </span><span class="n">Kafka</span><span class="p">::</span><span class="n">send_all_active_logs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">T</span><span class="p">;</span>
+
+<span class="c"># Use ISO8601 timestamps for better readability</span>
+<span class="k">redef</span><span class="w"> </span><span class="n">Kafka</span><span class="p">::</span><span class="n">json_timestamps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSON</span><span class="p">::</span><span class="n">TS_ISO8601</span><span class="p">;</span>
+
+<span class="c"># Tag JSON messages for easier identification</span>
+<span class="k">redef</span><span class="w"> </span><span class="n">Kafka</span><span class="p">::</span><span class="n">tag_json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">T</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="configuration-options-explained">
+<h3>Configuration Options Explained<a class="headerlink" href="#configuration-options-explained" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>topic_name</strong>: Kafka topic where Zeek logs will be sent</p></li>
+<li><p><strong>metadata.broker.list</strong>: VAST Kafka broker address</p></li>
+<li><p><strong><a class="reference external" href="http://client.id">client.id</a></strong>: Identifier for this Zeek instance</p></li>
+<li><p><strong>send_all_active_logs</strong>: Sends all protocol logs (conn, dns, http, ssl, etc.)</p></li>
+<li><p><strong>json_timestamps</strong>: Uses human-readable timestamp format</p></li>
+<li><p><strong>tag_json</strong>: Adds metadata tags to JSON messages</p></li>
+</ul>
+</section>
+</section>
+<section id="step-3-capture-network-packets">
+<h2>Step 3: Capture Network Packets<a class="headerlink" href="#step-3-capture-network-packets" title="Link to this heading">#</a></h2>
+<section id="identify-network-interface">
+<h3>Identify Network Interface<a class="headerlink" href="#identify-network-interface" title="Link to this heading">#</a></h3>
+<p>List available network interfaces:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^[0-9]+:&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="s1">&#39;: &#39;</span><span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/@.*//&#39;</span>
+</pre></div>
+</div>
+<p>Common interface names: <code class="docutils literal notranslate"><span class="pre">eth0</span></code>, <code class="docutils literal notranslate"><span class="pre">ens33</span></code>, <code class="docutils literal notranslate"><span class="pre">ens35</span></code>, <code class="docutils literal notranslate"><span class="pre">enp0s3</span></code></p>
+</section>
+<section id="capture-packets-with-tcpdump">
+<h3>Capture Packets with tcpdump<a class="headerlink" href="#capture-packets-with-tcpdump" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic capture (1000 packets)</span>
+sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>&lt;interface&gt;<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>-w<span class="w"> </span>pcap-files/mypackets.pcap<span class="w"> </span>-c<span class="w"> </span><span class="m">1000</span>
+
+<span class="c1"># Extended capture with filters</span>
+sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>-w<span class="w"> </span>pcap-files/web-traffic.pcap<span class="w"> </span>-c<span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="s1">&#39;port 80 or port 443&#39;</span>
+
+<span class="c1"># Capture for specific duration (60 seconds)</span>
+sudo<span class="w"> </span>timeout<span class="w"> </span>60s<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>-w<span class="w"> </span>pcap-files/timed-capture.pcap
+</pre></div>
+</div>
+</section>
+<section id="tcpdump-parameters">
+<h3>tcpdump Parameters<a class="headerlink" href="#tcpdump-parameters" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">&lt;interface&gt;</span></code>: Network interface to capture from</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">0</span></code>: Capture full packet (no truncation)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-w</span> <span class="pre">&lt;file&gt;</span></code>: Write packets to file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">&lt;count&gt;</span></code>: Capture specified number of packets</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'filter'</span></code>: BPF filter expression (optional)</p></li>
+</ul>
+</section>
+</section>
+<section id="step-4-process-pcap-with-zeek">
+<h2>Step 4: Process PCAP with Zeek<a class="headerlink" href="#step-4-process-pcap-with-zeek" title="Link to this heading">#</a></h2>
+<section id="setup-directory-structure">
+<h3>Setup Directory Structure<a class="headerlink" href="#setup-directory-structure" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>zeek-config<span class="w"> </span>pcap-files<span class="w"> </span>zeek-logs
+</pre></div>
+</div>
+</section>
+<section id="run-zeek-processing">
+<h3>Run Zeek Processing<a class="headerlink" href="#run-zeek-processing" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/zeek-config:/config<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/pcap-files:/pcap<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/zeek-logs:/logs<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>zeek-kafka<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>zeek<span class="w"> </span>-r<span class="w"> </span>/pcap/mypackets.pcap<span class="w"> </span>/config/kafka-pcap.zeek
+</pre></div>
+</div>
+</section>
+<section id="docker-run-parameters">
+<h3>Docker Run Parameters<a class="headerlink" href="#docker-run-parameters" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--rm</span></code>: Remove container after execution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code>: Mount volumes for configuration, input, and output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zeek</span> <span class="pre">-r</span></code>: Read from PCAP file</p></li>
+<li><p>Last argument: Zeek configuration script</p></li>
+</ul>
+</section>
+</section>
+<section id="step-5-verify-vast-integration">
+<h2>Step 5: Verify VAST Integration<a class="headerlink" href="#step-5-verify-vast-integration" title="Link to this heading">#</a></h2>
+<section id="query-zeek-logs-with-vastdb">
+<h3>Query Zeek Logs with VASTDB<a class="headerlink" href="#query-zeek-logs-with-vastdb" title="Link to this heading">#</a></h3>
+<p>Create a Python script to query your Zeek logs from VAST:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vastdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ibis</span><span class="w"> </span><span class="kn">import</span> <span class="n">_</span>
+
+<span class="c1"># VAST connection configuration</span>
+<span class="c1"># Change to reflect your environment</span>
+<span class="n">ENDPOINT</span><span class="o">=</span><span class="s1">&#39;http://172.200.204.1&#39;</span>
+<span class="n">ACCESS_KEY</span><span class="o">=</span><span class="s2">&quot;BR77TV2BSB1LQG4CH9QO&quot;</span>
+<span class="n">SECRET_KEY</span><span class="o">=</span><span class="s1">&#39;37tFv8Nd3tUFsQW7nyhFXLED0KUq7PW0Bj/cpjYg&#39;</span>
+
+<span class="c1"># Optional predicate for filtering (None = get all records)</span>
+<span class="n">predicate</span><span class="o">=</span><span class="kc">None</span> <span class="c1"># (_.key.isin([b&#39;123&#39;]))</span>
+
+<span class="c1"># Connect to VAST</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">ENDPOINT</span><span class="p">,</span>
+    <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+    <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
+
+<span class="c1"># Query the Zeek data</span>
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="s1">&#39;my-kafka&#39;</span><span class="p">)</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s1">&#39;kafka_topics&#39;</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;zeek&#39;</span><span class="p">)</span>
+
+    <span class="c1"># run `SELECT * FROM t WHERE predicate`</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">predicate</span><span class="o">=</span><span class="n">predicate</span><span class="p">)</span><span class="o">.</span><span class="n">read_all</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total records found: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">num_rows</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sample Output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Total</span> <span class="n">records</span> <span class="n">found</span><span class="p">:</span> <span class="mi">39</span>
+</pre></div>
+</div>
+</section>
+<section id="view-zeek-log-details">
+<h3>View Zeek Log Details<a class="headerlink" href="#view-zeek-log-details" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set pandas display options for better readability</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Convert to pandas and view the JSON values</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">zeek_logs</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+
+<span class="c1"># Display first few log entries</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">log</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">zeek_logs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Record </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Based on the actual data structure, you’ll see logs like:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;ssl&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-28T22:16:03.230983Z&quot;</span><span class="p">,</span><span class="nt">&quot;uid&quot;</span><span class="p">:</span><span class="s2">&quot;123456&quot;</span><span class="p">,</span><span class="nt">&quot;id.orig_h&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.10&quot;</span><span class="p">,</span><span class="nt">&quot;id.orig_p&quot;</span><span class="p">:</span><span class="mi">39156</span><span class="p">,</span><span class="nt">&quot;id.resp_h&quot;</span><span class="p">:</span><span class="s2">&quot;203.0.113.15&quot;</span><span class="p">,</span><span class="nt">&quot;id.resp_p&quot;</span><span class="p">:</span><span class="mi">443</span><span class="p">,</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;TLSv13&quot;</span><span class="p">,</span><span class="nt">&quot;cipher&quot;</span><span class="p">:</span><span class="s2">&quot;TLS_AES_256_GCM_SHA384&quot;</span><span class="p">,</span><span class="nt">&quot;curve&quot;</span><span class="p">:</span><span class="s2">&quot;x25519&quot;</span><span class="p">,</span><span class="nt">&quot;server_name&quot;</span><span class="p">:</span><span class="s2">&quot;example-service.com&quot;</span><span class="p">,</span><span class="nt">&quot;resumed&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;established&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">&quot;ssl_history&quot;</span><span class="p">:</span><span class="s2">&quot;CsiI&quot;</span><span class="p">}}</span>
+
+<span class="p">{</span><span class="nt">&quot;conn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-28T22:16:03.240134Z&quot;</span><span class="p">,</span><span class="nt">&quot;uid&quot;</span><span class="p">:</span><span class="s2">&quot;234567&quot;</span><span class="p">,</span><span class="nt">&quot;id.orig_h&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.20&quot;</span><span class="p">,</span><span class="nt">&quot;id.orig_p&quot;</span><span class="p">:</span><span class="mi">56950</span><span class="p">,</span><span class="nt">&quot;id.resp_h&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.2.30&quot;</span><span class="p">,</span><span class="nt">&quot;id.resp_p&quot;</span><span class="p">:</span><span class="mi">7680</span><span class="p">,</span><span class="nt">&quot;proto&quot;</span><span class="p">:</span><span class="s2">&quot;tcp&quot;</span><span class="p">,</span><span class="nt">&quot;conn_state&quot;</span><span class="p">:</span><span class="s2">&quot;S0&quot;</span><span class="p">,</span><span class="nt">&quot;local_orig&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">&quot;local_resp&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">&quot;missed_bytes&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;history&quot;</span><span class="p">:</span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="nt">&quot;orig_pkts&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;orig_ip_bytes&quot;</span><span class="p">:</span><span class="mi">52</span><span class="p">,</span><span class="nt">&quot;resp_pkts&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;resp_ip_bytes&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;ip_proto&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">}}</span>
+
+<span class="p">{</span><span class="nt">&quot;dns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-28T22:16:03.237027Z&quot;</span><span class="p">,</span><span class="nt">&quot;uid&quot;</span><span class="p">:</span><span class="s2">&quot;3456789&quot;</span><span class="p">,</span><span class="nt">&quot;id.orig_h&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.25&quot;</span><span class="p">,</span><span class="nt">&quot;id.orig_p&quot;</span><span class="p">:</span><span class="mi">5353</span><span class="p">,</span><span class="nt">&quot;id.resp_h&quot;</span><span class="p">:</span><span class="s2">&quot;224.0.0.251&quot;</span><span class="p">,</span><span class="nt">&quot;id.resp_p&quot;</span><span class="p">:</span><span class="mi">5353</span><span class="p">,</span><span class="nt">&quot;proto&quot;</span><span class="p">:</span><span class="s2">&quot;udp&quot;</span><span class="p">,</span><span class="nt">&quot;trans_id&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;rtt&quot;</span><span class="p">:</span><span class="mf">0.0004901885986328125</span><span class="p">,</span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="s2">&quot;workstation-host.local&quot;</span><span class="p">,</span><span class="nt">&quot;qclass&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;qclass_name&quot;</span><span class="p">:</span><span class="s2">&quot;C_INTERNET&quot;</span><span class="p">,</span><span class="nt">&quot;qtype&quot;</span><span class="p">:</span><span class="mi">255</span><span class="p">,</span><span class="nt">&quot;qtype_name&quot;</span><span class="p">:</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="nt">&quot;rcode&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;rcode_name&quot;</span><span class="p">:</span><span class="s2">&quot;NOERROR&quot;</span><span class="p">,</span><span class="nt">&quot;AA&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">&quot;TC&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;RD&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;RA&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;Z&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;answers&quot;</span><span class="p">:[</span><span class="s2">&quot;fe80::1234:5678:9abc:def0&quot;</span><span class="p">,</span><span class="s2">&quot;192.168.1.25&quot;</span><span class="p">],</span><span class="nt">&quot;TTLs&quot;</span><span class="p">:[</span><span class="mf">60.0</span><span class="p">,</span><span class="mf">60.0</span><span class="p">],</span><span class="nt">&quot;rejected&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">}}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ensure PCAP files don’t contain sensitive data</p></li>
+<li><p>Use encrypted Kafka connections in production</p></li>
+<li><p>Implement proper access controls for capture interfaces</p></li>
+<li><p>Regular security updates for Docker images</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>This tutorial provides a complete workflow for integrating network packet capture with Zeek analysis and VAST Kafka streaming. The containerized approach ensures consistent deployment across different environments while maintaining flexibility for custom configurations.</p>
+<p>For production deployments, consider implementing proper monitoring, alerting, and data retention policies to ensure optimal performance and compliance with organizational requirements.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_kafka"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="trino_direct_query.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Kafka to VastDB with Trino Lookup</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kafka Utils</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-structure">Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-build-the-zeek-kafka-docker-image">Step 1: Build the Zeek-Kafka Docker Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configure-zeek-for-kafka-integration">Step 2: Configure Zeek for Kafka Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options-explained">Configuration Options Explained</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-capture-network-packets">Step 3: Capture Network Packets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-network-interface">Identify Network Interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-packets-with-tcpdump">Capture Packets with tcpdump</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tcpdump-parameters">tcpdump Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-process-pcap-with-zeek">Step 4: Process PCAP with Zeek</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-directory-structure">Setup Directory Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-zeek-processing">Run Zeek Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-run-parameters">Docker Run Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-verify-vast-integration">Step 5: Verify VAST Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query-zeek-logs-with-vastdb">Query Zeek Logs with VASTDB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#view-zeek-log-details">View Zeek Log Details</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#security-considerations">Security Considerations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1291 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Querying Data &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/sdk_ref/05_querying';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Query with ‘LIMIT n’" href="06_limit_n.html" />
+    <link rel="prev" title="Column Management" href="04_column_management.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/iac.html">Infrastructure as code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/s3a_magics/instructions.html">Hadoop S3A Functional Tester (Also Magic Committer) - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/replication.html">Replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/sequences.html">Sequences</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ingestion/ingestion.html">Data Ingest/Transformation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_sdk_netcdf_import.html">Python SDK - import netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ingestion/apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/ray_daft_vastdb.html">Ray and Daft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Python SDK Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_column_management.html">Column Management</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13_transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/upserts.html">Spark Upserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/cnodes_and_vips.html">CNODES and VIPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/splits.html">Splits and Subsplits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/Spark_Predicate_Pushdown.html">Spark Predicate Pushdown</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup2.html">VAST Database Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/integrations.html">Integrations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Vector Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/quickstart-new.html">Vector DB Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/query_engine.html">VAST Query Engine</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Event Broker</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/101/VAST-EventBroker-101.html">VAST Event Broker 101</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/trino_direct_query.html">Kafka to VastDB with Trino Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/zeek_to_vast_kafka.html">Zeek PCAP to VAST Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/utils.html">Kafka Utils</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Catalog - Python SDK Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_dataengine/spark/overview.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/ports.html">Spark Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/spark_ui_proxying.html">Spark UI Proxying</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/overview.html">Notebook Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/1_connectivity_test.html">Connectivity Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/2_basic_workload_test.html">Basic Workload Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/3_add_libraries.html">Adding Spark libraries</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_dataengine/functions/overview.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/functions/workshop/workshop.html">Workshop</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/sdk_ref/05_querying.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/sdk_ref/05_querying.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Querying Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-and-filter">Query and Filter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select"><code class="docutils literal notranslate"><span class="pre">select</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-with-citizen-information">Create a table with Citizen information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-citizen-table">Specify the Citizen Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-citizen-table">Define the Citizen Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insert-rows-into-the-citizen-table">Insert rows into the Citizen Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-the-table-and-list-all-rows-for-the-citizen-table">Query the table and list all rows for the Citizen Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-predicates-in-vastdbapi">(Filter) Predicates in VastdbApi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-columns">Filter Columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-and-columns">Filter data and columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-a-table-using-pandas-predicates">Query a table using Pandas predicates</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="querying-data">
+<h1>Querying Data<a class="headerlink" href="#querying-data" title="Link to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The Vast DB SDK API Documentation is available <a class="reference external" href="https://vastdb-sdk.readthedocs.io">here</a>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This notebook is in the process of being migrated to Vast Data Platform Field Docs.  It will probably not run yet.</p>
+</div>
+<section id="query-and-filter">
+<h2>Query and Filter<a class="headerlink" href="#query-and-filter" title="Link to this heading">#</a></h2>
+<p><strong>Filtering</strong>
+VAST-DB Supports filtering using a complete set of predicates. These predicates can be used directly with the VAST-DB APIs or used by analytics engines that can “push down” operations to VAST-DB.</p>
+<p><strong>Filtering Mechanics</strong></p>
+<p>When searching for data, VAST-DB will use a distributed tree scan operation over range blocks in the element store, comparing the metadata in the bitmap blocks and eliminating blocks/sections of the tree based on min/max values. The search efficiency is directly related to the randomness of the column data referred to by the bitmap blocks. Best case scenario would be a search over a column whose values range linearly (greatest to least or least to greatest) relative to the keyspace without any overlap in the index blocks - reads of data blocks to find matching data are largely eliminated in this case. While the worst case would be a search on data that is random relative to the key space forcing reads on large sections of column data to perform comparisons. VAST-DB 5.0 will support sorted projections which will act similarly to indices to enable “best case” (ordered) scenarios on a given column or columns.</p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAGVCAIAAABYSFGJAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAAA2AAAAAQAAADYAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAtCgAwAEAAAAAQAAAZUAAAAAHdKRXgAAAAlwSFlzAAAITgAACE4BjDEA7AAAQABJREFUeAHtnQWcVNUXx9/MLizdnYuAoIR0lzTSIAYCCoIIBhiIiShiIerfAKVETFpSCemQbqRTGiWX2t2Z/+/xlrtvZmfezk6++M1nPut9N8/93pE5c+6559qy5Skv8UUCJEACJEACJEACoSRgD2Xn7JsESIAESIAESIAEZAJUOPg5IAESIAESIAESCDkBKhwhR8wBSIAESIAESIAEqHDwM0ACJEACJEACJBByAlQ4Qo6YA5AACZAACZAACVDh4GeABEiABEiABEgg5ASocIQcMQcgARIgARIgARKgwsHPAAmQAAmQAAmQQMgJUOEIOWIOQAIkQAIkQAIkQIWDnwESIAESIAESIIGQE6DCEXLEHIAESIAESIAESIAKBz8DJEACJEACJEACISdAhSPkiDkACZAACZAACZAAFQ5+BkiABEiABEiABEJOgApHyBFzABIgARIgARIgASoc/AyQAAmQAAmQAAmEnAAVjpAj5gAkQAIkQAIkQAJUOPgZIAESIAESIAESCDkBKhwhR8wBSIAESIAESIAEqHDwM0ACJEACJEACJBByAlQ4Qo6YA5AACZAACZAACVDh4GeABEiABEiABEgg5ASocIQcMQcgARIgARIgARKgwsHPAAmQAAmQAAmQQMgJUOEIOWIOQAIkQAIkQAIkQIWDnwESIAESIAESIIGQE6DCEXLEHIAESIAESIAESIAKBz8DJEACJEACJEACISdAhSPkiDkACZAACZAACZAAFQ5+BkiABEiABEiABEJOgApHyBFzABIgARIgARIgASoc/AyQAAmQAAmQAAmEnAAVjpAj5gAkQAIkQAIkQAJUOPgZIAESIAESIAESCDkBKhwhR8wBSIAESIAESIAEqHDwM0ACJEACJEACJBByAlQ4Qo6YA5AACZAACZAA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"><p>If we compare it with Parquet it allows us to store the data in much smaller elements and at a very fine granular level which is 4000x smaller compared to a standard parquet file with 128MB.</p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAGVCAIAAABYSFGJAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAAA2AAAAAQAAADYAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAtCgAwAEAAAAAQAAAZUAAAAAHdKRXgAAAAlwSFlzAAAITgAACE4BjDEA7AAAQABJREFUeAHtnQd8FMUXxxeSEAgQqvTeO1Kld0KRjgjSBAQRRQQEUVFAsf1VBEGpAoqiCAjSBQTpHaQqvfdek5AE+P+Wxcdyd0kuuVzuZu+33ud8Ozs75fsm7LuZN2+TBGcsofEgARIgARIgARIgAXcSSOrOwlk2CZAACZAACZAACegEaHBwHJAACZAACZAACbidAA0OtyNmBSRAAiRAAiRAAjQ4OAZIgARIgARIgATcToAGh9sRswISIAESIAESIAEaHBwDJEACJEACJEACbidAg8PtiFkBCZAACZAACZAADQ6OARIgARIgARIgAbcToMHhdsSsgARIgARIgARIgAYHxwAJkAAJkAAJkIDbCdDgcDtiVkACJEACJEACJECDg2OABEiABEiABEjA7QRocLgdMSsgARIgARIgARKgwcExQAIkQAIkQAIk4HYCNDjcjpgVkAAJkAAJkAAJ0ODgGCABEiABEiABEnA7ARocbkfMCkiABEiABEiABGhwcAyQAAmQAAmQAAm4nQANDrcjZgUkQAIkQAIkQAI0ODgGSIAESIAESIAE3E6ABofbEbMCEiABEiABEiABGhwcAyRAAiRAAiRAAm4nQIPD7YhZAQmQAAmQAAmQAA0OjgESIAESIAESIAG3E6DB4XbErIAESIAESIAESIAGB8cACZAACZAACZCA2wnQ4HA7YlZAAiRAAiRAAiRAg4NjgARIgARIgARIwO0EaHC4HTErIAESIAESIAESoMHBMUACJEACJEACJOB2AjQ43I6YFZAACZAACZAACdDg4BggARIgARIgARJwOwEaHG5HzApIgARIgARIgARocHAMkAAJkAAJkAAJuJ0ADQ63I2YFJEACJEACJEACNDg4BkiABEiABEiABNxOgAaH2xGzAhIgARIgARIgARocHAMkQAIkQAIkQAJuJ0CDw+2IWQEJkAAJkAAJkAANDo4BEiABEiABEiABtxOgweF2xKyABEiABEiABEiABgfHAAmQAAmQAAmQgNsJ0OBwO2JWQAIkQAIkQAIkQIODY4AESIAESIAESMDtBGhwuB0xKyABEiABEiABEqDBwTFAAiRAAiRAAiTgdgI0ONyOmBWQAAmQAAmQAAnQ4OAYIAESIAESIAEScDsBGhxuR8wKSIAESIAESIAEaHBwDJAACZAACZAACbidAA0OtyNmBSRAAiRAAiRAAjQ4OAZIgARIgARIgATcToAGh9sRswISIAESIAESIAEaHBwDJEACJEACJEACbidAg8PtiFkBCZAACZAACZAADQ6OARIgARIgARIgAbcToMHhdsSsgARIgARIgARIgAYHxwAJkAAJkAAJkIDbCdDgcDtiVkACJEACJEACJECDg2OABEiABEiABEjA7QRocLgdMSsggZgJROWvgI+RB8LNL/dI/tBeU+6GvKroJemF8wJRCCuiIAohYBkhSXDGEpbpDDtCAioSMEyKwGVjVWx8DG3GI9P/yNYYMthfIgphQhREIQQsI9DgsIwq2RES8CICsDYiQnoFjevmRW3yUFOIQsAThY+joMEhA4ACCZAACZAACZCAuwjQh8NdZFkuCcRKAC4a+M0XazZfyEAUomWiIAohYDHBLzAok8W6xO6QgCoEklw7G1cvB1W6Ftd2EoUQIwqiEAIWEzjDYTGFsjsqEbC8tWHecROzYohC+BAFUQgBiwk0OCymUHZHJQKYPFepuXFva/CAkk7eRBQCiiiIQghYTKDBYTGFsjsqEUi2bFwMzTU/eLBJ0tgnaeQ3zxx49lJC+aAQhYwEoiAKIWAxgbtULKZQdsciBJIkSYJnuSqz6w8ePHAfd6IQtkRBFEJARYEzHCpqjW22OAE8V9BDVayNGJRhnpWJIVsMl4hC4BAFUQgBRQUaHIoqjs22AgGH6xHm5RIlOolemFd/4tdmohBuREEUQsBiApdULKZQdkclAnhO28fixA9Z47esQj2JzFfO73Dcopjb9I4oBAhREIUQsJhAg8NiCmV3lCegoL2hwYXDHW4cRCGjmSiIQgioK/ir23S2nAQsSUDFRwsUQYNDRiNREIUQEMEdo0IKV0WgD4cqmmI7fYXA7Z7fKdfV8PqvOGyzi/4oRCFUiYIohIC6Ag0OdXXHlitPwKGvZfI/xyvXsah85R222cXAX0QhVInCx1FI95UW6MOhtPrYeLUJYD+C/d7XpPqhb4tV6Lh//8H9+/ddaTBRCD2iIAohYDGBBofFFMruKE8A1gYsDrW6AWsDNkeCt5koBClREIUQUFdQ7N81dUGz5STgJIHIfBUe+o0q9uWwdy4G/iIKoUoURCEE1BVocKirO7ZceQIOQzy5+JD2CJRr/9vlYr1EIQCJgiiEgMUELqlYTKHsjkoEHIZ48vPTnThU6oamhecu63d4iyttJgqhRxREIQQsJtDgsJhC2R3lCcDgwH9qdePe/Xv37rnkNOqwv0QhWIiCKISAuoJiP6TUBc2WkwAJkAAJkIAvE6DB4cvaZ9+9kcCtl79TzF80SZLw+r0conQx8BdRCFWiIAohoK5Ag0Nd3bHlyhNwGPgraOUE5ToWmbecwza7GPiLKIQqUfg4Cum+0gJ9OJRWHxuvNgGHIZ78/XW3UbU6du/+/aioe660mSiEHlEQhRCwmECDw2IKZXeUJwCDAyaHWt2IunfPRYPDYX+JQrAQBVEIAXUFxX5IqQuaLScBJwlE5C2PmJ1qfaLrmosxRYhCwBIFUQgBdQUaHOrqji1XnkB0IZ6Ucxq9+tlOF5VBFAKQKIhCCFhM4JKKxRTK7qhEwGGIp4AArKgotqQSmvPppIc2u4KeKIQeURCFELCYQIPDYgpld5QnoKLBgbBfkZFRCY6eKAQpURCFEFBX8Fe36Ww5CViVAJZUrNq1uPaLKIQYURCFEFBUoA+Hoopjsy1L4Eb3icr1LaxeT4dtdjHwF1EIVaIgCiGgrkCDQ13dseXKE3AY+CvVqknKOY1G5HFL4C+ikCFOFD6OQrqvtEAfDqXVx8arTcBhiKdkWK4PUGytMyoyKiIy0hVlEIXQIwqiEAIWE2hwWEyh7I7yBHzT4HCoNqIQLERBFEJAXYFLKurqji23JoG7ecsqt6QSnSZcDPxFFAKWKIhCCKgr0OBQV3dsufIEognx5PjNq97c28uf7nCxeUQhAImCKISAxQQuqVhMoeyOSgQchngKDAgISKaYD8et7KWSHEz4wF9EIaOZKHwchXRfaYEGh9LqY+MtSCAwWTLlDI7IiKi7EREJrgyiEKREQRRCQF2BSyrq6o4tJwESIAESIAFlCNDgUEZVbKiPELj20njlnEZD673sUDsuBv4iCqFKFEQhBNQVaHCoqzu2XHkCDgN/pV41WbmO3c1d1mGbgweUdJhun0gUwoQoiEIIWEygD4fFFMruqETAYYin5HDhCEymUjc0LeJuRHhEwgf+IgoZBkTh4yik+0oLijnDK82ajScBGwL+R7bapOineHObci9vc7nBRCEjgSiIQghYTOCSisUUyu4oTyA8j+PlCRU75mLgL6IQpRMFUQgBdQUaHOrqji1XnkB0IZ6Ucxq9+PF2F5VBFAKQKIhCCFhMoA+HxRTK7qhEwHHgr8BkyZMHqtQNTbuRpbh2YJMrbSYKoUcURCEELCbQ4LCYQtkd5QkkV9DgCA+/G3434QN/EYWMZqIgCiGgrkCnUXV1x5ZblIDugImPUofLTqOOe0sUwoUoiEIIKCvQh0NZ1bHhFiVwtes45Xp2p45bAn8RhYwEoiAKIaCuQINDXd2x5coTcBjiKc2aKfg1q9bnbu4yDpXhYuAvohCqROHjKKT7Sgv04VBafWy82gQcB/5KHphCNafRMPhwhN91RRlEIfSIgiiEgMUE+nBYTKHsjkoEHIZ4UtCDIwFcTohCBi5REIUQsJjAJRWLKZTdUZ6AHuJJrQUVo7WOwCdA4C+ieAiWo0LGF1EICuUEGhzKqYwNtg6B6EI8KdfDC8MdxWiPSzeIQmgRBVEIAYsJ9OGwmELZHZUIOAzxlCJF8qAUyVXqhqZdzVT0wf6NrrSZKIQeURCFELCYQIPDYgpld5QnoKLBERoWHhYWnuDoiUKQEgVRCAF1BS6pqKs7tpwESIAESIAElCFAg0MZVbGhPkLgSpexyr287U5ttwT+IgoZ80RBFEJAXYEGh7q6Y8uVJ+Aw8Fe6dVOV61h47qcdttnFwF9EIVSJwsdRSPeVFujDobT62Hi1CTgM8RQUlCJlUAq1OnYnNCw0NMyVNhOF0CMKohACFhM4w2ExhbI7KhFwGOJJpQ4kXFuJQlgSBVEIAYsJNDgsplB2R3kC0S1PqNgxVwN/RbNSQxQqEpA2c1QkFAopRxWBBocqmmI7LUjAcYin+q8qF13z/IdbXFQPUQhAoiAKIWAxgT4cFlMou6MSAYchnlKmDEoZpFjgr8sZitzfv8EV9EQh9IiCKISAxQQaHBZTKLujPAHd4EipmtPonbA7d0ITHD1RCFKiIAohoK7AJRV1dceWk8BjAoGByR6f+LZEFKJ/oiAKIeANAg0Ob9AC20ACjwlc6vzN4xMnpAL5c4/6csiOTYsWzJncoH4NmzsG9Ht55vRvbRIT/PR2rR4Oy7z55R6H6U4mEoWAiiuKys+U/WHyiF1bl/w4ZWSJ4oWlHEOYMuHz99553SYxwU85KgSpm1BI+aoI/qo0lO0kAesRcLhan2HDD4g06nxn3+jdrVDBvP0HfdShXfNh7/X9a9XGAgXy4Hmzbfvu3Xv3BwT445MrZ7ZKz5SZ9dvialUr3A2/qyVJEuDvlyVLpmvXb9y/dz9vnpzzFi7PlSNbcHCq5MkD06YNnjtvaVTUPefbEJardJCj3HEK/BU0rptNGUQhQOKK4uMPB548dbZ336HvvPUqjM6uPQYULVJARgVmPvAp83TxdOnSYMA0aVz3wMEjefPmunDhUqkSRTBs8ufNlSww2W9zllSpXO76jZsYYNev31y+Yp20xxmBo0IouY5CilJaoMGhtPrYeLUJJFs2zr4Dfke2aikdPr7t82qwD2pWf2bMuB+WLV+zdt2WqMiokiWL4EctHjZv9u0xcsxk454K5UoNfa8vDI5OL7S8HRp6L+pei2Yhf+/ch0cOcqZLG1y4cP5bN2936fzclq07K1Z4+v79B7/NXeKgvmiSMv3Y+3Y0l5xMJgoB5TqK4sUK5cyRdfCQLzZt+Xvz1p1wrylbpoT9qGj6bL0SxQrB4Hh7YK8p3898rlWj/PlyHzp8/P13+/yz/3Dhgnn9kvo1blQbg8cYKs1ad99/4Ii0M1aBo0IQuY5CilJa4JKK0upj49UmEF2IJ+ffpRIQEODn74f5ENySLm0azG3Uq1MVQT8bN+8yd94frVs0whX9kyRJUvyXJImRGQk7du4dNPgz4Pvw46/XrN+a6akMSDx+4nSnbv0vX76aMWN659uAnK6rgSiEoesokj906EmqKzxJjuxZsmfLbD8q9DGhaUkfZvL389OHiab99PPccRN/gtDt5YGnz5zPnDkjkhctWdnnzQ+QmCFDOo4KT/2B6OpR/6DBob4O2QNrEQjL6fi9JA57efv2nXXrt7Zs3qBu7SpfffHehG8+wdR3iqDkFcqXyp8/z8lTZ4y7IiOj/P398uXNlSd3diPl9u3QqKgoyLdu34mMiDASb97S5ynu/ndqJLry7WKIJ6IQ+HFCsWPnvvPnL3Xr0rZOrSqTxn76wZD+DkdFRGRUxozpMCqCg1MbFd2+82hU3L51J+K/YXDz5u2Iu/oIgY0i7XFF4KgQei6ikHJUEWhwqKIpttOCBByHeAp5NU5dHTVmKpZFvhn1YcYM6d7/YMTsuUv27Tv409RRKZIHjp3w44MHWB65v3PXPqzEL5w7OWOG9Cj8wX09GRcg6/9HjoffSH+Yol+NUxvODtscp/z2mYlCmCQIivc//Co4daqxo4dfvnLto0/H2IwKo671GzCzlXHe7IkPcOhjQNc+DmNE3Lt3T/x47t3XHXqQ5eF1Z784KoSU6yikKKUFxuFQWn1svNoEHDqNpk6dMlWqlHHtGN73hjeoyV02p0j380uK9ZdweIy64biYtuC9f9e7UjBRCL3ERAHXUbNhIW1IEIGjQjC6jkKKUlqgwaG0+th4CxLQDQ6nnUa9pP+Yir91606CN4YoBClREIUQUFfgLhV1dceWW5ZAgrhhWoMOUYgeiYIohICiAn04FFUcm21ZAhc6jlGub7dquiXwF1HISCAKohAC6go0ONTVHVuuPAGs1tv3IePGafaJXp4SmrOUwxbGKfCXfQlEIUyIwsdRSPeVFujDobT62Hi1CWA/gn3QBYT7TB13p1HPgsDeWmyedKUNRCH0iIIohIDFBM5wWEyh7I5KBOytDZVan6BtJQrBSRREIQQsJtDgsJhC2R3lCYRmL434Smp9ooPuYlwjohCwREEUQkBdgQaHurpjy5Un4DjEU4NeetRppT6nh2x0URlEIQCJgiiEgMUE+nBYTKHsjkoEHIZ4gg8HYkSq1A1NO58mX9Q/G1xpM1EIPaIgCiFgMYEGh8UUyu4oTyBNmtTKGRx4CcuNG7cSHD1RCFKiIAohoK7AJRV1dceWkwAJkAAJkIAyBGhwKKMqNtRHCJxr/7VaHqNo7Y0a3Rxq5+aXexymO5lIFAKKKIhCCKgr0OBQV3dsufIEHAb+emrzT2p5jKK1oTlKO1SGi4G/iEKoEoWPo5DuKy34BQZlUroDbDwJqEsgybWzSa+dtWl/UOjl5IHJbBK9/DRg2/y7dyNcaSRRCD2iIAohYDGBL2+zmELZHZUIOAzxhHd0KfeaLtcbTBQycImCKISAxQQuqVhMoeyO8gRuZyupXh8eOG6yi4G/iEKwEgVRCAF1BRoc6uqOLVeegMMQTxEhryrnNHry/fUuKoMoBCBREIUQsJjAOBwWUyi7oxIBhyGe0qYJTps2tUrd0LQzqfJE7nPJ5iAK0ThREIUQsJhAg8NiCmV3lCegosFx/fqt6zduJjh6ohCkREEUQkBdgU6j6uqOLbcmgYcvUcGiikoH2uyOgyiEKlEQhRBQV6APh7q6Y8utSeDMC6OU69h19wT+IgoZCURBFEJAXYEGh7q6Y8uVJ+Aw8FfmLdOVcxq9k72UQ2W4GPiLKIQqUfg4Cum+0gJ9OJRWHxuvNgHsR7APupAubXC6dGnU6ti1azeuXXfJh4MoRONEQRRCwGICZzgsplB2RyUC9taGSq1P0LYSheAkCqIQAhYTaHBYTKHsjvIEbmcv9TDWqGJfDrm7GviLKP7DylHxHwmNKASFcgINDuVUxgZbh4DDEE8uPqQ9Quf44HUu1ksUApAoiEIIWEygD4fFFMruqETAYYin9OnSKOfDcTJFrsh9LtkcRCEDlyiIQghYTFDG4AgI8N+yfn7atMGPFPDgQa367U6cPOO8PipWKP3r9G8l/6B3Pp352yI5NYS3B/bq2aODIf/089z3h42wyeCp07q1q3w34XP72h/cvx8aFn7jxs0DB4/9MnP+8j/X2ueJX0rlSmX9kiZdt2FbPG5PmjTp3r+XpkiRwri3zQuvbtu+Ox7l+OYtKhoccBq9eu1GguuLKAQpURCFEFBXUCbwV+OGtfPlzWkG/WKn1h9+PNqcErOcNm0a/NFKnk+GD1y6fM2Nm7ckBcJTT2WQPJmeymC+5FkZP3mlYTYtQStz5shaonjh1i0bzl/459uDPztz9oJNnjidZs+WefiwASjt5xnz4m1wZM+WRSpNm0axQN3ScgokQAIkQAIJRUAZH45OHVrZ9LlT+5b+/vE3mGBbDHnvDZsyVT9t1qTe1g3zCxbIG++OdO3cZtvGBbA24l0Cb3SRwOl2I10sIfFvv1a9m8NKb365x2G6k4lEIaCIgiiEgLqCGgZHjuxZsKZgQzlTpoyNG9aySYzTabcX25R9unicbvGSzPfu3bt1+87duxEPHti+FzxlyqDPP3073u2sX69aUNCjpZB4F8IbnSTgMPBXlq3Tnbzde7LdyV7SYWNcDPxFFEKVKHwchXRfaUENg6Nj+5ZwC7AH3fXFNvaJzqegzJFfDsHuQ+dv8ZKcFau2yJG3UqYc5TJmK1upekusfcAEkbbVqVWlSeO6ckrBawkkWzbOvm3+R+LjN2NfTmKm5JjRz8XqiEIAEgVRCAGLCfFfkkg0EDAIOrzQwmF1tWtWzpM7x/ETpx1edSbx6dLFXn7phQnf/exM5gL583Rs36J0qaJFixS4efP2nr0H9uzdP/WHWeIIgsd8vbpVjaI2bNwxc/ZCQ4YHxlDT8s2IkZNOnT5nXGrRLKRWzUqGvG37HniqGrKT31FRUf/uP9zr9ffglfnVF+/LXe+/+/rCxSvkNFmygFYtGjZvWj9b1sxZMj/1QHtw9er1c+cvrVy14bspMzBTgpwlSxR+qWvbShXLyF21a1UeNWLI/fv3h3046uat20h3phy53Syg6mcb1S5ftlRAsgBA27xl5/hJ0416zdkKFcz7Upfn4Y+SNWvmNMGpMItz7fqNv3fum/7LvO07bCfnQ+rXeL71s7lyZsuePYufX9JLl65euHBp2Z9rf521UDQihWMUQXdVK5eH+tKnS3voyPG9ew8s+3PNylUbJU/iCwzxJMyJgiiEgAgcFYLCGoICu1Tq1Ko8d9ZEwf3Lr/NfaNtMTr/6+rsPPvpaTmMQ8Hya9fPjXSqSE4/ScpWaXLx4BSkjPn+ve9e2xqUZMxf0fO1dyda5Y6v/ffy2/XIDTIfurwzatPlv5Hz/3T4D+vUwbtl/4Mgz1R7ZSS2bN/j+uy+lqH4Dhk/5YaZxumLpz+XLPpqOxkQFTAfJZhaea9VosmmXSrlKTQ8fOW7OgAfq6j9/xdNUEvMXrXn58lWcZsiQbsn87wsXyieXzMKWrTvbdnwd9gc6OGbkB+ZLIpev3OzQ4WNOloO74Ftz5ZwOxDjOnD1v9iE1Evf9c7BL9wEHDx37L5fWs3v7zz99R07NQmRk5Ov9hkH1RmLy5IFzfh1ftUp5cx6Rr1y51rRVd5QvKVmzZJo47tMa1SpKigiTpswYPOQLe9NHMiS+EFC8Wq6wk4lfrys1RrdLBTFFApeNjXfJRCHoiIIohIC6goN1Cm/rTOeOraVJd+6EDhj08ekz5yWl4wstXHEdRTnBqVN9OnyQFOhQwBQLHsb21gYyY4fI4nlTS5UsAnnhoseTCkUK54friVFazRrPmIutXq2CcYpHuNmJBHtMzNniJMOZY9aTu3wxeWOUMG3yiOisDWSoWOHpsaOHO1NXvMuxtzZQXfFihWb+/C12OxtVV69a4X+fROt6EhAQMP6bj8Wc+vyTd6KzNlAaqMIcCQxMZpSMKhbNm+rQ2kCGHt3aTZnoYL+xca+7vxniSQgTBVEIARE4KgSFNQRvNzjSp0/7bKM6whrLBLfvhGLuQVLgOoq5ejl1XjB+/Rv5MX9Qq8ajdQ37ElKnSjnMtCCCJYYlS1f9sXS1OGz6+fkNHtQbN/69a5/ZGKpft7pRWs3qTxSOh6uRXr9uNfFNuX07FAsc9rU7n4K1FXPmDOnT4hQGTbX/qsPpufMXZ/22ePacJeHhdyVzzeq6PXT9+k20QRINASmYAQoNDXW+HJsSjFNAW7Z8zaIlK81zCXnz5Hy5e3sjQ5/XuogzDfxR1m/Y9v202eZZCmQz2glirVs2kloA7a13Pv1y5KTde/ZLYpYsT7Vt08Q4fbVnp/z5csmlY8dPIf6KOYILFsLK/TfJJNkSR4gI6WVfUcbvHSTaZ/OqlAxTHbfZ+ekNohCFEgVRCAGLCd5ucLR7vin8BgT6L7/qpoZMrRvpXTo/JxmcFBCkaPDQx2scuGvE/wabKzKXA88GmDWS0r7zG+06vt62Y+8+/YdJYsMGNY0ZBbPnBHZ8IAOcDGwiiGBHLuY/cCmkXg0pYfmKteaHsaQ7L9y4qbtZyJE2jR4kDf4NBw4eNVxKsW5SrXYbLAC91POtL76aIDkxc4MP5ley530GNoGkY4kHKTnzVUZgD+fLkdtFgGX2fIfebdq/BnSNmnUJCwuXS3CgMeQkSZNK5KgRo75r3LzrG29+UDvkBbhxSGZwg5w7V7ZUqYIk8ff5y76b+uvwT0Y3bNoZ3jwwjzZu2jFx8i/GYg1mvwa+2VMy79z1T+UarXq88nblGi0PHjoq6e8MdPy8lAxuEoLGdXNTyYlcbOqze1yskSgEIFEQhRCwmODtTqMvmtZT8Ot81ZpNUADcF7Zu21WhfGlDGfFzHcU0CTa/yGRDgQJ5+r7u+F9/+DCK1lev3YzpDeN05uxFWIuRh1+FcqXwPMOqyiv/xSrFxAbm823WU4x7McN/6PDxunWqSMnzFy4XOX6CzLgYtyf1063JBYtW4IP1BayqwN0Ea+14bD9T4eny5UqZa0EvQkPDzCk2sivlzJ23VEKgwvfzp19+x0KGUT4WpGATwPX1uXb6Ix/OFsHBqY4eO4nE4sUKQrORkVHSEgP1xUtXYD9hVslIH/3VsA+H9seMyJp1W55v/xqsK8kPIXfu7JigkpSff51vmDt37oRBfe+987pxqYyau6OlXxRIgARIwPsJeLXBAZPCmAkwOOJ3dpXK5Qz55KlzYnBgKh5RR510HTWrBM6bG1b/JhMbb/btsX7jdnMGQ86fP5ckYlZ/1Z8z5FSsDaRkzZoJ3xs27cBEAlaCIONqlUrlbNZTjHurV6u495+DxiQEUjC3sWz5WuNSvL/NT1YUcvLkWSkqMFmykiWKvNG7G+K7Y8ZF0kWQ5QxJcSjErxxYaebSVqxcLwYH7IZcubIdPXrSyJAtW+YmjetUfqYspotSpEhuvguy0UjYCti3YjaYgBHrbsbS2+HDx6fPmDd2wo/GmlH+fLnNhfTr0+2Ftk2NFPOljBnTozrz1Iv5rkSWEeIp3dJhiVypi9Xpgb/mj7QvBIG/nA/FYX87UQgToiAKIaCu4NUGR+cno4tiNwfcMx2yhuvox599ix/KDq9Gl4idF19/M3Vg/5eNDNj7YB9eDJfy5MphLqFMacexwrDjFNnw4xtTILKPN6Re9ZrVKxq3Y/cE3nuC3/Q4rValPJwJpNi/Vm2Eb4qcxk8oWCCP+cYjR08Yp5jFmT7t6zTBqc1XbeR79+7bpNifxrscvJPFXNqlh3tnJAXbdGFwwOybNO4zbBKWdHtBGtnztcHLFk2Dc6h9HsxUYQdyty7P12vY4fyFS3lyZTfnwQwKPuYUkaEX85YZSXer4PA1XYqGeHq8ymVC5ry1QRSCjSiIQghYTHjiSeBVfUuZMgVCRzjZpHi7jsKV4eixxw9+h9WF333sX+kwg5GInRSGgNUHydb71RfF/wM/9Ff+9cgtFFMgb/TuKtnmL/pT5HgL9eo8CgGCErC8Yhg0cIecM3OC2drAFlMsSC14skY4dcZcryvl3I2INBee8slIprDDcPWHySNsrA2soM35/Q/zrIM0EmtqdRq0n/bTHCM6iLlwQ4b1YOywdVJ3uMuYlLIvyq0pDPEkeImCKISACBwVgsIagvfOcGAngnnBIlbciDo6b0Gc3SCwljFg0Ed4JNuXLwFIT5w4Y8xeIA+e073fGCqZ4Sdx/7+5gdCwRz4Qf63eiO27CDEu2QwBDii3bt3G6o9NOiZmFv/xl01iXE/xctcGITXlLlhRhgtqy+YhsmYEK+S1N4bAowLuGiWKF2r6bD3Jj7fOiiyC7KBBiivlVK1czhzQrHjxQlIFmgRPT9hDDerXkMR167e+OehjBDJByvQfRknUVDE4kI67hnz41VdfT8qdKwcClFWpVBZ+GGLzIQMqxTd0h285qtdpIytN0C88VUV9Zu9Uye9ugXGNhDBREIUQEIGjQlBYQ/Beg8O8noJ1CsSatCfeMKSGzB9gX2vePDmOHT9tny3mlBV/bcAv6RhmU+DDiMe5UUjNGpUQK/PSpSs4RZiNFX/8HJQyxYEDR/7dfwRhMOC3iHR4D6BMvEfNpt7VazbjFzkesTYOE3gjK3w5bTI7fwr/SuzleXfQq+ZbfvhxtnFqjlcBh83pv/xupMtT3DhN+p8PpvmhLpYK8sS1HKNY4xtxzxDLFR61OMV2GHGqxSlWPWAYgao4gSLx8xETDGsDiybmyKdGnlYtGrzSoyPWjzAnAZ4I2ma4EiPz+DEfIbybUSmiu0KA7oxT4xtaHjZ8lCF/OvwthHiBC+r+A4dR3UeffmPO6UH5VraS6VQL/BUdLhcDfxGFgCUKohAC6gpeuqQCX1HxCQVcrES83m+o/Wfy9zMF/UPX0TjvjzVuf/u9/0U3OY8M2FUhtSBK2II532H3BOKfjv/2E8R7QAqaijCd8EWQbOZVFSMRv8jxgT+pOVyEcWlB3ON9/bHg+x2bF/29ZfG/u/88f3LLt19/aA6udfHi5Sn/kYmMeOzXUqxowfr1quPt8717vSieK0YbZJnDvCukbp2qbw/shcWO3Lmyx7UcQQEB/pjzfpvUr89LcG1ZunAaSpOr8+YvgxwV+cSaC+wAGHPwz/1p6ki4c0pmo5FZsmR6puLTxgoI4E/49hPoAlNQME1ymvxh//n3MG7ExhzDCjQKQbSPwW/3RkwRRDXt2aM9ptCwY7lxw9rNnq1n7ByWuhJHYFwj4UwURCEEROCoEBTWELx0hsO8GxagZ8xa4BA3fq8PGvCKzPzDdRS/U+PqOoqSL1y4PPzj0V989q7DWjZs3I7QDjLJgRep/D57ok1O7MacNWexJC5dthquEuYZfkxvGFex4CIRM5GCCY+Fi1fKjU4K2NpqBKWwz4/uv9h9gCwQ7Nz9Dx7PRjbMLsz+Zaz9LUhBDK6Tp85CwC9+yYCVjnfe0idOpv30W1zLkUIMARtJhr3f1yYRRt7/RuiLWbv27DdP/CAOGz42mXGKRuJ72o+/DezfM/3DCQyc4k11+Nhnlm3GX341UcKMYo7krTd74mOT/9MvHGOxyZbgpwjx5D9uq02xeuCv/3pnc8lrTxH46wmb8b+GxinwF1EY2Dgq/hs+GlEICmsI3jjDgdgVWCMQvnh2RvdIxu9XYzrdyIxnMDZVyo1xEvBOjR0790Z3S8eu/WB2RHf1/PlLHV7si0emZMDLw9auf+JBsmrNo5eEYUOKZIMA/00sK5hTXJHxUrSQZzubmzpq9BS8/yzWMps1rW/kQQRV+8zYrRrXcsyFHDlywnxqyBERkW8O/AhTPjiF3+iYsT/Y57FJgeWUOXNGbOdp/XzP6zdu2lw1n8KqQ+xRIwW+uq/2ed/waDHnEfnbcdMQelVOE1NgiCehTRREIQRE4KgQFNYQvNHgKFggr3nLwPwFy81xuG24m70RcUnmIWyy4TTUtO/UPsgVzAWE5TDPq5v3qSIOOt4HNmbs98Y0gBSOpyYaUL9xR+ywlURDML9XBYWvXqu7d+DYuHmHuTtOvj/FPui4URpKxiXEU4ehgHehhTzbyeatqmfPXWjeuse2J1+1CkOtU9d+8khGUfLiFRhwX3w10ezJAeMJ6yxxKge3C2FsM6nXuCP8ec37TRCFvcGznRBi3OgFvhFG5dPPx5rzgC3sgFLlGoqtgKksRBNB5h0799Wu327y979KLVIOXhSHEKWt2/YydwEzYY2avghrzCY/go3ibXnvDvlCbqdAAiRAAiTgJgIKvC3WTT2Pd7FYaChRojCW/8+cOX/8+GmzXRLvMhPhRrhuwJLz9/fbs+8AlpBirhExxLCXJDg49cGDR+F6Ys4cp3LMN2LiCntr4Yfx965/jIkN81VDxqJPgfy54Y+CPbF4kYrZocQ+M1Lg1gpvD+RPlSol3k1/4tRZY5Otw8xIhKNPgfx58GoVTJudPHkGhld0OT2YjjAMJVUL/HW0ROsHbgj8RRQyDomCKISAugINDnV1x5YrTwBPEftJ4+DydZ+6ekitvu1pMMy+I3HqAlEILqIgCiFgMcEvMCiTxbrE7pCAKgSSXDub9Jruq2s+UoZdtQ/rbs7ghXKybfPCTO8fjkcLiUKgEQVRCAGLCd7ow2ExxOwOCURHgHGNhAxREIUQEIGjQlBYQ6DBYQ09shfWIYAQT5bpDAJ/udIXohB6REEUQkBdgQaHurpjy5UnwLhGokKiIAohIAJHhaCwhkCnUWvokb1QkoBD90DENDPisivUpZMpckXuW+dKg4lC6BEFUQgBiwk0OCymUHZHeQIqGhx4GdBVF94HFJ3OiELIEAVRCAF1BS8Nbe4QKAKJIkgDYjchgsK16zEFmnR4OxNJgARIgARIgAQ8RUABH45ePTvOn/PdkX9XH/5n1R8LflizYubxQ+tPH9v060/flCqpx52M99EwpOaxg+uMz/pVj16vGu/SeCMJJAiB0+1GJkg5iVnIterdHFZ388s9DtOdTCQKAUUURCEE1BW82uBA3Em8qvSzjwbhxaHmt4YCN0JhNmxQE8YHrsabPgKoY6LS+GTLliXe5fBGEogfAazW29+YZet0+0QvT7mT3fHOmuABjtPtu0MUwoQoiEIIWEzw6sBffyyc5vBFoKIDRKquUL4UAlTv2btfEp0X8GIOedkbwhZ9PcbBv/7Ol8acJBBXAgzxJMSIgiiEgAgcFYLCGoL3znA0alCrfNknfh7h/Rcr/tqAN7+bX34GNfzvk7fx2nFr6IO98CkCjGsk6iYKohACInBUCAprCN5rcOBd5GbE7Tu/kbtA1VbP93y+Q+9S5RsePXZKrupvGitWUE4pkIDSBBjiSdRHFEQhBETgqBAUygneu0vlqYzpzTTXb9gm747Hy04/+GgU3DskQ5mni+/e88SqSsUKpZs3qV+0aMHChfLhHe6nT5/bf/DIpMkz8A5SuctGwNvPu3Z+rnq1imXLlIiKjMJLTVeu2oA3m9tkwyneONqxfYvSpYoWLVLg5s3be/YewJrO1B9m4U3ukjlVyqAPhvb389NNOtQ+YtR3uKVG9Wcqli+Nwjdt+XvRkr8W//EXrlarUr5li4ZVKpXF21m3bd+9YdOOX2bMu3nrthQFAa9FbdWiYfOm9bNlzZwl81MPtAd44eq585fQwu+mzJAXuJtvoez9BBDXyP433O3spbTDJ72/8eYWHh+8znl3DfONIhMFUQgBETgqBIU1BO+Nw9H39W4fDOknlA8eOopn9h9LV1+/oW+IhT9p02frhoWFY5fsndCww0dOXLp0xcicPHngkHf7YG8LDAi5XYRvx017d8gXxmn7ds3HjflILq1euxneqXJqCPMWLO/+yqCIiEhJ79yx1f8+fhsNkBRDgCsJcm7a/LdxmjdPjp1blxgyQhRs2bITXq42t/QfODxFihTDh/W3aSpa0ur5V6Kiooz8GTKkWzL/e1hONrcbp1u27mzb8fXoXvju8BYmegkBhyGeMICzZ8vsJS10shkHkmS2t5ycvNfIRhSCiyiIQghYTPBeg6NqlfKL5021wY1Jjq3bdq/4a/2Klet37NyHqQubDDid8O0n7Z5vap8uKUM++Orrb/SSbQwOyWAj9O475Mfpc43EDi+0GDt6uE0GOUXzatVvZ8y1mA0OyeC8MH7iT4MG/8/Iv+j3KdWqVojh3iVLV7Xr+HoMGXhJLQKqRHm6na2k35GtsKdt3KoSkDZRCEyiIAohoKjgYA7AS3qCNZRFS1baNAbOoZWeKTP47d4rl/2yf/eKdwe9liY4tTkPPD/M1gYsgI2bdpw4ecacp3/f7ilT2s5PGBkuX76Kh/e/+w+b83d8oaVxCmeRYe+9IZfu37+PzJh0EbsHzRs8qLdksBGwSrL8z7VHjpywSccpFmVOnzlvTm/eLMQ4Lft0cbO1ce78xVm/LZ49Z4n5n3j7iRlzUZSVI4BHOOYM/n51ESJ4Gp89DYZdSl/QkBFH/FDzz7zh0smg3GfPXTQPxQRHTRSClCiIQggoKnjvDAeApk0TvGDu5Jije8Eno+XzPeHVYShgzswJdWtXMWSsgzRt9ZKxxjFowCuwTkRJbTv0/mPZapsZjsOHj2N+Anth/P39l8yfWrHCI6/VixcvFyxeG/farPJgUgEGB9KxyDJm5AdSeM16bXfu+sdmhgMrQdVqPYdlFwQU+XvLouDUqST/2PE/vvP+51hVGf/tx22fa2Kkw4hJm6kUZKwcvf9uH4RYhTWDdZMKVZvDKkL6gH49kC6FZM1dEatLckqBBLyBAAJ/uejb4Q29SJA2EIVgJAqfReG9MxxQCR7SeHgPGvzZseOP96SIqgyheLFCyxb9CD9K47RY0QKS4ecZ88SjYszYHzBl8vv8ZR9/9s0Lnfps3vLI00IyQ3jjzQ9gbUCA88Rvv/8hl4KCggy5RPHCkgg3C8PaQMrM2Ytu3w6VSxXK6YaCzfHFiImwNpAIc2GPyb/1ypVrQ4ePRDrmS7DjV+5CiBFjGmbBohUVqzaHPVG9TpuylZrgdoR4b9K4bvkna0mV6lEjpQQK3k/AYYgn72+28y103togCqFKFEQhBCwmeO8uFQM0HsPjJ07HB/MceMrWqVUZG1IwA2FWQ57cOTANMGnKDDyhs2bJJJc2bNouMn79N27eVU4dClu27ZJ0zFeLjB0ihpw/fy5JxCrGqj9nyKn5eZ816+M2SIZdu/8R+dYt3awxjt1794tH6vUnXxCTREvyXy4tMFkyhCl7o3c37L7JlTObpIsAA0VkCqoQSLZsnCpNdXc7iUIIEwVRCAGLCU88ub2tb/DPyJw5I37Qb922C56Y+Hzyv2/hSFG/XjWsjxQskFcajL2sMDhyZM8qKRCM/SzmlBjkO3dC5cGPbGZZ7sqTK4fIEMqULm4+FRk7V0UWwbzNNSLy8Z4Xs5ER3e7W6lUrTJ/2tY23ipRsCPfu3bdJ4an3E3BxZ4f3d9D5FhKFsCIKohACFhO8dEkF8xkXTm07eWTD1g3zsVelXp1qwh2rHnN+X1qpeiuza2fVyuWQASExJBsEuICYT2OW75o2viInZlbs84ffvWufaJ8SEPBoRsR8yexYJ06myGBON+cXuVzZknBMMVsbkZGRsMAWLPpT8kBw2GBzBsokkPgE7oa8mviVemeNRCF6IQqfReGlMxyXL19DNALRyosdWxsxsiQFbhZwj0fcLSMlZUrdgwE7ODBRYcg4LV2y6K+zFsotc2dNwKTIv/8e+vfAkWXL16zbsE0uOSmcOHFGZi/wvO/9xlC5Malf0vv/zTGEhiWk82bL5iGypgNL5bU3hsydtxQrRCWKF2r6bD1pwANHFpJcpeCdBBzGNfLOprq7VUQhhImCKISAxQQvNTjOnrtw4OBRCXWFkFlYQ/l8xASJhfVSl+dlNwpUcvzEaUMxiACGAKCG3LFDy1HfTLl48QpOixTOX6NaRTh/5MyRNaR+DZQTD4Pj6LGTlSuVNQqvWaNSQLIAI9pYjuxZVvzxc1DKFAcOHPl3/5FZvy1as26Lkc31b8QjkUK279gjkU/h0SLpEJLybTJmHIrIESG9/MdtddhY/Aq8l788nj0Or3pDImb+/Y5sC1w2NobGxHzVfCNRCA2iIAohYDHBSw0OUMbuDDE4cIp9rdjFiicunBVKlSxsduDAVYQJNxQz5/c/xODAMgTeX4/I31myZGrVvIHZ1XTGzAVG/jh9//TL7wj8ZdyCfa0L5nz3znufw1mzf98eWbLo22QqlC+Nz9qEszZQZmRElDSyWNGC9etV/wc7gZs3HNj/ZUmHkDIoBTa8mFMoez+BoHHdHDYS1sbdkF4OL3lPIowhwx5y3qqIofFEIXCIgiiEgMUE7zU4Ph8xPqRedXMQDkxO4GOvAExvjJv4k5H+7fhpndq3LFAgj3GKTSvmYBVGIqJvHTx0zJDj9L1h43aEEZNJDizo/D57ok0JmJiZNWexTaIrpzt3/yPvsUM89dm/OP5BmTdPzpOnzrpSEe/1EgJKWBvCyjCMEsTmkDJFIAqiEAIicFQICuUEL3UaBUds2Xix+5uxPkQRXaN2yAtGLCzcFRkZ1bP3YKzIRKeJQ4ePdX/l7eiuxpresWs/mB3RZTt//lKHF/uafUKjy+l8+qjRU65df7xHN7obmzWtH90lpqtFACsplmkwQjy50heiEHpEQRRCQF3Bew0OMD169GTZZ55F4C94g9ojxtN99LffN2vdw+a9ZXjhaqVqLRH1yxyMC7fjdMSoSfUbdZTtsvAwlWJtwnTihXBy6bYpGyybpq26jxn7vY0lhG20P/08t37jjjBojBvDwyPk9bbYQmLejWKuy1y4OR321r2HfqAwnpq37rFtxxP/cCOGWKeu/b4cOUka+XTpYiJTUIWAwxBP3uy34RBsDA12MfBXDCU7bInHE2NoMFGIdogiHijkFqUFrw5tbiYLn4k8eXLkzJEtadIkeKfA+QuXHL6UxHwLZMQEK1gwb2RE5ImTp0+dPi8+pzbZ4ncKH5ESJQoj5NeZM+ePHz9tNh3iV2DMd+ENovBc8ff327PvgIRyj/kWXvVyAng+2QddcHFWwCNddv4REl3ziELIEAVRCAGLCd7rw2EDGoGzjNhfNukxn8K9QzawxJwzHldv3LyFBZ143Bi/W86cvYBP/O7lXd5JwN7a8M52JkKriEIgEwVRCAGLCV69pGIx1uwOCfgaAfj3+VqXo+svUQgZovBZFDQ4RPUUSCCxCcSw5J/YTfF0fUQhGiAKohACFhNocFhMoeyOSgQQ4kml5sa9rc5vlyUKoUsURCEELCbQ4LCYQtkdlQhEF+JJpT4kUFuJQkASBVEIAYsJNDgsplB2x0cJfFRGi+j06DO1akwQkiXVxlTUKmWMKY/S15xHkSW5NqeWllIZ1/k4q2Vh3cejok+RmG63PAqOipjUn1jXrPunllgEWQ8JeAOBgKTatbvac6v0tpwP0/yTaK1zaxkCtZnHtct3tXTJtFa5tLv3td9OaPWyar2LahH3tU2XdTl3Sm3GcS0gifZ8Xu3+A+1sqLb4TIJ1CFt8Xd8xG9fWOI+iVxGtZW6t+Qnt52PWRJHcT9twUXv/bx3hwZtPDIOwe1qelFrTnNqRW9ofZzRBMeu4PnIwVOaf0vKm0qpl0tIFaqvPazuuxlUP0eb3hlFh/ovwNRTRKsb9F2hwuJ8xayCBaAgg8FcCzp+nDtBeffgrdvgubXxlrUM+7dQdbUQFLe9sbXE9LVdK/SkypLQ2+ZDemhqZtbeKa++X1o7f1voX1zqt1SZU1m5GaGP2J6TB4by14REUOx8+RKtn1nIEWRZF4TSPRsVL67V1jR4PgxpLtC1NtLAoLW0y3eDAO6FwAEXznFrVTNq9B1rLXNq6i/qoOHNHOxOakAaHN4yKFSGKodDVo/7BJRX1dcgeKEsg2bJxCdh2PCQuhOkfzF48l1sb/a9Wap6G58gL+bQyGbRXN2vNVmoFg/WfvDgGbtOey6OF39NuR2nF0j5qRcu/tPce/hpOwFY5WZRHUPx4RG/dW5ZGcTtSHxKY9Moa9MQwqJlFeyq5Vm2JNnC7Ps0jKJrk1ELvafjR3zD7I9UVm6fPk3nkcN+oMP9FKIHCI/wTvFLOcCQ4UhZIAs4SSNgQT1g66fvfu+6v3NVKpNVqZ9UC/bRDN7UHD7QKGfTf8Vg0OXZbb17e1Bry4NftnBP6z1zjuBD+SEj8/3kExYOH/bQ2il3XHo2K9MmeGAbQPo562bSKGXWLRFDAQDl2S9t9TSuSRs8Ak/RmpC545HDTqFARhUf4J3ilnOFIcKQskAQ8QACWBD5yYAKjSiZtbm3tpyPakjPa0J2638Z7pbRhO7VL4drlcG1yFe2zPdqdKO1/5XQnD+O4e08KSBjBIyGenEcB2yvyvja7lmVRmLV4NeKJYQC3jJ+PapMq684rGC2C4q3tWtG0Wp+i2tbL+t0RCT0kUKbHR4WPozCPikSWlXmXSiJzYXUkkAgE3PrWDPyYSOGvmxTGgc0pWF6BGwcOyPCsNC6l8tdXVVw8oluVx6PFyVAcnkKBLSqwObAIhcMXUJiHAbqM7mN+62HvddlAAY9jfMKNVBdGhpePCrVQuKAHL7qVMxxepAw2xdcIuDXEE54XYm0ALJ6phrVhyHLJdWsjBq05aW3oTXJnDLQYUICDYW2gDb6AwjwM0GV0X+wKQRH1IAGsDe8fFWqhiIGnQpfow6GQsthUqxFIwC0qCYUG2wXhfIpnD74T8yAKoe1tKDAxliZAt0s4KqAjT/2ByPBQWqDBobT62HjfJbCsvlYri9Z5rfbXee1UG53DV/v0za5VlsSfSal02oZG2sZL2oJT2uj98S8nke+8/oIW5K+VmKflT63Nq6Nhs+vKc0TxCMXVu9qBm9obW+Kvk875dZcOlMNRoegfSPx1n9B30uBIaKIsjwQShQBiOsEPo342LWkSXcCx77oeTeGZjPqPMHhvIOrXD4e1LgX0CAq1Mmt/ntMNFMT1mnVCj+aEWAtwHf3nhlYynTb9qB50AdsWuhbQwz0tP6d9UlYbf/DxWkO8O5Q4IZ7QfXzg/AiDAwLIOIli9gmtWU6teFo9/8Vwa6LYdEmPotE4u24xlEina3n9Rb3X2IdS5Slt5XktJJu2+ZIeckNQwOs2TTJt7kk9lMuOK3rslm/3a9ciOCpU/QOJ999vgt9IgyPBkbJAEnCWgOvRrvCUlePp9BoiCsAVrm8xPTQkZDw5JlbRnzShUdqXFbTtV7RyGbTKi7TVDbVlZ7UG2bQu67XRFbXXi+iPohYrdSvk7e26aTKlqlY0jYYdlS4e0bkN2hebICjypX5UsJMoMD80qYr+AP64rPb0fGuigJWJGY5OafSgXhsvapUzadUW673ec03Ll0o3TGFswb5EWDBB0WGN9mN1be81PdJo2YUaqCIyGAwOjgoP/oHY/8momEKnURW1xjZbhICLcY1WnddypdK6FdQgmA8E3qi1VA+ukDmFntx/qzbjmB51tO5S/RQBoMYd0IM+YTokawp9RyisDYQ8X3NByxakZ0OQKOxWMMIw6DckyuE6CkSvKp0+bijgJYqO50ml9zBjoMVRYAy0Wa33FMtPOF5Yo229ok9o9d2iTwutvvAYBUbOwlP6qPhotx6OE8dJjgpP/4HoalD/oMGhvg7ZA2UJuBjXCD9SrzwM1fXXuScQXI/QTxGyyThuROgGBBKNFEQ9eq2INnKfPu0Bf8BGDwNKYs0FKxH37mv+D3fPIh13tcmt5Qx6VIi7/+ciCsPkwg5PrCCYj5hR1M+qNc6h2xk4sDJleRTGADCimCOMPWJsyKh4u8QTKJ55SmfSJs+jqF+wSDAkjFHxQl7dhzRxDo6KxOGcaLXQ4Eg01KyIBBKYAPaR4Icp3tmGtRIj2pV8oyZDRoxRmwNRj2CmTKuuRd3Xf9xjkaXZCv1xO66SduiWHp8UcxswOzDTPrOW7vbhypE4IZ7QEcStOnFbd3c1YpcJBwg4okMBf9vApNpXFXQUZTNYE4VZfTAoDRpGIra/ouP4xmFG8XIhPSZpy5VamfT6uhvoyag4Far9XEPL7poZylFh8Md34qCQ6jwuMPCXx1XABvguAbdGu4oBK8I6wdUDr8ywOQYW1xpk15af1df7W/2lbWuidVuvbbtik8vBaXS+Gl4S+MtBi/9LSuGnP3Qj7cwyoviPkPZrDe34Hd0TCKPi9c3anyFamQVOxTvnqBCGrqOQopQWOMOhtPrYeLUJuDXaVQxo8KPW3tpAfvh24LmCF6x8uEvfotJmlVPWRgwVeUngrxhaiLeU2VsbRGEmNny3vtxmjIpzoVrtpU5ZG+YSbGSOCgHiPAq5RWmBMxxKq4+NtyABbCV1sVf41Y7naGIe0f2Ac7ENRCEAXUeRPKl744dKU0Xw2lFhGRSCWhWBMxyqaIrtJIHYCdTNos9432qvrQzRymeIPb/k6FtUgzOglQ6iEG12ya/taqpdb6/NqqnvS3LywKLbmIpapaovQJQAAB8/SURBVIxOZlcjG1F4Vk80ODzLn7WTQEISQCgFuPu1XqXlTqV9WlZ/BVfbPNqrhfU9n8EBGpwBsUUFXqJIRHywhtn0eF/dC+ohN4Y9rSemTejdB67/Lo83HaIw0D0VqH1XRdt8WXtxndYkp/ZGUT0u3EsFtI75NMyEIRQHBgAOOIciTC3ig8HCQAoGBlLwhmFsVEnww1Ojwh5FDH8g1kaR4Dp1skAG/nISFLORQMITcD3alblNsCTypta6b9DDR2Kb6K1IPeoXgkUitMaIClqFhdqEytqGi1qTHFr7vNriM4/jgyHoU+oA3exAcI7rkeYiXZWdn1QnCmGdsCha5da3IA3arkfuQrQ37IPd3kSProE3+SGE6Ce7tW+f0b47pPUuog+YHCkfxwdDCDgcsEIS/PDUqLBBASAwxaL7A7kQ7l0oElwLHimQMxwewc5KSUAn4GK0KxuIWJnGgWAJODDDgYfKc7m10f9qpebpiQiCjgPPHvyqMw5zfDDEepp4UN8W66mDKIR8AqPwk4K1Ymn0sKFlMmivbtaardQKBuuXMCRwYCO0cUh8MAQ1xzFw26N0j/zPrSgQ+z/mPxCvQuER/gle6X+jLMELZoEkQAKxEXAxrpFN8RsuaafvaANK6C/FWFxXG19Zf3EGIijUzqoF+mkwL3AUTK3hBVTGYQ6KhW2hWVLoc+yeOohCyCcsilnHNSj3ozK6j86qhlq3AvqiW4UMWs3MeoAN7EWCqYHJLQwM45BQYEZ8MMyZefBwK4r+xWL/AzGHSvMsCg9qIQGrpsGRgDBZFAl4kgCeKz036tsXf6+tYUK4zxb952mVTNrc2tpPR/Tp9H+ua7Nr67G8sC3WiIWF5hrCwZu6pVLpYXzJBOyDp+IaEYUo8WyYHjwDb2ibVk1/ie4ne7ShO3XnjPdKacN26qHSsBF6TzPd3JRD4oPh9X6TqyR8XFFPjQp7FDH8gRg0rIpCdJ3IArfFJjJwVkcCjwm4KfBXan/tVtSjWvCTAi/ouvPwFHPn8NW46chLA9lw6YajS4+bG70U3aq8xwN/EYWhNKger1AxhgFSsAMFKXDjwBFdFDgjG4Kay1167rgc3jkqbFA4+QcCYp5FERfw3puXMxzeqxu2zPIE3BT4S6wNAMQzRR4Y+N3v0NowssXb2ohBTc7HNSIKwegOFFC9DANUhJUUw9qAHF0UOCOb+S5poYuCZ0eFDQon/0BAzLMoXGTuJbfT4PASRbAZvkggaFw3X+y2oz4ThVAhCqIQAhYTaHBYTKHsDgmQAAmQAAl4IwEaHN6oFbaJBKxBwFMhnryQHlGIUojCZ1HQ4BDVUyCBxCaAEE+JXWXi1hed26B9K4hCmBAFUQgBiwk0OCymUHZHJQIJG9dIpZ7btZUoBAlREIUQsJhAg8NiCmV3VCLgMK6Rw0Rv7lWCNNhhIQ4TicKbCUjbEkR3DgtxmCj1eqGgXIPdx5AGh/vYsmQSiA8BvyMejSYd9ybH0GAXQzzFUHLcm5kYd8TQYKIQBRBFQqGQclQRaHCooim204IEEPjLvleIUhC4bJx9unemoKnOh1WIoQtEIXCIgiiEgMUEv8CgTBbrErtDAqoQCG/3UcC2efatfTgHq7/L4n767PZXvSQFjQzYNj9ma8P5yWSiELUSBVEIAYsJDG1uMYWyOyQQLQFsR3R+20i0pVjiAlGIGo0FjpgNR8lsbYEo3K1fLqm4mzDLJwESIAESIAES0GhwcBCQAAm4iwBDPAlZoiAKISCCr40KGhyiegokkNgEGOJJiBMFUQgBETgqBIU1BBoc1tAje6EkAYZ4ErURBVEIARE4KgSFNQQaHNbQI3uhJAHnN3Eo2b24NJoohBZREIUQsJhAg8NiCmV3SMBbCCCehIshnrylJy63gygEIVH4MgoaHKJ9CiSQ2AQs/4+v35GtTjIlCgFFFEQhBCwm+FusP+wOCZCAlxDg0oAogiiIQgiI4IOjgjMcon0KJJDYBPAvjgRcwu/axK7ebfXFoy9EIdogCqIQAhYTaHBYTKHsjsIExOMBD2zzBn1sDlTrUkRILxfVoFZ/Y1AWURgjAUOaKBIQhYt/X566naHNPUWe9ZJAYhPAc5GhzQ3oRCGDz7DtZKZN0n1QIAp3K50zHO4mzPJJgARIgARIgAQY2pxjgARIgARIgARIwP0EOMPhfsasgQRIgARIgAR8ngANDp8fAgRAAiRAAiRAAu4nQIPD/YxZAwmQAAmQAAn4PAEaHD4/BAiABEiABEiABNxPgAaH+xmzBhIgARIgARLweQI0OHx+CBAACZAACZAACbifAA0O9zNmDSRAAiRAAiTg8wRocPj8ECAAEiABEiABEnA/ARoc7mfMGkiABEiABEjA5wnQ4PD5IUAAJEACJEACJOB+AjQ43M+YNZAACZAACZCAzxOgweHzQ4AASIAESIAESMD9BGhwuJ8xayABEiABEiABnydAg8PnhwABkAAJkAAJkID7CdDgcD9j1kACJEACJEACPk/A3+cJEAAJ+BCBqPwVfKi3MXaVKATPvfzlSUNoUHAfgSTBGUu4r3SWTAIk4D0EQntN8Z7GsCXGM97/yFai8B4Cfke2BS4b6z3tsVhLaHBYTKHsDgmQgBoE7oa8ejekV/CAkmo0l60kAZcJ0IfDZYQsgARIgARIgARIIDYCNDhiI8TrJEACJEACJEACLhOgweEyQhZAAiRAAiRAAiQQGwEaHLER4nUSIAESIAESIAGXCdDgcBkhCyABEiABEiABEoiNAA2O2AjxOgmQAAmQAAmQgMsEaHC4jJAFkAAJkAAJkAAJxEaABkdshHidBEiABEiABEjAZQI0OFxGyAJIgARIgARIgARiI0CDIzZCvE4CJEACJEACJOAyARocLiNkASRAAiRAAiRAArERoMERGyFeJwESIAESIAEScJkADQ6XEbIAEiABEiABEiCB2AjQ4IiNEK+TAAmQAAmQAAm4TIAGh8sIWQAJkAAJkAAJkEBsBGhwxEaI10mABEiABEiABFwmQIPDZYQsgARIgARIgARIIDYCNDhiI8TrJEACJEACJEACLhOgweEyQhZAAiRAAiRAAiQQGwEaHLER4nUSIAESIAESIAGXCdDgcBkhCyABEiABEiABEoiNAA2O2AjxOgmQAAmQAAmQgMsEaHC4jJAFkAAJkAAJkAAJxEaABkdshHidBEiABEiABEjAZQI0OFxGyAJIgARIgARIgARiI0CDIzZCvE4CJEACJEACJOAyARocLiNkASRAAiRAAiRAArERoMERGyFeJwESIAESIAEScJkADQ6XEbIAEiABEiABEiCB2AjQ4IiNEK+TAAmQAAmQAAm4TIAGh8sIWQAJkAAJkAAJkEBsBGhwxEaI10mABEiABEiABFwm4O9yCSyABEiABEggzgT8jmz1P1I+zrfxBhJQlkCS4IwllG08G04CJEACJEACJKAGAS6pqKEntpIESIAESIAElCZAg0Np9bHxJEACJEACJKAGARocauiJrSQBEiABEiABpQnQ4FBafWw8CZAACZAACahBgAaHGnpiK0mABEiABEhAaQI0OJRWHxtPAiRAAiRAAmoQoMGhhp7YShIgARIgARJQmgANDqXVx8aTAAmQAAmQgBoEaHCooSe2kgRIgARIgASUJkCDQ2n1sfEkQAIkQAIkoAYBGhxq6ImtJAESIAESIAGlCdDgUFp9bDwJkAAJkAAJqEGABocaemIrSYAESIAESEBpAjQ4lFYfG08CJJCQBDJlypA0qWf+VUyXNjhJkiQJ2Rm3lRUYmCxDhnRuK54FW5aAZ/60LIuTHSMB3yZQ6ZkyF09vNz4nDq/fsPq3Lp2fM5D8MHnE9B9GOcTTplXj51o1srlk5E+bJhilPduojs1V+9PChfKNGfmBfbp9yszp34z+apg5PXnywFEjhpw+tunQvlXnTmz55cfR6dKlMWeITpaWx9C76O6V9ODUqebOmnD0wNp9O5c1CKkh6SJs2zhfqBpCSP0aRo0ZM6ZHCu5KkSL5Jx8OzJc3p9wVnfD8c03QRxgN0WWIIb1ggbzLFv149vjmo/vXHPl39YB+PWLInCCXnO9XglTHQtxKwN+tpbNwEiABnyIQmCwZnmTfTf314KFjmZ7K0KJp/a9HDA0Pvztj5oKt23bfuRPqkMb7g/ssXLRi9pwl5qtGfvzmR4EpUwaZLzmU27drXrdOFYeXbBKDg1PfCQ0zJ77YsXXXzm1m/bZ4zbrNJYoXfvmlF9Dszt36m/M4lKXlMfTO4Y3mxM4dW9epVeWlnm8N6Pfyu2+9tnTZGvNVyMmSJdv378FfZsyX9L937itUIK/BE3xSpQwqUij/a706z52/7OixU5LNoXD8xCmgjoq65/BqzImjvxpavFihL0dOunjxcovmDd5/t8/RYyfn/L405rtcuep8v1yphfcmDgEaHInDmbWQgA8RmPv7H+s2bEOHvxn3w8qlvwwf2h8Gx+07d2COILHps3XbtH42RfLA3XsPjBo9uWFIzfTp0zZqWHvLtl0Z0qfNkSNrkcL5T5w4s//gESO/cUuLZvVDQ8O/nzYLJWMeBSW8+dZHuFSlcrlWLRr+8OPspo3rYjrkf5+8Pejdz8qULt69W9ssWTLt2bt/5NeTb9y8hYWSnj3a16pe6ez5C1myPHXu/EXcK8fTpYtB7vvmB7cfmkTp06VFG5CCu+rUrvJcy0apUgUtX7Huhx9/CwpK8enwt3B7uTIlZs5eJC03eoef4599NGjHzr01q1cKDAz4fd6yWXMWo5xaNSq1e75p6tQpt+/YmzNn1rfe+TQyMkpqT5Mm9YMHD2AB+PklhXEm6Wbh0OHjEyf/Yk4RnkZi3z7dILzV/+V33v/i0qUr/d54CZYTzALctXPXPxUrlG7ZrEGKoOTBqVOPnfBjZFQkMsPGCg5OlTNntrx5ciLPlyMnhoWF58yRtXu3drAqtm3fDVBQ3KbNf0u9ALV+4/ZPPx+LlDnzlq7+89diRQstW7724w8Hjp80/d/9hzFbM3zYm1OnzfL392/TuvH16zfLlS25a/e/Eyf/fOHCZdSIMnNkzwJuy/9cN+WHmSgHWmvZvAGGwZWr1yZP/XX733vNrQUT5DH6dfjIccg81CVAg0Nd3bHlJODtBK5du7F8xdqe3dtj5r9Zk/r3oqJWrto4bcpXO3buO3bsVN/Xu+LZs3b91qAUycPCwrCugR/NNapVxOMcsyOFCuVD/pmzF6KTzZrUw/Mvd67srVo0qFmvbakSRbp3bTvw7U/u379fskSRHt3ajZv4U2hYOJ73eGQWLVJg+ZIfr169sfefg31e6wLToV3H14cM7tOvz0vbduwpW6Z4pkwZMUNgZrdm3RZMkGxYM2fBwj//Wr3x9X5DUQ4ydOn03Mgv39/3z0E/P7+mz9bLni0LKjIWiU6eOotHtbTc6B0ez7iKz4aN2zNnfqpJ47owm9Cq2TPGXrp89dz5S0Pfq4tih34wMjLytjRgyvczB/Z/GUskV6/deO2NIZJuFvLnzYVlFCMFZgTsA6PG337/w0iEyQIB3w+0BwvmTgaE1Ws3N2pQ67lWjQsUrVmyeOFXX+l06/adsNCwVWs2vtSl7eAhXzZvVr92zcqYETl95pyxOAKbY9YvY/PlzbVx8443+/ZIlixgx997zQbH2nVbGoTUXDxv6tLlawCqVLmGqBTKRZcxOQSDAzYNZFxKmzb4lR4dgBG3QAu1alYKadzJqPH4idPoAsDC0ho5evKP34+sWrkchsGzjeu0bdOkdsgL5tbCvpF+GT3lt7oEdOORBwmQAAm4icDBg0dRcs7sWY3ys2fLjGmD3Xv+/eKrCa/3G7birw0//Tz39Jnzq1ZvwtMaefA7uHT5RnUbdjC3Z96C5UjBBw/+Du1amC8Z8pEjJ1b8tR6WyrDho3q81C4gIKBdx94vv/rO/74cX69OVfzsxqLJnyvX123QvlKNVjBTbEr45df5fd/8MDQ0rPerL/726/iD+/6CiYM8r73Sad36rVVqtn6mWgv88n7l5Uet+n7a7JJlG3z19XfmlkuZfyxd3ahZl45d+iIFKwKd2reC8EzVFnVCXliydJVkMwRMmXz28SDDXfTcuQtnz16Aj4W9B0n5cqVm/fyt8Xn91S42heD06zFT8f3FyEnZsmQqXarot+OnvdJ78LMtumHBpXGj2kb+Tl36FSz+SDZSIiMja9Rp07TlSwcPHS1SOF+VSmVhqfTpP6x56x69+zowfbq9/BamJeAu8+HQ/mtXzlqzYiasQKMoh9+vvfF+m/avDR0+snzZkiVLFEYeTOFUrtGqfuNOW7bufLFTayTCxMSkFGqsUed5zIt079rOKMporfQLKnZYBRMVIkCDQyFlsakkoB6Bp57KgEafv3DJaDp+OuPnb7cXn9+yft6gAa/cv2/rSQBnhbt3I2z6ibuQcuLkmbPnLmBJwnzVfmMHFgiQ4a/lM+DV+O6g12B84Oc15vB37f4H6VeuXNt/4Ii5BMiYBcFMTKXqLYuUrIsH7a1bt6dM/Bw/3PPnz715604j8+o1m9IEpzZkLJrYlGA+hemD0zNnzuPbz9+vaJH8R46evHlLn9LA73hzTshtn2vSolkIFlk++nQMFjKAZdK4T/PkymGTbf7CPwsWr2V8+vQfanPVfJr3od8opnPQ/Y1r5uBSSL1HUyOYrjDnhLxl6y5Me0A4c/ZCgL9/4YcLSZieQcrqNZttMmOqplDBvO++/0WBYrWq12nz9TdTixcriDUsc7YkWhLzKSa0cLr54aJMoYL5IGPaCYYdhE1bdubJneOZCk9DXvWwLugX0y25cz+yYOxbi5w8lCZAg0Np9bHxJODVBDAnD98FzJ+LzwTcI36dtRC/cYd88FVAgD92i2DSwtwHYy3DnAI5eWAgvuEa+VTG9HgOGVMUKVLoidmyZrbJvH+/bk/UqPt8+crNnm3e9cOPv8ZDDkZM1iyZkI65hMyZMtrc8uv0b8aM+gCJaOeP0+d+PmICzBQs9yDFuAtC/ny5jWcz5LDQcHxHdxi2hVxF7dmyZTa6CU9PSTeEypXKoDvf/zj7i68mYr4H7rGwTv7e9cSKD3KGhYdfvHjF+Ny584THq02BhjmFXqP7Fao0G/rhSGNZCtlCw2xvvHVLtzZwGCsy+/YdhFykSAH9+6HxoV/778BsDcy45597Fpl379kPDcJ+woyIcW+KFCmQMVtWHbIcuXJmgwx0+D57VrfA4KZjXM2fLxeMP8NpxjCSsKaG20+fPmdksG+tkc5vdQnQh0Nd3bHlJOClBOC7gLkB+GHA7wG/YgcN/kwaWqxogfHffDxm7PeL/1jVpHGdVKlS4hKm2cs8Xdz+CSd3dX2xDdw/4Y4AO2D+whUlSxTCpYH9e8KVAZeMbLBUMqRPB0cHuDXAX6HXyx3xoIUjQtkyJbD9ZMOm7XAR6Lq1DZ5t9jEklv25FjtTfpw6csGiFalTBQ3o/zLcKfbsPbB12y7c1ePvdpiowNIMfpRLkwwh1pYjGzbgwFkSUyZw/Gxtt/t3ydLVbds0/fbr4UuW/pXr4eQNnsQ9e3SYMGm6TV0xn8IiQYbGDWthDQILPa1bNjpw8Bh8POEdMmDQx/arSA5Lg0Putes3Phr2ZvGiBV9o28wmz649/54/f+mLT9/NkT3rP/8egsqqV63w84z5mBDC0kznDq3On7/Yt89L5ruGDH5j+i9z+/Tuev3GTbiO4hLmnzCzBeceuI+g73AQiYiIfOetXvCGaVC/BmyOTVv+ThYQIIVIvw4dOoZCJJ2CigRocKioNbaZBLyUQNQ9fYmkV8+O+MbDGJPkb737mTw7w8Lv4kf8tJ/m9Oj2AhwRMBMAx8979+7BZxOOn59/+g7uCgt7vE0D+SMiI/GwxJwEXCsgjJ/406HDx86eO48HFVYNcC8Wa1IG6b+tN2/ZiR0N8HLIU7Aqdkng+YdHJhrQ/62P4OD5ymuDMY2BYBt4NEZFPd4hghtxvPv+5/7+fs+3bgLXDfxeh/PjK71fR+Gv9hny/XdffPm/waga5fd87d3IiEikG3fhW1qOPSZorV70f4UbMiBgWWH0t993aNccG17Cw8JTp0qJS1LCwsX6fmCEIcGeDsyvwH8CvpYwxQQacqIQyW8W9BojdD5IRB+PHT/V/43uJ0+eRXdGjRiKqCeYkpn+y+/YpdypQ0s0+6FfqYam4hbjLuNxLmUiD/r4yQcDB7/9Glw7kW7eTYNbGjV7ceLYT9/s2x0TNmgV7LN33vsfLAZMz8CMgI4w84G7UGxaLRhChfKlYKhhIQwOGTI/hJzw49m4aUe/AR9iAxFcdKF6+Mxil+83Y3/ADFPnjq2kteZ+Qa3SVAoqEkgSnLGEiu1mm0mABNQlAE/J9OnS4Ie4dAHuEZhCNz/e5JIhwBckNDTUvJoAHws8v405eSMPfh/7+/kZKXCWxIQHHnXmchBI9ObN29E9v7Hagk2h2MlpsyaCGZGoyCg8Gs1FiRxryzFd0TCkBnbKYFlnxk9jqlYpnzNfZbndEFKmTJEmONhoLSwStMSmDTb5ozvFFlOZBoB/7sVLV2JAal8I1o9++Wn024P/B3sOG0ZgW7Rs87Lhh2HODM5ZMj8F9Yl1havQKfb9wufXyIm9KohlkjV3RURQhYOIkfj77Il3wyO69RwYGBh49ep1KRP9RWvPX7hsLlCuQjD3y5xOWS0CnOFQS19sLQlYgQDcBg3PQelMdI9zyYDYEiIbwuXLV21SzJYEnu421gYywwfC5hbzKeY28HvanGLIcDWwT5SUWFu+Zu3mzz95e//uFZgJQBQK7KORe0WAISW2lMwEyFXnBbE2cIs85p2/HVMsiH2yYM7kU6fP5c2TA5M6xq5UmxLA2Zj/MKfb6xRXMSli3wxzZ40SQN5sfZqLNWRzv+yvMkUVApzhUEVTbCcJkICqBBBxvG7tqpgDwJ4Xc1gLL+wPJmywqQeuoIg+gvUvG7vQ+QbDd6dypbLYb2y+BcsrMKdgx5gTKfsOARocvqNr9pQESIAESIAEPEaA22I9hp4VkwAJkAAJkIDvEKDB4Tu6Zk9JgARIgARIwGMEaHB4DD0rJgESIAESIAHfIUCDw3d0zZ6SAAmQAAmQgMcI0ODwGHpWTAIkQAIkQAK+Q4AGh+/omj0lARIgARIgAY8RoMHhMfSsmARIgARIgAR8hwANDt/RNXtKAiRAAiRAAh4jQIPDY+hZMQmQAAmQAAn4DgEaHL6ja/aUBEiABEiABDxGgAaHx9CzYhIgARIgARLwHQI0OHxH1+wpCZAACZAACXiMAA0Oj6FnxSRAAiRAAiTgOwRocPiOrtlTEiABEiABEvAYARocHkPPikmABEiABEjAdwjQ4PAdXbOnJEACJEACJOAxAjQ4PIaeFZMACZAACZCA7xCgweE7umZPSYAESIAESMBjBGhweAw9KyYBEiABEiAB3yFAg8N3dM2ekgAJkAAJkIDHCNDg8Bh6VkwCJEACJEACvkOABofv6Jo9JQESIAESIAGPEaDB4TH0rJgESIAESIAEfIcADQ7f0TV7SgIkQAIkQAIeI0CDw2PoWTEJkAAJkAAJ+A4BGhy+o2v2lARIgARIgAQ8RoAGh8fQs2ISIAESIAES8B0CNDh8R9fsKQmQAAmQAAl4jAANDo+hZ8UkQAIkQAIk4DsEaHD4jq7ZUxIgARIgARLwGAEaHB5Dz4pJgARIgARIwHcI0ODwHV2zpyRAAiRAAiTgMQI0ODyGnhWTAAmQAAmQgO8QoMHhO7pmT0mABEiABEjAYwRocHgMPSsmARIgARIgAd8hQIPDd3TNnpIACZAACZCAxwjQ4PAYelZMAiRAAiRAAr5DIGEMjk1r55YoXgjU8L1xzRzBlzNH1gN7VuJbUiD0ea3LpTM7blzac/LIBkk/fWwTUvCBIIkUSIAESIAESIAErEEgYQyOv1ZtHNi/J4gM6PcyZEHTt89LGTKkxbekQGjbpsnbgz/LX7RmiadDJL1YqXojRk3CB4IkUiABEiABEiABErAGgYQxOL7+ZmqD+jWaPlu3YUjN0d9+b6DJkvmpDu2ad+0xEN+Qhdeo0VPee7fPhlW/ValcThJv3rodFhaODwRJpEACJEACJEACJGANAgljcJy/cGn6jHlTJ32Bb8gGGiyd/LFs9YJFK5YuX/NG767CC6cVqzafNOWXl7u3l0QKJEACJEACJEACFibgn1B9GzV6cpNGdfAtBdauVblHr7dx+sVXEyaN+0zS9+5cliY49d27EW8O+kgSIYSF3X2gPTCnUCYBEiABEiABErAGgSTBGUtYoyfsBQmQAAmQAAmQgNcSSJglFa/tHhtGAiRAAiRAAiTgDQRocHiDFtgGEiABEiABErA4ARocFlcwu0cCJEACJEAC3kCABoc3aIFtIAESIAESIAGLE6DBYXEFs3skQAIkQAIk4A0EaHB4gxbYBhIgARIgARKwOAEaHBZXMLtHAiRAAiRAAt5AgAaHN2iBbSABEiABEiABixOgwWFxBbN7JEACJEACJOANBGhweIMW2AYSIAESIAESsDgBGhwWVzC7RwIkQAIkQALeQIAGhzdogW0gARIgARIgAYsToMFhcQWzeyRAAiRAAiTgDQRocHiDFtgGEiABEiABErA4ARocFlcwu0cCJEACJEAC3kDg/4h0UaIr5SduAAAAAElFTkSuQmCC"><p>The Data is distributed and sorted. We are keeping min and max stats and the count for each column. This allows us to allow for filter push downs and we are able to skip and reduce the amount of data that we have to transfer back to the query engine.</p>
+<img src="data:image/png;base64,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"><section id="select">
+<h3><code class="docutils literal notranslate"><span class="pre">select</span></code><a class="headerlink" href="#select" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Usage</strong>: Execute a data query on a specified table within a bucket and schema. This function allows for complex queries, including filters and projections, on the table data.</p></li>
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span></code> (list[str], optional): List of column names to be included in the query. If None, all columns are included.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predicate</span></code> (dict, optional): A filter to apply to the query. See <a class="reference external" href="https://github.com/vast-data/vastdb_sdk/blob/main/README.md#filters-and-projections">filters-and-projections</a> for more details.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> (QueryConfig, optional): Configuration options for the query execution. If None, default configuration is used. See the source for <a class="reference external" href="https://github.com/vast-data/vastdb_sdk/blob/main/vastdb/table.py">vastdb.table.QueryConfig</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">internal_row_id</span></code> (bool, optional): If True, includes the internal row ID in the query.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pa.RecordBatchReader</span></code>: A reader object that can be iterated to retrieve the query results as record batches.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors.TooLargeRequest</span></code>: If the serialized query data request size exceeds the maximum allowed size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StoppedException</span></code>: If the stop event is set during the execution of the query.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="create-a-table-with-citizen-information">
+<h2>Create a table with Citizen information<a class="headerlink" href="#create-a-table-with-citizen-information" title="Link to this heading">#</a></h2>
+<section id="specify-the-citizen-table">
+<h3>Specify the Citizen Table<a class="headerlink" href="#specify-the-citizen-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Define the Table name for the citizen table</span>
+
+<span class="n">TABLE_NAME</span><span class="o">=</span><span class="s1">&#39;pythonsdkcitizen&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-citizen-table">
+<h3>Define the Citizen Table<a class="headerlink" href="#define-the-citizen-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vastdb.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">TableExists</span>
+
+<span class="n">ARROW_SCHEMA</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">schema</span><span class="p">([</span>
+        <span class="p">(</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s1">&#39;Citizen_Name&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s1">&#39;Citizen_experience&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">float64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s1">&#39;Is_married&#39;</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">bool_</span><span class="p">()),</span>
+    <span class="p">])</span>
+
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">table_name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">ARROW_SCHEMA</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table created: </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">TableExists</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t create table because it already exists:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t create table:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table created: pythonsdkcitizen
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="insert-rows-into-the-citizen-table">
+<h3>Insert rows into the Citizen Table<a class="headerlink" href="#insert-rows-into-the-citizen-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ROWS</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Koko&#39;</span><span class="p">,</span> <span class="s1">&#39;Menny&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Citizen_Age&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">51</span><span class="p">],</span>
+    <span class="s1">&#39;Citizen_experience&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">25.5</span><span class="p">,</span> <span class="mf">17.9</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">,</span> <span class="mf">28.2</span><span class="p">],</span>
+    <span class="s1">&#39;Is_married&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">PA_RECORD_BATCH</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecordBatch</span><span class="o">.</span><span class="n">from_pydict</span><span class="p">(</span><span class="n">ROWS</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">PA_RECORD_BATCH</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data inserted.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t insert data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data inserted.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This uses the <a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.from_pydict">RecordBatch.from_pydict</a> method.  See also:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.from_arrays">RecordBatch.from_arrays</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.from_pandas">RecordBatch.from_pandas</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.from_pylist">RecordBatch.from_pylist</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.from_struct_array">RecordBatch.from_struct_array</a></p></li>
+</ul>
+</section>
+</section>
+<section id="query-the-table-and-list-all-rows-for-the-citizen-table">
+<h2>Query the table and list all rows for the Citizen Table<a class="headerlink" href="#query-the-table-and-list-all-rows-for-the-citizen-table" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This uses the <a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_pandas">Table.to_pandas</a> method.  See also:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_batches">Table.to_batches</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_pydict">Table.to_pydict</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_pylist">Table.to_pylist</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_reader">Table.to_reader</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_string">Table.to_string</a></p></li>
+<li><p><a class="reference external" href="https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.to_struct_array">Table.to_struct_array</a></p></li>
+</ul>
+</section>
+<section id="filter-predicates-in-vastdbapi">
+<h2>(Filter) Predicates in VastdbApi<a class="headerlink" href="#filter-predicates-in-vastdbapi" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You can use these predicates in the VastdbApi API:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">eq</span></code></strong>: Equal -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['eq</span> <span class="pre">value']</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ge</span></code></strong>: Greater Than or Equal -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['ge</span> <span class="pre">value']</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">gt</span></code></strong>: Greater Than -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['gt</span> <span class="pre">value']</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">lt</span></code></strong>: Less Than -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['lt</span> <span class="pre">value']</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">le</span></code></strong>: Less Than or Equal -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['le</span> <span class="pre">value']</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">is_null</span></code></strong>: Checks for null values -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['is_null']</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">is_not_null</span></code></strong>: Checks for non-null values -&gt; <code class="docutils literal notranslate"><span class="pre">'column_name':</span> <span class="pre">['is_not_null']</span></code>
+<strong>Note:</strong></p></li>
+<li><p>If using pandas dataframe, pandas predicates can also be used. (Perfomance might be reflected because it’s not API-native filters)</p>
+<ul>
+<li><p><strong>Example</strong> <a class="reference internal" href="#query-a-table-using-pandas-predicates">Query a table using Pandas predicates</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="filter-columns">
+<h2>Filter Columns<a class="headerlink" href="#filter-columns" title="Link to this heading">#</a></h2>
+<p>We want to filter and project only the following columns:</p>
+<ul class="simple">
+<li><p>Citizen_Age</p></li>
+<li><p>Citizen_Name</p></li>
+<li><p>Citizen_experience</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">COLUMNS</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_experience&#39;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">)</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>Koko</td>
+      <td>5.3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="filter-data-and-columns">
+<h2>Filter data and columns<a class="headerlink" href="#filter-data-and-columns" title="Link to this heading">#</a></h2>
+<p><strong>(Citizen_Age &gt; 37) AND (Citizen_experience &lt;= 40) limit 10</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ibis</span><span class="w"> </span><span class="kn">import</span> <span class="n">_</span>
+
+<span class="n">PREDICATE</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_Age</span> <span class="o">&gt;</span> <span class="mi">37</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_experience</span> <span class="o">&lt;=</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_experience&#39;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="n">PREDICATE</span><span class="p">)</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>(Citizen_Age = 45) OR (Citizen_Age = 51)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ibis</span><span class="w"> </span><span class="kn">import</span> <span class="n">_</span>
+
+<span class="n">PREDICATE</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_Age</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">45</span><span class="p">,</span><span class="mi">51</span><span class="p">]))</span>
+<span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_experience&#39;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="n">PREDICATE</span><span class="p">)</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45</td>
+      <td>Alice</td>
+      <td>25.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>(Citizen_experience &lt;= 28) AND (Citizen_Age between 30 to 60)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ibis</span><span class="w"> </span><span class="kn">import</span> <span class="n">_</span>
+
+<span class="n">PREDICATE</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_experience</span> <span class="o">&gt;=</span> <span class="mi">28</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_Age</span> <span class="o">&gt;=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">Citizen_Age</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Citizen_experience&#39;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="n">PREDICATE</span><span class="p">)</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>51</td>
+      <td>Menny</td>
+      <td>28.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="query-a-table-using-pandas-predicates">
+<span id="id1"></span><h2>Query a table using Pandas predicates<a class="headerlink" href="#query-a-table-using-pandas-predicates" title="Link to this heading">#</a></h2>
+<p>This performs client side querying.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">DATABASE_SCHEMA</span><span class="p">,</span> <span class="n">fail_if_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">TABLE_NAME</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+                <span class="n">pyarrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pyarrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                <span class="c1"># pandas client side querying</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Citizen_Age&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">38</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Citizen_experience&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t select data:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Schema doesn&#39;t exist:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Citizen_Age</th>
+      <th>Citizen_Name</th>
+      <th>Citizen_experience</th>
+      <th>Is_married</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Bob</td>
+      <td>17.9</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/sdk_ref"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_column_management.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Column Management</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_limit_n.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Query with ‘LIMIT n’</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-and-filter">Query and Filter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select"><code class="docutils literal notranslate"><span class="pre">select</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-with-citizen-information">Create a table with Citizen information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-citizen-table">Specify the Citizen Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-citizen-table">Define the Citizen Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insert-rows-into-the-citizen-table">Insert rows into the Citizen Table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-the-table-and-list-all-rows-for-the-citizen-table">Query the table and list all rows for the Citizen Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-predicates-in-vastdbapi">(Filter) Predicates in VastdbApi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-columns">Filter Columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-and-columns">Filter data and columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#query-a-table-using-pandas-predicates">Query a table using Pandas predicates</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

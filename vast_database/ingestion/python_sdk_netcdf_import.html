@@ -1,0 +1,1402 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python SDK - import netcdf &#8212; Data Platform Field Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vast_database/ingestion/python_sdk_netcdf_import';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Apache NiFi" href="nifi.html" />
+    <link rel="prev" title="Python SDK - import Grib2" href="python_sdk_grib2_import.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Data Platform Field Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Data Platform Field Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Platform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/architectures.html">Reference Architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataplatform/iac.html">Infrastructure as code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Datastore</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/vastpy/overview.html">Vastpy Library</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/enablecatalog.html">Enable Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/vastpy/vastdb_py_setup.html">Vast DB set up using API</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_datastore/nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_datastore/nifi/tagging_s3/overview.html">Tagging Datastore S3 Objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/kafka_connect.html">Kafka Connect to Vast S3</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../vast_datastore/s3a_magics/instructions.html">Hadoop S3A Functional Tester (Also Magic Committer) - WIP</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Database</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/overview.html">Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/limits.html">Dimensions and Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/datatypes.html">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/nrt.html">Near real-time workloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/replication.html">Replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/sequences.html">Sequences</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ingestion.html">Data Ingest/Transformation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="python.html">Python Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_sdk_json_import.html">Python SDK - import JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_sdk_csv_import.html">Python SDK - import CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_sdk_parquet_import.html">Python SDK - import Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_sdk_grib2_import.html">Python SDK - import Grib2</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Python SDK - import netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nifi.html">Apache NiFi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Spark Data Ingestion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_kafka.html">Kafka via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark_streaming_python_sdk.html">Kafka via Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trino.html">Trino with Vast Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_time_merge.html">Query Merge vs Insert Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark_merge_on_read_with_id.html">Spark Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark_merge_on_read_without_id.html">Spark Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trino_merge_on_read_with_id.html">Trino Query Time Merge (id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trino_merge_on_read_without_id.html">Trino Query Time Merge (non-id)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apache_beam_python.html">Apache Beam Sink (Python)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../query/query.html">Data Querying</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../query/dremio_quickstart/howto.html">Dremio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/python.html">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/ray_daft_vastdb.html">Ray and Daft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/spark.html">Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../query/trino.html">Trino</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sdk_ref/intro.html">Python SDK Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/01_create_session.html">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/02_schema_management.html">Scheme Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/03_table_management.html">Table Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/04_column_management.html">Column Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/05_querying.html">Querying Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/06_limit_n.html">Query with ‘LIMIT n’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/07_projections.html">Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/08_manipulation.html">Manipulating Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/09_verify_parquet.html">Utility: Verify Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/10_importing_files.html">Importing Files using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/11_importing_files_pandas.html">Importing Files using Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/12_snapshots.html">Snapshots Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/13_transactions.html">Transaction Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/14_tuning.html">Performance Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sdk_ref/15_recordbatchreader.html">RecordBatchReader functionality</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../spark/overview.html">Apache Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../spark/operations_guide.html">Spark Operations Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/upserts.html">Spark Upserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark/architecting.html">Architecting Apache Spark on the VAST Data Platform</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/tuning.html">Performance Tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/cnodes_and_vips.html">CNODES and VIPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/splits.html">Splits and Subsplits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/python/howto.html">Tuning Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/trino/howto.html">Tuning Trino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/Spark_Predicate_Pushdown.html">Spark Predicate Pushdown</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nifi/overview.html">Apache NiFi</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/quickstart.html">NiFi 2.x Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/bulk_import.html">Bulk Import from S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nifi/salesforce/query.html">Salesforce to VAST DB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trino/overview.html">Trino</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trino/quickstart.html">Trino Quickstart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../admin/overview.html">Admininstration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup.html">Vast DB set up using API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/vastdb_py_setup2.html">VAST Database Python SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/restore.html">VastDB restore procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/secure_deployment.html">Secure Deployment Pattern</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrations/integrations.html">Integrations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Vector Database</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/overview/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/quickstart-new.html">Vector DB Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_vectordb/query_engine.html">VAST Query Engine</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Event Broker</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/101/VAST-EventBroker-101.html">VAST Event Broker 101</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/trino_direct_query.html">Kafka to VastDB with Trino Lookup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/zeek_to_vast_kafka.html">Zeek PCAP to VAST Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_kafka/utils.html">Kafka Utils</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Catalog</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/overview.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/python-sdk-vast-catalog.html">Catalog - Python SDK Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/trino_quickstart/howto.html">Trino Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/blogs/intro.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/catalog.html">Query Catalog via Jupyter and Trino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vast_catalog/jupyter/auditlog.html">Query Audit Log via Jupyter and Trino</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Vast Data Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../vast_dataengine/overview.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_dataengine/spark/overview.html">Spark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/ports.html">Spark Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/spark/spark_ui_proxying.html">Spark UI Proxying</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/overview.html">Notebook Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/1_connectivity_test.html">Connectivity Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/2_basic_workload_test.html">Basic Workload Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vast_dataengine/spark/notebooks/3_add_libraries.html">Adding Spark libraries</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vast_dataengine/functions/overview.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vast_dataengine/functions/workshop/workshop.html">Workshop</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/intro.html">Feedback</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/vast-data/data-platform-field-docs/issues/new?title=Issue%20on%20page%20%2Fvast_database/ingestion/python_sdk_netcdf_import.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/vast_database/ingestion/python_sdk_netcdf_import.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python SDK - import netcdf</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-streamlining-netcdf-data-with-vast-database">Introduction: Streamlining NetCDF Data with VAST Database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-vast-db-sdk">Install Vast DB sdk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-netcdf-and-xarray-stuff">Install NETCDF and Xarray Stuff</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-netcdf-files-into-vast-database">Import NETCDF Files into VAST Database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-the-vast-database-using-python-api">Read data from the VAST Database using python API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-api-examples-and-api-documentation-links">Python API Examples and API Documentation links</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-sdk-examples">Python SDK Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-sdk-documentation">Python SDK Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-db-field-engineering-documentation">VAST DB Field Engineering Documentation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-sdk-import-netcdf">
+<h1>Python SDK - import netcdf<a class="headerlink" href="#python-sdk-import-netcdf" title="Link to this heading">#</a></h1>
+<section id="introduction-streamlining-netcdf-data-with-vast-database">
+<h2>Introduction: Streamlining NetCDF Data with VAST Database<a class="headerlink" href="#introduction-streamlining-netcdf-data-with-vast-database" title="Link to this heading">#</a></h2>
+<p>NetCDF (Network Common Data Form) files are a standard for storing scientific data, particularly large, multi-dimensional datasets like climate and weather information. While effective, managing and querying data directly from NetCDF files can be cumbersome, slow, and resource-intensive. This is where VAST Database offers a significant advantage.</p>
+<p><strong>Benefits of using VAST Database over direct NetCDF file handling:</strong></p>
+<ul class="simple">
+<li><p><strong>Scalability and Performance:</strong> VAST is designed for high-performance analytics on massive datasets. It allows for efficient querying and analysis of NetCDF data at scale, significantly outperforming traditional file-based approaches.</p></li>
+<li><p><strong>Efficient Data Management:</strong> VAST provides a structured, database-driven approach to data management. This simplifies data organization, versioning, and access control, reducing the complexity associated with managing numerous NetCDF files.</p></li>
+<li><p><strong>Optimized Querying:</strong> VAST enables complex queries using SQL-like syntax, allowing for fast and flexible data retrieval. This is particularly beneficial for tasks like finding minimum/maximum values, filtering data based on conditions, and performing aggregations.</p></li>
+<li><p><strong>Parallel Processing:</strong> VAST leverages parallel processing to accelerate data ingestion and querying. This is crucial for handling the large volumes of data typically found in NetCDF files.</p></li>
+<li><p><strong>Simplified Data Access:</strong> Instead of dealing with individual NetCDF files and their specific structures, VAST provides a unified interface for accessing and analyzing the data.</p></li>
+<li><p><strong>Integration with Python and other tools:</strong> VastDB python SDK allows easy integration with python, and tools like pandas and pyarrow, for data manipulation and analysis.</p></li>
+<li><p><strong>Reduced I/O Overhead:</strong> By storing data in a columnar format, VAST minimizes I/O operations, leading to faster query execution compared to row-based file access.</p></li>
+</ul>
+<p>The provided Python script demonstrates how to:</p>
+<ol class="arabic simple">
+<li><p><strong>Ingest NetCDF data into a VAST Database:</strong> It reads NetCDF files, converts them to Pandas DataFrames, and then loads them into a VAST table using PyArrow for efficient data transfer.</p></li>
+<li><p><strong>Query and Analyze data within VAST:</strong> It utilizes the VAST Python SDK to perform analytical queries, such as finding minimum and maximum values for a specified column and retrieving rows containing the maximum value.</p></li>
+</ol>
+<p>By leveraging VAST Database, users can unlock the full potential of their NetCDF data, enabling faster, more efficient, and scalable analysis.</p>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<section id="install-vast-db-sdk">
+<h3>Install Vast DB sdk<a class="headerlink" href="#install-vast-db-sdk" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>vastdb
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="install-netcdf-and-xarray-stuff">
+<h3>Install NETCDF and Xarray Stuff<a class="headerlink" href="#install-netcdf-and-xarray-stuff" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>netcdf4<span class="w"> </span>h5netcdf<span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>conda<span class="w"> </span>install<span class="w"> </span>xarray<span class="w"> </span>netCDF4<span class="w"> </span>--yes<span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="import-netcdf-files-into-vast-database">
+<h2>Import NETCDF Files into VAST Database<a class="headerlink" href="#import-netcdf-files-into-vast-database" title="Link to this heading">#</a></h2>
+<p>Adjust File Location, Database Connection details before executing the script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span> <span class="c1"># Ensure os is imported</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Import VAST SDK and PyArrow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vastdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vastdb</span><span class="w"> </span><span class="kn">import</span> <span class="n">errors</span> <span class="k">as</span> <span class="n">vast_errors</span> <span class="c1"># Import specific errors module</span>
+
+<span class="c1"># --- Configuration ---</span>
+
+<span class="c1"># VAST Cluster Connection Details from Environment Variables</span>
+<span class="n">VAST_ENDPOINT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VASTDB_ENDPOINT&quot;</span><span class="p">)</span>
+<span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VASTDB_ACCESS_KEY&quot;</span><span class="p">)</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VASTDB_SECRET_KEY&quot;</span><span class="p">)</span>
+
+<span class="c1"># Data and Table Details (Updated as per request)</span>
+<span class="n">SOURCE_DIRECTORY</span> <span class="o">=</span> <span class="s1">&#39;/home/jovyan/datastore/weather_data/netcdf&#39;</span> <span class="c1"># Directory containing .nc files (keep or adjust as needed)</span>
+<span class="n">TARGET_BUCKET</span> <span class="o">=</span> <span class="s1">&#39;christian-db&#39;</span> <span class="c1"># Updated Bucket Name</span>
+<span class="n">TARGET_SCHEMA</span> <span class="o">=</span> <span class="s1">&#39;netcdfdemo&#39;</span>    <span class="c1"># Updated Schema Name</span>
+<span class="n">TARGET_TABLE_NAME</span> <span class="o">=</span> <span class="s1">&#39;weather&#39;</span>     <span class="c1"># Updated Table Name</span>
+
+<span class="c1"># Performance Tuning</span>
+<span class="n">MAX_PROCESSES</span> <span class="o">=</span> <span class="mi">18</span> <span class="c1"># Adjust based on your client machine&#39;s resources</span>
+
+<span class="c1"># --- Logging Setup ---</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(process)d</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># --- Validation for Environment Variables ---</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">VAST_ENDPOINT</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Environment variable VASTDB_ENDPOINT is not set.&quot;</span><span class="p">)</span>
+    <span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Error: VASTDB_ENDPOINT environment variable missing.&quot;</span><span class="p">)</span> <span class="c1"># Exit if essential config is missing</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">ACCESS_KEY</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Environment variable VASTDB_ACCESS_KEY is not set.&quot;</span><span class="p">)</span>
+    <span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Error: VASTDB_ACCESS_KEY environment variable missing.&quot;</span><span class="p">)</span> <span class="c1"># Exit if essential config is missing</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">SECRET_KEY</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Environment variable VASTDB_SECRET_KEY is not set.&quot;</span><span class="p">)</span>
+    <span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Error: VASTDB_SECRET_KEY environment variable missing.&quot;</span><span class="p">)</span> <span class="c1"># Exit if essential config is missing</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using VAST Endpoint: </span><span class="si">{</span><span class="n">VAST_ENDPOINT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using VAST Bucket: </span><span class="si">{</span><span class="n">TARGET_BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using Target Schema: </span><span class="si">{</span><span class="n">TARGET_SCHEMA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using Target Table: </span><span class="si">{</span><span class="n">TARGET_TABLE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Helper Functions ---</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_vast_session</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a VAST SDK session instance.&quot;&quot;&quot;</span>
+    <span class="c1"># Function remains the same, uses provided arguments</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
+            <span class="n">access</span><span class="o">=</span><span class="n">access_key</span><span class="p">,</span>
+            <span class="n">secret</span><span class="o">=</span><span class="n">secret_key</span><span class="p">,</span>
+            <span class="c1"># verify_ssl=False # Add if needed</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully connected VAST session to endpoint: </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to create VAST session: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pyarrow_schema_from_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a pyarrow.Schema from a Pandas DataFrame.&quot;&quot;&quot;</span>
+    <span class="c1"># Function remains the same</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">arrow_schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Schema</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">preserve_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Inferred PyArrow schema from DataFrame.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arrow_schema</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to create PyArrow schema from DataFrame: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_vast_schema_and_table</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">pa_schema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates schema and table if they don&#39;t exist within a transaction.&quot;&quot;&quot;</span>
+    <span class="c1"># Function remains the same, uses provided arguments</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+            <span class="n">bucket</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema_name</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">&#39; already exists in bucket &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">MissingSchema</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">&#39; not found. Creating...&quot;</span><span class="p">)</span>
+                <span class="n">schema</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">create_schema</span><span class="p">(</span><span class="n">schema_name</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">&#39; created successfully.&quot;</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; already exists.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">MissingTable</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; not found. Creating...&quot;</span><span class="p">)</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">pa_schema</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; created successfully.&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">vast_errors</span><span class="o">.</span><span class="n">SchemaExists</span><span class="p">,</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">TableExists</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema or Table creation conflict (likely already exists): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">HttpError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAST HTTP Error during schema/table setup: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error during schema/table setup: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">netcdf_to_dataframe</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a NetCDF file to a Pandas DataFrame.&quot;&quot;&quot;</span>
+    <span class="c1"># Function remains the same</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NetCDF file &#39;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; converted to DataFrame in </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s. Shape: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error converting NetCDF file &#39;</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">insert_pyarrow_table_to_vast</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">arrow_table</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inserts a PyArrow Table into a VAST Data table within a transaction.&quot;&quot;&quot;</span>
+    <span class="c1"># Function remains the same, uses provided arguments</span>
+    <span class="k">if</span> <span class="n">arrow_table</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">arrow_table</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping insertion into &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; due to empty or invalid Arrow Table.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inserting </span><span class="si">{</span><span class="n">arrow_table</span><span class="o">.</span><span class="n">num_rows</span><span class="si">}</span><span class="s2"> rows into table &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;...&quot;</span><span class="p">)</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">inserted</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema_name</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">arrow_table</span><span class="p">)</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arrow_table</span><span class="o">.</span><span class="n">num_rows</span><span class="si">}</span><span class="s2"> rows inserted into table &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; in </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s.&quot;</span><span class="p">)</span>
+        <span class="n">inserted</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">HttpError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAST HTTP Error inserting data into &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error inserting data into &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">inserted</span>
+
+<span class="c1"># --- Multiprocessing Worker Function ---</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_file_batch</span><span class="p">(</span><span class="n">file_batch</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">vast_endpoint</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span> <span class="n">pa_schema_for_conversion</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Worker function for multiprocessing.</span>
+<span class="sd">    Connects to VAST, processes a batch of files, converts to PyArrow Table, and inserts data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Function remains the same, uses provided arguments</span>
+    <span class="n">worker_session</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">files_processed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">files_failed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">process_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Worker started processing batch of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">file_batch</span><span class="p">)</span><span class="si">}</span><span class="s2"> files.&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">worker_session</span> <span class="o">=</span> <span class="n">create_vast_session</span><span class="p">(</span><span class="n">vast_endpoint</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">file_batch</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing file: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">arrow_table</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">netcdf_to_dataframe</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                    <span class="n">arrow_table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">pa_schema_for_conversion</span><span class="p">,</span> <span class="n">preserve_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Converted DataFrame to Arrow Table for </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="si">}</span><span class="s2">. Shape: </span><span class="si">{</span><span class="n">arrow_table</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">success</span> <span class="o">=</span> <span class="n">insert_pyarrow_table_to_vast</span><span class="p">(</span><span class="n">worker_session</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">arrow_table</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+                        <span class="n">files_processed</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">files_failed</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">df</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                     <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping empty DataFrame from file </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                     <span class="n">files_processed</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">files_failed</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># Failure during NetCDF conversion</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing/inserting file </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">files_failed</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">df</span>
+                <span class="k">del</span> <span class="n">arrow_table</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Worker process failed unexpectedly: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">files_failed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_batch</span><span class="p">)</span> <span class="o">-</span> <span class="n">files_processed</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Worker finished. Processed: </span><span class="si">{</span><span class="n">files_processed</span><span class="si">}</span><span class="s2">, Failed: </span><span class="si">{</span><span class="n">files_failed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">files_processed</span><span class="p">,</span> <span class="n">files_failed</span>
+
+<span class="c1"># --- Main Execution ---</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main function to orchestrate the NetCDF to VAST Data process.&quot;&quot;&quot;</span>
+    <span class="c1"># Ensure global config variables are accessible if needed, or pass explicitly</span>
+    <span class="k">global</span> <span class="n">VAST_ENDPOINT</span><span class="p">,</span> <span class="n">ACCESS_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">,</span> <span class="n">TARGET_BUCKET</span><span class="p">,</span> <span class="n">TARGET_SCHEMA</span><span class="p">,</span> <span class="n">TARGET_TABLE_NAME</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting NetCDF to VAST Data ingestion process using vastdb_sdk...&quot;</span><span class="p">)</span>
+    <span class="n">script_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># 1. Find NetCDF files</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Searching for NetCDF files (*ncdd*.nc) in: </span><span class="si">{</span><span class="n">SOURCE_DIRECTORY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">nc_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SOURCE_DIRECTORY</span><span class="p">,</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="s1">&#39;*ncdd*.nc&#39;</span><span class="p">),</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">num_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nc_files</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">num_files</span><span class="si">}</span><span class="s2"> NetCDF files.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">num_files</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No NetCDF files found matching the pattern. Exiting.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># 2. Create main VAST session (using config from env vars)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Pass the globally defined config values</span>
+        <span class="n">main_session</span> <span class="o">=</span> <span class="n">create_vast_session</span><span class="p">(</span><span class="n">VAST_ENDPOINT</span><span class="p">,</span> <span class="n">ACCESS_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Could not establish initial VAST session. Exiting.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># 3. Determine PyArrow Schema and Create Table/Schema (if needed)</span>
+    <span class="n">pa_schema</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading first file to determine schema: </span><span class="si">{</span><span class="n">nc_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">first_df</span> <span class="o">=</span> <span class="n">netcdf_to_dataframe</span><span class="p">(</span><span class="n">nc_files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">first_df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to read the first NetCDF file to determine schema. Exiting.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">pa_schema</span> <span class="o">=</span> <span class="n">get_pyarrow_schema_from_dataframe</span><span class="p">(</span><span class="n">first_df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pa_schema</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Could not determine PyArrow schema from the first DataFrame. Exiting.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Derived PyArrow Schema: </span><span class="si">{</span><span class="n">pa_schema</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">first_df</span>
+
+        <span class="c1"># Create schema and table using the derived PyArrow schema and updated names</span>
+        <span class="n">create_vast_schema_and_table</span><span class="p">(</span><span class="n">main_session</span><span class="p">,</span> <span class="n">TARGET_BUCKET</span><span class="p">,</span> <span class="n">TARGET_SCHEMA</span><span class="p">,</span> <span class="n">TARGET_TABLE_NAME</span><span class="p">,</span> <span class="n">pa_schema</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed during schema derivation or table creation: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+
+    <span class="c1"># 4. Prepare for Multiprocessing</span>
+    <span class="n">num_processes</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_files</span><span class="p">,</span> <span class="n">MAX_PROCESSES</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num_processes</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">:</span>
+       <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid number of processes calculated. Exiting.&quot;</span><span class="p">)</span>
+       <span class="k">return</span>
+
+    <span class="n">files_per_process</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">num_files</span> <span class="o">/</span> <span class="n">num_processes</span><span class="p">)</span>
+    <span class="n">file_batches</span> <span class="o">=</span> <span class="p">[</span><span class="n">nc_files</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">files_per_process</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_files</span><span class="p">,</span> <span class="n">files_per_process</span><span class="p">)]</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distributing </span><span class="si">{</span><span class="n">num_files</span><span class="si">}</span><span class="s2"> files across </span><span class="si">{</span><span class="n">num_processes</span><span class="si">}</span><span class="s2"> worker processes.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 5. Run Multiprocessing Pool</span>
+    <span class="n">total_processed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_failed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Pass updated config values to the worker processes</span>
+    <span class="n">pool_args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">batch</span><span class="p">,</span> <span class="n">TARGET_BUCKET</span><span class="p">,</span> <span class="n">TARGET_SCHEMA</span><span class="p">,</span> <span class="n">TARGET_TABLE_NAME</span><span class="p">,</span> <span class="n">VAST_ENDPOINT</span><span class="p">,</span> <span class="n">ACCESS_KEY</span><span class="p">,</span> <span class="n">SECRET_KEY</span><span class="p">,</span> <span class="n">pa_schema</span><span class="p">)</span> <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">file_batches</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">results_async</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap_async</span><span class="p">(</span><span class="n">process_file_batch</span><span class="p">,</span> <span class="n">pool_args</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">worker_outputs</span> <span class="o">=</span> <span class="n">results_async</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">processed_count</span><span class="p">,</span> <span class="n">failed_count</span> <span class="ow">in</span> <span class="n">worker_outputs</span><span class="p">:</span>
+                <span class="n">total_processed</span> <span class="o">+=</span> <span class="n">processed_count</span>
+                <span class="n">total_failed</span> <span class="o">+=</span> <span class="n">failed_count</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Process interrupted by user. Terminating pool.&quot;</span><span class="p">)</span>
+            <span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+            <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+            <span class="n">total_failed</span> <span class="o">=</span> <span class="n">num_files</span> <span class="o">-</span> <span class="n">total_processed</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error occurred during multiprocessing execution: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">total_failed</span> <span class="o">=</span> <span class="n">num_files</span> <span class="o">-</span> <span class="n">total_processed</span>
+
+    <span class="c1"># 6. Log Summary</span>
+    <span class="n">script_elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">script_start_time</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;--- Ingestion Summary ---&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target Bucket: </span><span class="si">{</span><span class="n">TARGET_BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target Schema.Table: </span><span class="si">{</span><span class="n">TARGET_SCHEMA</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">TARGET_TABLE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total NetCDF files found: </span><span class="si">{</span><span class="n">num_files</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully processed files: </span><span class="si">{</span><span class="n">total_processed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed files: </span><span class="si">{</span><span class="n">total_failed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total script execution time: </span><span class="si">{</span><span class="n">script_elapsed_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-------------------------&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># multiprocessing.set_start_method(&#39;spawn&#39;) # Consider uncommenting for macOS/Windows</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-03-26 11:14:43,927 - 4090262 - INFO - Using VAST Endpoint: http://172.200.203.1:80
+2025-03-26 11:14:43,928 - 4090262 - INFO - Using VAST Bucket: christian-db
+2025-03-26 11:14:43,929 - 4090262 - INFO - Using Target Schema: netcdfdemo
+2025-03-26 11:14:43,929 - 4090262 - INFO - Using Target Table: weather
+2025-03-26 11:14:43,933 - 4090262 - INFO - Starting NetCDF to VAST Data ingestion process using vastdb_sdk...
+2025-03-26 11:14:43,933 - 4090262 - INFO - Searching for NetCDF files (*ncdd*.nc) in: /home/jovyan/datastore/weather_data/netcdf
+2025-03-26 11:14:43,938 - 4090262 - INFO - Found 1 NetCDF files.
+2025-03-26 11:14:43,944 - 4090262 - INFO - Successfully connected VAST session to endpoint: http://172.200.203.1:80
+2025-03-26 11:14:43,945 - 4090262 - INFO - Reading first file to determine schema: /home/jovyan/datastore/weather_data/netcdf/netcdf_files/ncdd-202211-grd-scaled.nc
+2025-03-26 11:14:58,435 - 4090262 - INFO - NetCDF file &#39;ncdd-202211-grd-scaled.nc&#39; converted to DataFrame in 14.49s. Shape: (24763800, 7)
+2025-03-26 11:14:58,453 - 4090262 - INFO - Inferred PyArrow schema from DataFrame.
+2025-03-26 11:14:58,456 - 4090262 - INFO - Derived PyArrow Schema: time: timestamp[ns]
+lat: float
+lon: float
+tmax: double
+tmin: double
+prcp: double
+tavg: double
+-- schema metadata --
+pandas: &#39;{&quot;index_columns&quot;: [], &quot;column_indexes&quot;: [], &quot;columns&quot;: [{&quot;name&quot;:&#39; + 842
+2025-03-26 11:14:58,501 - 4090262 - INFO - Schema &#39;netcdfdemo&#39; not found. Creating...
+2025-03-26 11:14:58,512 - 4090262 - INFO - Created schema: netcdfdemo
+2025-03-26 11:14:58,522 - 4090262 - INFO - Schema &#39;netcdfdemo&#39; created successfully.
+2025-03-26 11:14:58,529 - 4090262 - INFO - Table &#39;netcdfdemo.weather&#39; not found. Creating...
+2025-03-26 11:14:58,578 - 4090262 - INFO - Created table: weather
+2025-03-26 11:14:58,626 - 4090262 - INFO - Table &#39;netcdfdemo.weather&#39; created successfully.
+2025-03-26 11:14:58,638 - 4090262 - INFO - Distributing 1 files across 1 worker processes.
+2025-03-26 11:14:58,653 - 4095577 - INFO - Worker started processing batch of 1 files.
+2025-03-26 11:14:58,698 - 4095577 - INFO - Successfully connected VAST session to endpoint: http://172.200.203.1:80
+2025-03-26 11:14:58,701 - 4095577 - INFO - Processing file: ncdd-202211-grd-scaled.nc
+2025-03-26 11:15:11,279 - 4095577 - INFO - NetCDF file &#39;ncdd-202211-grd-scaled.nc&#39; converted to DataFrame in 12.58s. Shape: (24763800, 7)
+2025-03-26 11:15:11,549 - 4095577 - INFO - Converted DataFrame to Arrow Table for ncdd-202211-grd-scaled.nc. Shape: (24763800, 7)
+2025-03-26 11:15:11,551 - 4095577 - INFO - Inserting 24763800 rows into table &#39;netcdfdemo.weather&#39;...
+2025-03-26 11:15:28,721 - 4095577 - INFO - 24763800 rows inserted into table &#39;netcdfdemo.weather&#39; in 17.17s.
+2025-03-26 11:15:28,745 - 4095577 - INFO - Worker finished. Processed: 1, Failed: 0
+2025-03-26 11:15:28,769 - 4090262 - INFO - --- Ingestion Summary ---
+2025-03-26 11:15:28,770 - 4090262 - INFO - Target Bucket: christian-db
+2025-03-26 11:15:28,770 - 4090262 - INFO - Target Schema.Table: netcdfdemo.weather
+2025-03-26 11:15:28,771 - 4090262 - INFO - Total NetCDF files found: 1
+2025-03-26 11:15:28,772 - 4090262 - INFO - Successfully processed files: 1
+2025-03-26 11:15:28,772 - 4090262 - INFO - Failed files: 0
+2025-03-26 11:15:28,773 - 4090262 - INFO - Total script execution time: 44.84 seconds.
+2025-03-26 11:15:28,773 - 4090262 - INFO - -------------------------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-data-from-the-vast-database-using-python-api">
+<h2>Read data from the VAST Database using python API<a class="headerlink" href="#read-data-from-the-vast-database-using-python-api" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">vastdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vastdb</span><span class="w"> </span><span class="kn">import</span> <span class="n">errors</span> <span class="k">as</span> <span class="n">vast_errors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span> <span class="c1"># To get current time for summary</span>
+
+<span class="c1"># ibis is needed for creating the predicate (_.prcp == max_val)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">ibis</span><span class="w"> </span><span class="kn">import</span> <span class="n">_</span>
+    <span class="n">IBIS_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;`ibis-framework` not found. Install it (`pip install ibis-framework`) to filter for max value rows.&quot;</span><span class="p">)</span>
+    <span class="n">IBIS_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="c1"># --- Configuration ---</span>
+
+<span class="c1"># VAST Cluster Connection Details from Environment Variables</span>
+<span class="n">VAST_ENDPOINT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VASTDB_ENDPOINT&quot;</span><span class="p">)</span>
+<span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VASTDB_ACCESS_KEY&quot;</span><span class="p">)</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;VASTDB_SECRET_KEY&quot;</span><span class="p">)</span>
+
+<span class="c1"># Data and Table Details</span>
+<span class="n">TARGET_BUCKET</span> <span class="o">=</span> <span class="s1">&#39;christian-db&#39;</span>
+<span class="n">TARGET_SCHEMA</span> <span class="o">=</span> <span class="s1">&#39;netcdfdemo&#39;</span>
+<span class="n">TARGET_TABLE_NAME</span> <span class="o">=</span> <span class="s1">&#39;weather&#39;</span>
+<span class="n">TARGET_COLUMN</span> <span class="o">=</span> <span class="s1">&#39;prcp&#39;</span> <span class="c1"># Column to query for min/max</span>
+
+<span class="c1"># --- Logging Setup ---</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># --- Validation for Environment Variables ---</span>
+<span class="c1"># (Keep the validation block from the previous script)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">VAST_ENDPOINT</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Environment variable VASTDB_ENDPOINT is not set.&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Error: VASTDB_ENDPOINT environment variable missing.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">ACCESS_KEY</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Environment variable VASTDB_ACCESS_KEY is not set.&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Error: VASTDB_ACCESS_KEY environment variable missing.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">SECRET_KEY</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Environment variable VASTDB_SECRET_KEY is not set.&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Error: VASTDB_SECRET_KEY environment variable missing.&quot;</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using VAST Endpoint: </span><span class="si">{</span><span class="n">VAST_ENDPOINT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Querying Bucket: </span><span class="si">{</span><span class="n">TARGET_BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Querying Schema: </span><span class="si">{</span><span class="n">TARGET_SCHEMA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Querying Table: </span><span class="si">{</span><span class="n">TARGET_TABLE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analyzing Column: </span><span class="si">{</span><span class="n">TARGET_COLUMN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_stats_and_max_rows</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">column_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Connects to VAST, finds min/max of a column, and retrieves row(s) with the max value.</span>
+<span class="sd">    Returns: min_val, max_val, record_count, max_rows_df (Pandas DF or None)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_val</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">record_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_rows_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span> <span class="c1"># Initialize empty DataFrame</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">IBIS_AVAILABLE</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot fetch max rows because `ibis-framework` is not installed.&quot;</span><span class="p">)</span>
+        <span class="c1"># Still attempt to get min/max if possible without ibis for filtering</span>
+        <span class="c1"># You might want to return early or handle this differently</span>
+        <span class="c1"># For now, we&#39;ll proceed to get min/max but won&#39;t query for max rows.</span>
+        <span class="k">pass</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting analysis for &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; in </span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Use a single transaction for both steps if possible</span>
+        <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">tx</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema_name</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accessed table </span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># --- Step 1: Find Min/Max Value ---</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing select for column: </span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2"> to find min/max&quot;</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">column_name</span><span class="p">])</span>
+
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Reading data into PyArrow table...&quot;</span><span class="p">)</span>
+                <span class="n">arrow_table</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_all</span><span class="p">()</span>
+                <span class="n">record_count</span> <span class="o">=</span> <span class="n">arrow_table</span><span class="o">.</span><span class="n">num_rows</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Read </span><span class="si">{</span><span class="n">record_count</span><span class="si">}</span><span class="s2"> records for min/max calculation.&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">record_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Converting to Pandas DataFrame for min/max...&quot;</span><span class="p">)</span>
+                    <span class="n">df_col</span> <span class="o">=</span> <span class="n">arrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">df_col</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">df_col</span><span class="p">[</span><span class="n">column_name</span><span class="p">]):</span>
+                        <span class="c1"># Drop NaNs before calculating min/max if they shouldn&#39;t be considered</span>
+                        <span class="n">valid_series</span> <span class="o">=</span> <span class="n">df_col</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_series</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                            <span class="n">min_val</span> <span class="o">=</span> <span class="n">valid_series</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+                            <span class="n">max_val</span> <span class="o">=</span> <span class="n">valid_series</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated MIN=</span><span class="si">{</span><span class="n">min_val</span><span class="si">}</span><span class="s2">, MAX=</span><span class="si">{</span><span class="n">max_val</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; contains only NaN/Null values after dropping.&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; not found or is not numeric in the result.&quot;</span><span class="p">)</span>
+                    <span class="k">del</span> <span class="n">df_col</span> <span class="c1"># Free memory</span>
+                    <span class="k">del</span> <span class="n">arrow_table</span> <span class="c1"># Free memory</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Table appears to be empty or column has no data.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">record_count</span><span class="p">,</span> <span class="n">max_rows_df</span> <span class="c1"># Return early</span>
+
+                <span class="c1"># --- Step 2: Find Row(s) with Max Value ---</span>
+                <span class="k">if</span> <span class="n">max_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">IBIS_AVAILABLE</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing select for full rows where </span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2"> == </span><span class="si">{</span><span class="n">max_val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="c1"># Create the predicate using ibis placeholder</span>
+                        <span class="n">predicate</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_val</span><span class="p">)</span>
+
+                        <span class="c1"># Select all columns (*) where the predicate matches</span>
+                        <span class="n">max_rows_reader</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">predicate</span><span class="o">=</span><span class="n">predicate</span><span class="p">)</span>
+
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Reading max value rows into PyArrow table...&quot;</span><span class="p">)</span>
+                        <span class="n">max_rows_arrow_table</span> <span class="o">=</span> <span class="n">max_rows_reader</span><span class="o">.</span><span class="n">read_all</span><span class="p">()</span>
+
+                        <span class="k">if</span> <span class="n">max_rows_arrow_table</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">max_rows_arrow_table</span><span class="o">.</span><span class="n">num_rows</span><span class="si">}</span><span class="s2"> row(s) with the max value.&quot;</span><span class="p">)</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Converting max rows to Pandas DataFrame...&quot;</span><span class="p">)</span>
+                            <span class="n">max_rows_df</span> <span class="o">=</span> <span class="n">max_rows_arrow_table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c1"># This might happen with floating point inaccuracies, though less likely with ==</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find rows matching the calculated max value </span><span class="si">{</span><span class="n">max_val</span><span class="si">}</span><span class="s2">. Potentially a float precision issue?&quot;</span><span class="p">)</span>
+
+                    <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">InvalidArgument</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error during filtering query (maybe column name issue?): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred fetching max rows: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">max_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">IBIS_AVAILABLE</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Cannot query for max rows because `ibis-framework` is not installed.&quot;</span><span class="p">)</span>
+
+
+            <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">MissingSchema</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Schema &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">&#39; not found in bucket &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">MissingTable</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; not found in schema &#39;</span><span class="si">{</span><span class="n">schema_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">InvalidArgument</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                 <span class="k">if</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                     <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; likely not found in table &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;. Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                 <span class="k">else</span><span class="p">:</span>
+                     <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid argument during initial query: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">HttpError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAST HTTP Error during query: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred during query processing: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">vast_errors</span><span class="o">.</span><span class="n">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAST Connection Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish VAST transaction context: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">record_count</span><span class="p">,</span> <span class="n">max_rows_df</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to connect to VAST and run the analysis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Script started at </span><span class="si">{</span><span class="n">start_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">vastdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="n">VAST_ENDPOINT</span><span class="p">,</span>
+            <span class="n">access</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+            <span class="n">secret</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">,</span>
+            <span class="c1"># verify_ssl=False # Add if needed</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Successfully connected VAST session.&quot;</span><span class="p">)</span>
+
+        <span class="n">min_prcp</span><span class="p">,</span> <span class="n">max_prcp</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">max_rows_dataframe</span> <span class="o">=</span> <span class="n">get_stats_and_max_rows</span><span class="p">(</span>
+            <span class="n">session</span><span class="p">,</span>
+            <span class="n">TARGET_BUCKET</span><span class="p">,</span>
+            <span class="n">TARGET_SCHEMA</span><span class="p">,</span>
+            <span class="n">TARGET_TABLE_NAME</span><span class="p">,</span>
+            <span class="n">TARGET_COLUMN</span>
+        <span class="p">)</span>
+
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+
+        <span class="c1"># --- Enhanced Summary ---</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; VAST Data Query Summary - </span><span class="si">{</span><span class="n">end_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Target:         </span><span class="si">{</span><span class="n">TARGET_BUCKET</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">TARGET_SCHEMA</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">TARGET_TABLE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Analyzed Column: </span><span class="si">{</span><span class="n">TARGET_COLUMN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Query Duration: </span><span class="si">{</span><span class="n">duration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Statistics for &#39;</span><span class="si">{</span><span class="n">TARGET_COLUMN</span><span class="si">}</span><span class="s2">&#39;:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Total Records Read (for </span><span class="si">{</span><span class="n">TARGET_COLUMN</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">min_prcp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Minimum Value:  </span><span class="si">{</span><span class="n">min_prcp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Minimum Value:  N/A (No valid data found)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_prcp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Maximum Value:  </span><span class="si">{</span><span class="n">max_prcp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Maximum Value:  N/A (No valid data found)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">max_rows_dataframe</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Full Row(s) Containing Maximum &#39;</span><span class="si">{</span><span class="n">TARGET_COLUMN</span><span class="si">}</span><span class="s2">&#39; Value (</span><span class="si">{</span><span class="n">max_prcp</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+            <span class="c1"># Configure pandas display options if needed (e.g., for many columns)</span>
+            <span class="c1"># pd.set_option(&#39;display.max_rows&#39;, None)</span>
+            <span class="c1"># pd.set_option(&#39;display.max_columns&#39;, None)</span>
+            <span class="c1"># pd.set_option(&#39;display.width&#39;, 1000)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">max_rows_dataframe</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span> <span class="c1"># `to_string` avoids truncation sometimes</span>
+        <span class="k">elif</span> <span class="n">max_prcp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">IBIS_AVAILABLE</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Row(s) for maximum value could not be retrieved.&quot;</span><span class="p">)</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Please install `ibis-framework` (`pip install ibis-framework`).&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">max_prcp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; No rows found matching the calculated maximum value (</span><span class="si">{</span><span class="n">max_prcp</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; No maximum value found, cannot display corresponding rows.&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred in main execution: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="c1"># finally:</span>
+        <span class="c1"># Session object from vastdb.connect doesn&#39;t have explicit close in examples</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Ensure necessary libraries are installed:</span>
+    <span class="c1"># pip install vastdb pandas pyarrow ibis-framework</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-03-26 11:48:49,679 - 4090262 - INFO - Using VAST Endpoint: http://172.200.203.1:80
+2025-03-26 11:48:49,681 - 4090262 - INFO - Querying Bucket: christian-db
+2025-03-26 11:48:49,682 - 4090262 - INFO - Querying Schema: netcdfdemo
+2025-03-26 11:48:49,683 - 4090262 - INFO - Querying Table: weather
+2025-03-26 11:48:49,684 - 4090262 - INFO - Analyzing Column: prcp
+2025-03-26 11:48:49,686 - 4090262 - INFO - Script started at 2025-03-26 11:48:49
+2025-03-26 11:48:49,695 - 4090262 - INFO - Successfully connected VAST session.
+2025-03-26 11:48:49,697 - 4090262 - INFO - Starting analysis for &#39;prcp&#39; in netcdfdemo.weather...
+2025-03-26 11:48:49,727 - 4090262 - INFO - Accessed table netcdfdemo.weather
+2025-03-26 11:48:49,728 - 4090262 - INFO - Executing select for column: prcp to find min/max
+2025-03-26 11:48:49,738 - 4090262 - INFO - Reading data into PyArrow table...
+2025-03-26 11:48:50,560 - 4090262 - INFO - Read 24763800 records for min/max calculation.
+2025-03-26 11:48:50,561 - 4090262 - INFO - Converting to Pandas DataFrame for min/max...
+2025-03-26 11:48:50,942 - 4090262 - INFO - Calculated MIN=0.0, MAX=302.3125.
+2025-03-26 11:48:50,944 - 4090262 - INFO - Executing select for full rows where prcp == 302.3125
+2025-03-26 11:48:50,957 - 4090262 - INFO - Reading max value rows into PyArrow table...
+2025-03-26 11:48:51,046 - 4090262 - INFO - Found 1 row(s) with the max value.
+2025-03-26 11:48:51,047 - 4090262 - INFO - Converting max rows to Pandas DataFrame...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+ VAST Data Query Summary - 2025-03-26 11:48:51
+============================================================
+ Target:         christian-db.netcdfdemo.weather
+ Analyzed Column: prcp
+ Query Duration: 0:00:01.368626
+------------------------------------------------------------
+ Statistics for &#39;prcp&#39;:
+   Total Records Read (for prcp): 24763800
+   Minimum Value:  0.0
+   Maximum Value:  302.3125
+------------------------------------------------------------
+ Full Row(s) Containing Maximum &#39;prcp&#39; Value (302.3125):
+      time       lat         lon      tmax      tmin     prcp     tavg
+2022-11-05 46.854168 -121.770836 -4.828125 -9.726562 302.3125 -7.28125
+============================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="python-api-examples-and-api-documentation-links">
+<h2>Python API Examples and API Documentation links<a class="headerlink" href="#python-api-examples-and-api-documentation-links" title="Link to this heading">#</a></h2>
+<section id="python-sdk-examples">
+<h3>Python SDK Examples<a class="headerlink" href="#python-sdk-examples" title="Link to this heading">#</a></h3>
+<p><a class="github reference external" href="https://github.com/vast-data/vastdb_sdk">vast-data/vastdb_sdk</a></p>
+</section>
+<section id="python-sdk-documentation">
+<h3>Python SDK Documentation<a class="headerlink" href="#python-sdk-documentation" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://vastdb-sdk.readthedocs.io/en/v1.1.0/">https://vastdb-sdk.readthedocs.io/en/v1.1.0/</a></p>
+</section>
+<section id="vast-db-field-engineering-documentation">
+<h3>VAST DB Field Engineering Documentation<a class="headerlink" href="#vast-db-field-engineering-documentation" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://vast-data.github.io/data-platform-field-docs/intro.html">https://vast-data.github.io/data-platform-field-docs/intro.html</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./vast_database/ingestion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="python_sdk_grib2_import.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Python SDK - import Grib2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nifi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Apache NiFi</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-streamlining-netcdf-data-with-vast-database">Introduction: Streamlining NetCDF Data with VAST Database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-vast-db-sdk">Install Vast DB sdk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-netcdf-and-xarray-stuff">Install NETCDF and Xarray Stuff</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-netcdf-files-into-vast-database">Import NETCDF Files into VAST Database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-the-vast-database-using-python-api">Read data from the VAST Database using python API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-api-examples-and-api-documentation-links">Python API Examples and API Documentation links</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-sdk-examples">Python SDK Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-sdk-documentation">Python SDK Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vast-db-field-engineering-documentation">VAST DB Field Engineering Documentation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By VAST Data
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+  <a href="https://vast-data.github.io/data-platform-field-docs/feedback/intro.html">Provide Feedback</a>
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
